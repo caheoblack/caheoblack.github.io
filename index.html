@@ -1,293 +1,551 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" data-theme="neural-dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="https://raw.githubusercontent.com/WeansHHN/weanshhn.github.io/refs/heads/main/img/gif/gifwaifu.gif">
-    <title>CÁ HEO BLACK MMO</title>
-    <!-- Tailwind CSS CDN -->
+    <title>ThemeStore Pro - Animated Showcase</title>
+
+    <!-- ===== THƯ VIỆN & FONTS ===== -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Animate.css for animations -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <!-- Google Fonts: Dancing Script & Fira Code -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
     <style>
-        /* Professional Hacker Theme Styling */
+        /* =====================================================================
+           1. DESIGN TOKENS & DYNAMIC THEME SETUP
+           ===================================================================== */
+        :root {
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+            --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+            
+            /* Theme dự phòng: Được làm lại thành Purple Mist (Tối) */
+            --bg-primary: #191724;
+            --bg-secondary: #201e2d;
+            --bg-sidebar: #1f1d2b;
+            --bg-glass: rgba(32, 30, 45, 0.6);
+            --text-primary: #e0def4;
+            --text-secondary: #908caa;
+            --text-heading: #ffffff;
+            --border-primary: #2e2a3f;
+            --border-secondary: #444059;
+            --accent-primary: #c3a6ff;
+            --accent-secondary: #e0def4;
+            --shadow-color: rgba(195, 166, 255, 0.15);
+            --glow-color-base: var(--accent-primary);
+        }
+
+        /* THEME MỚI: NEURAL DARK (Được tinh chỉnh) */
+        [data-theme="neural-dark"] {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #111118;
+            --bg-sidebar: #0f0f15;
+            --bg-glass: rgba(17, 17, 24, 0.6);
+            --text-primary: #cccccc;
+            --text-secondary: #88889a;
+            --text-heading: #ffffff;
+            --border-primary: #252530;
+            --border-secondary: #3d3d4d;
+            --accent-primary: #00f5ff; /* Cyan rực rỡ */
+            --accent-secondary: #74f9ff;
+            --shadow-color: rgba(0, 245, 255, 0.2);
+            --glow-color-base: var(--accent-primary);
+        }
+        
+        /* THEME MỚI: FOREST DEW (Minty Fresh phiên bản tối) */
+        [data-theme="forest-dew"] {
+            --bg-primary: #0f1a14; --bg-secondary: #14201a; --bg-sidebar: #121c16; --bg-glass: rgba(20, 32, 26, 0.6); --text-primary: #b8d8cb; --text-secondary: #79998a; --text-heading: #ffffff; --border-primary: #23382d; --border-secondary: #385246; --accent-primary: #4deeb2; --accent-secondary: #90f5d1; --shadow-color: rgba(77, 238, 178, 0.15); --glow-color-base: var(--accent-primary);
+        }
+
+        /* THEME MỚI: SUNSET GLOW (Peach Sorbet phiên bản tối) */
+        [data-theme="sunset-glow"] {
+            --bg-primary: #21140f; --bg-secondary: #2b1a14; --bg-sidebar: #281812; --bg-glass: rgba(43, 26, 20, 0.6); --text-primary: #f5d3c5; --text-secondary: #b89182; --text-heading: #ffffff; --border-primary: #4d2f25; --border-secondary: #694134; --accent-primary: #ff8c69; --accent-secondary: #ffbba8; --shadow-color: rgba(255, 140, 105, 0.2); --glow-color-base: var(--accent-primary);
+        }
+
+        [data-theme="cosmic-dark"] {
+            --bg-primary: #04040a; --bg-secondary: #100f22; --bg-sidebar: #0C0B1A; --bg-glass: rgba(12, 11, 26, 0.6); --text-primary: #f0f0f5; --text-secondary: #a0a0c0; --text-heading: #FFFFFF; --border-primary: rgba(67, 79, 138, 0.25); --border-secondary: rgba(67, 79, 138, 0.4); --accent-primary: #8b5cf6; --accent-secondary: #3b82f6; --shadow-color: rgba(139, 92, 246, 0.2); --glow-color-base: var(--accent-primary);
+        }
+
+        /* =====================================================================
+           2. KIỂU CƠ BẢN & BỐ CỤC
+           ===================================================================== */
+        html { transition: background-color 0.5s var(--ease-in-out-cubic); }
         body {
-            font-family: 'Fira Code', monospace;
-            background: linear-gradient(135deg, #0F0F0F, #1C2526);
-            color: #DDEEFF;
-            overflow-x: hidden;
+            font-family: var(--font-main);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.5s var(--ease-in-out-cubic), color 0.5s var(--ease-in-out-cubic);
+            cursor: none;
         }
-        .navbar {
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        .glass-effect {
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            background-color: var(--bg-glass);
+            transition: background-color 0.5s var(--ease-in-out-cubic);
         }
-        .navbar.scrolled {
-            background-color: rgba(0, 0, 0, 0.95);
-            box-shadow: 0 2px 10px rgba(0, 221, 235, 0.2);
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background-color: var(--border-secondary); border-radius: 10px; border: 3px solid var(--bg-primary); transition: background-color 0.3s ease; }
+        ::-webkit-scrollbar-thumb:hover { background-color: var(--accent-primary); }
+
+        /* NỀN SAO LẤP LÁNH */
+        #starry-sky { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+
+        /* =====================================================================
+           3. CON TRỎ CHUỘT TÙY CHỈNH
+           ===================================================================== */
+        .cursor-dot, .cursor-outline {
+            position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+            transform: translate(-50%, -50%); border-radius: 50%; will-change: width, height, transform, border;
         }
-        .navbar.scrolled a {
-            color: #00DDEB;
+        .cursor-dot {
+            width: 8px; height: 8px; background-color: var(--accent-primary); transition: transform 0.2s ease-out, background-color 0.5s ease;
         }
-        /* Subtle Glow Effect for Titles */
-        .glow {
-            text-shadow: 0 0 5px #00DDEB, 0 0 10px #00DDEB;
-            transition: text-shadow 0.3s ease;
+        .cursor-outline {
+            width: 40px; height: 40px; border: 2px solid var(--accent-primary);
+            transition: width 0.4s var(--ease-out-quint), height 0.4s var(--ease-out-quint), transform 0.1s ease-out, border-color 0.5s var(--ease-in-out-cubic), background-color 0.4s var(--ease-out-quint);
         }
-        .glow:hover {
-            text-shadow: 0 0 10px #BB00FF, 0 0 20px #BB00FF;
+        .cursor-outline.hovered { width: 10px; height: 10px; background-color: var(--accent-primary); border-width: 0px; opacity: 0.8;}
+
+        /* =====================================================================
+           4. HIỆU ỨNG & THÀNH PHẦN TÁI SỬ DỤNG
+           ===================================================================== */
+        @keyframes pulseGlow { 0% { box-shadow: 0 0 15px -5px var(--glow-color-base); } 50% { box-shadow: 0 0 25px 0px var(--glow-color-base); } 100% { box-shadow: 0 0 15px -5px var(--glow-color-base); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .initial-hidden { opacity: 0; } /* Dùng cho animation khi tải trang */
+
+        .category-pill { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 700; padding: 6px 12px; border-radius: 999px; transition: all 0.3s ease; border: 1px solid var(--accent-primary); background-color: transparent; color: var(--accent-primary); }
+
+        /* =====================================================================
+           5. SIDEBAR
+           ===================================================================== */
+        .sidebar { border-right: 1px solid var(--border-primary); background-color: var(--bg-sidebar); transform: translateX(-100%); animation: slideInFromLeft 1s var(--ease-out-quint) 0.2s forwards; }
+        @keyframes slideInFromLeft { to { transform: translateX(0); } }
+
+        .sidebar-logo i { color: var(--accent-primary); }
+        .sidebar-logo h1 { color: var(--text-heading); }
+        
+        .sidebar-nav-link { position: relative; font-weight: 700; color: var(--text-secondary); transition: all 0.3s ease; }
+        .sidebar-nav-link:hover { color: var(--text-primary); background-color: var(--bg-primary); }
+        .sidebar-nav-link.active { color: var(--accent-primary); background-color: var(--bg-primary); box-shadow: inset 0 0 20px -10px var(--glow-color-base), 0 0 20px -8px var(--glow-color-base); animation: pulseGlow 3s ease-in-out infinite; }
+        .sidebar-nav-link .ph-fill { color: var(--accent-secondary); }
+
+        /* =====================================================================
+           6. NỘI DUNG CHÍNH & HEADER
+           ===================================================================== */
+        .header { animation: fadeIn 0.8s var(--ease-out-quint) 0.6s forwards; }
+        .header h2 { color: var(--text-heading); text-shadow: 0 0 15px rgba(255,255,255,0.2), 0 0 40px var(--shadow-color); }
+        
+        .layout-toggle button { background-color: var(--bg-secondary); border: 1px solid var(--border-primary); color: var(--text-secondary); transition: all 0.3s ease; }
+        .layout-toggle button.active { background-color: var(--accent-primary); color: #000; font-weight: bold; box-shadow: 0 0 20px var(--shadow-color); animation: pulseGlow 3s infinite ease-in-out; }
+        .layout-toggle button:not(.active):hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+
+        /* =====================================================================
+           7. THẺ THEME (GRID & LIST VIEW)
+           ===================================================================== */
+        @keyframes card-shine { 0% { transform: translateX(-100%) skewX(-20deg); } 100% { transform: translateX(200%) skewX(-20deg); } }
+        .theme-card {
+            background: var(--bg-secondary); border-radius: 24px; border: 1px solid var(--border-primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; overflow: hidden;
+            transition: all 0.4s var(--ease-out-quint);
+            opacity: 0; transform: translateY(30px); /* Bắt đầu ẩn */
         }
-        /* Neon Glow Effect for Elements */
-        .neon-glow {
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 0 5px #00DDEB;
+        .theme-card.visible { /* State khi scroll tới */
+            opacity: 1; transform: translateY(0);
         }
-        .neon-glow:hover {
-            box-shadow: 0 0 15px #BB00FF, 0 0 30px #BB00FF;
-            transform: scale(1.02);
+
+        .theme-card::before { /* Hiệu ứng ánh kim khi hover */
+            content: ''; position: absolute; top: 0; left: 0; width: 50%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
+            transform: translateX(-150%) skewX(-20deg);
+            transition: transform 0.8s ease;
+            z-index: 1;
         }
-        /* 3D Card for Projects */
-        .project-card {
-            perspective: 1000px;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            will-change: transform;
-            border: 1px solid #00DDEB;
-            background: rgba(30, 30, 30, 0.8);
-            backdrop-filter: blur(5px);
+        .theme-card:hover::before { transform: translateX(250%) skewX(-20deg); }
+        .theme-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 0px 20px -5px var(--shadow-color), 0 25px 50px var(--shadow-color);
+            border-color: var(--accent-primary);
         }
-        .project-card:hover {
-            transform: rotateX(5deg) rotateY(5deg);
-            box-shadow: 0 0 15px #BB00FF, 0 0 30px #BB00FF;
+        .theme-card:active { transform: translateY(-5px) scale(1.01); }
+        
+        #themeGrid.list-view .theme-card { display: flex; flex-direction: row; align-items: center; padding: 1.25rem; }
+        #themeGrid.list-view .card-image-wrapper { width: 150px; height: 110px; flex-shrink: 0; }
+        #themeGrid.list-view .card-content { flex-grow: 1; padding: 0 0 0 1.5rem; }
+        #themeGrid.list-view .card-description { display: block !important; }
+        
+        .btn-primary {
+            background-color: var(--accent-primary); color: black; font-weight: bold;
+            padding: 14px 28px; border-radius: 12px; border: 1px solid transparent;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            transition: all 0.3s ease; position: relative; overflow: hidden;
         }
-        /* 3D Avatar */
-        .avatar-container {
-            perspective: 1000px;
+        .btn-primary:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 8px 30px var(--shadow-color), 0 0 20px var(--shadow-color); filter: brightness(1.15); }
+        .btn-primary:active { transform: translateY(-1px) scale(1); }
+
+        /* =====================================================================
+           8. BỘ CHUYỂN ĐỔI THEME ĐỘNG
+           ===================================================================== */
+        #theme-switcher { position: fixed; bottom: 2rem; right: 2rem; z-index: 1000; }
+        #theme-switcher-btn {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: var(--bg-secondary); border: 1px solid var(--border-primary);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2); color: var(--accent-primary);
+            transition: transform 0.3s ease, color 0.5s ease, box-shadow 0.3s ease;
         }
-        .avatar {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            will-change: transform;
-            border: 2px solid #00DDEB;
+        #theme-switcher-btn:hover { transform: scale(1.1) rotate(20deg); box-shadow: 0 0 25px var(--shadow-color); }
+        
+        #theme-menu { position: absolute; bottom: 70px; right: 0; padding: 0.5rem; border-radius: 16px; border: 1px solid var(--border-primary); box-shadow: 0 10px 40px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px) scale(0.95); pointer-events: none; transition: all 0.3s var(--ease-out-quint); background-color: var(--bg-secondary); }
+        #theme-menu.visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+        
+        .theme-option { width: 40px; height: 40px; border-radius: 50%; border: 3px solid transparent; transition: all 0.2s ease; cursor: pointer; }
+        .theme-option:hover { transform: scale(1.15); }
+        .theme-option.active { border-color: var(--bg-secondary); box-shadow: 0 0 0 3px var(--accent-primary), 0 0 15px var(--accent-primary); }
+
+        .theme-option[data-theme-set="neural-dark"] { background-image: linear-gradient(135deg, #00f5ff, #111118); }
+        .theme-option[data-theme-set="purple-mist"] { background-image: linear-gradient(135deg, #c3a6ff, #191724); }
+        .theme-option[data-theme-set="forest-dew"] { background-image: linear-gradient(135deg, #4deeb2, #0f1a14); }
+        .theme-option[data-theme-set="sunset-glow"] { background-image: linear-gradient(135deg, #ff8c69, #21140f); }
+        .theme-option[data-theme-set="cosmic-dark"] { background-image: linear-gradient(135deg, #8b5cf6, #0C0B1A); }
+
+        /* =====================================================================
+           9. MODAL
+           ===================================================================== */
+        #modal-backdrop { opacity: 0; pointer-events: none; transition: opacity 0.4s var(--ease-in-out-cubic); }
+        #modal-backdrop.visible { opacity: 1; pointer-events: auto; }
+        
+        #modal-content {
+            background-color: var(--bg-secondary); border: 1px solid var(--border-primary);
+            box-shadow: 0 0 60px -15px var(--shadow-color);
+            opacity: 0; transform: translateY(40px) scale(0.95);
+            transition: all 0.4s var(--ease-out-quint);
         }
-        /* Styling for the name "Cá Heo" */
-        .highlight-name {
-            font-family: 'Dancing Script', cursive;
-            font-size: 3.5rem;
-            background: linear-gradient(to right, #00DDEB, #BB00FF);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 5px #00DDEB;
-            display: inline-block;
-        }
-        /* Typing Effect for Description */
-        .typing-text {
-            overflow: hidden;
-            border-right: 2px solid #00DDEB;
-            white-space: normal; /* Allow text to wrap */
-            animation: typing 4s steps(40, end) forwards, blink-caret 0.5s step-end infinite;
-            display: inline-block;
-            max-width: 100%; /* Ensure text stays within container */
-        }
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        @keyframes blink-caret {
-            50% { border-color: transparent; }
-        }
-        /* Social Links */
-        .social-link {
-            transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
-        }
-        .social-link:hover {
-            color: #BB00FF;
-            text-shadow: 0 0 10px #BB00FF;
-            transform: translateY(-3px);
-        }
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .navbar ul {
-                display: none;
-            }
-            .navbar.active ul {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(0, 0, 0, 0.95);
-                padding: 1rem;
-                text-align: center;
-            }
-            .navbar.active ul li {
-                margin: 0.5rem 0;
-            }
-            .hamburger {
-                display: block;
-                font-size: 1.5rem;
-                cursor: pointer;
-            }
-            .avatar {
-                width: 32px;
-                height: 32px;
-            }
-            .highlight-name {
-                font-size: 2rem;
-            }
-            .project-card {
-                margin-bottom: 1rem;
-            }
-            .grid-cols-1.md\:grid-cols-3 {
-                grid-template-columns: 1fr;
-            }
-            h2 {
-                font-size: 2rem;
-            }
-            .social-link {
-                font-size: 1.25rem;
-            }
-            /* Adjust typing text for mobile */
-            .typing-text {
-                font-size: 0.9rem; /* Smaller font size for mobile */
-                line-height: 1.5; /* Improve readability */
-                white-space: normal; /* Ensure text wraps */
-                max-width: 90vw; /* Prevent overflow */
-                animation: none; /* Optional: disable typing animation on mobile for simplicity */
-                border-right: none; /* Remove blinking caret on mobile */
-            }
-        }
+        #modal-backdrop.visible #modal-content { opacity: 1; transform: translateY(0) scale(1); }
+        #modal-title { text-shadow: 0 0 10px var(--shadow-color); }
     </style>
 </head>
-<body>
-    <!-- Navigation Bar -->
-    <nav class="navbar fixed top-0 w-full bg-transparent text-[#DDEEFF] py-4 z-50">
-        <div class="container mx-auto flex justify-between items-center px-4">
-            <h1 class="text-2xl font-bold glow">CÁ HEO BLACK MMO</h1>
-            <div class="md:hidden hamburger">
-                <i class="fas fa-bars"></i>
-            </div>
-            <ul class="flex space-x-6">
-                <li><a href="#about" class="hover:text-[#BB00FF] transition">Về Tôi</a></li>
-                <li><a href="#projects" class="hover:text-[#BB00FF] transition">Dự Án</a></li>
-                <li><a href="#contact" class="hover:text-[#BB00FF] transition">Liên Hệ</a></li>
-            </ul>
-        </div>
-    </nav>
+<body class="initial-hidden">
+    <canvas id="starry-sky"></canvas>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
 
-    <section id="about" class="min-h-screen flex items-center justify-center text-[#DDEEFF] pt-16">
-        <div class="container mx-auto px-4 text-center" data-animate="fadeInUp">
-            <h2 class="text-4xl font-bold mb-6 glow">Về Tôi</h2>
-            <div class="avatar-container">
-                <img src="https://caheoblack.github.io/caheoblack.png" alt="Avatar" class="avatar w-48 h-48 rounded-full object-cover mx-auto mb-6 neon-glow" id="avatar">
+    <div class="flex min-h-screen">
+        <!-- ===== SIDEBAR ===== -->
+        <aside class="sidebar w-80 flex-shrink-0 flex-col hidden lg:flex transition-all duration-500">
+            <div class="sidebar-logo h-24 flex items-center px-8 border-b border-[var(--border-primary)] transition-colors duration-500">
+                <i class="ph-duotone ph-storefront text-5xl transition-colors duration-500"></i>
+                <h1 class="text-3xl font-extrabold ml-4 transition-colors duration-500">ThemeStore</h1>
             </div>
-            <ul class="text-lg max-w-2xl mx-auto leading-relaxed">
-                <li><span class="highlight-name">Cá Heo</span></li>
-                <li class="mt-4">
-                    <span class="font-semibold">NOTE:</span> 
-                    <span class="typing-text">CÁ HEO NHẬN CODE CÁC LOẠI WEB PHISHING THEO YÊU CẦU BAO GỒM CẢ NGOẠI VÀ VIỆT, NHẬN CODE CÁC LOẠI BOT TELEGRAM CHO CÁC DOANH NGHIỆP CÓ NHU CẦU MỞ RỘNG THỊ TRƯỜNG, NHẬN CODE ĐA DẠNG LOẠI WEB</span> 
-                    <a href="#" class="text-[#BB00FF] hover:underline">X CAHEO</a>.
-                </li>
-            </ul>
+            <nav class="flex-1 p-6 space-y-4">
+                 <a href="#" class="sidebar-nav-link active flex items-center px-6 py-4 rounded-2xl">
+                    <i class="ph-duotone ph-circles-four text-2xl mr-4"><span class="ph-fill"></span></i>
+                    <span>Tất Cả Theme</span>
+                </a>
+                <a href="#" class="sidebar-nav-link flex items-center px-6 py-4 rounded-2xl">
+                    <i class="ph-duotone ph-rocket-launch text-2xl mr-4"><span class="ph-fill"></span></i>
+                    <span>Phổ Biến Nhất</span>
+                </a>
+                 <a href="#" class="sidebar-nav-link flex items-center px-6 py-4 rounded-2xl">
+                    <i class="ph-duotone ph-sparkle text-2xl mr-4"><span class="ph-fill"></span></i>
+                    <span>Mới Phát Hành</span>
+                </a>
+            </nav>
+            <div class="p-6">
+                <div class="bg-[var(--bg-primary)] p-6 rounded-2xl border border-[var(--border-primary)] text-center transition-colors duration-500">
+                     <i class="ph-duotone ph-chats-circle text-5xl text-[var(--accent-primary)]"></i>
+                     <h3 class="mt-4 text-xl font-bold text-[var(--text-heading)]">Bạn cần hỗ trợ?</h3>
+                     <p class="mt-2 text-[var(--text-secondary)]">Đội ngũ của chúng tôi luôn sẵn sàng giúp đỡ bạn.</p>
+                     <button class="btn-primary mt-5 w-full">Liên Hệ Ngay</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ===== NỘI DUNG CHÍNH ===== -->
+        <main class="flex-1 p-6 sm:p-8 lg:p-12 transition-colors duration-500">
+            <div class="max-w-full mx-auto">
+                <header class="header initial-hidden mb-10 flex flex-col md:flex-row justify-between md:items-center gap-6">
+                    <div>
+                        <h2 class="text-5xl font-extrabold tracking-tight">Showcase</h2>
+                        <p class="text-[var(--text-secondary)] mt-3 text-xl">Một bộ sưu tập các giao diện được tuyển chọn với tình yêu.</p>
+                    </div>
+                    <div class="layout-toggle flex items-center gap-2 p-1.5 rounded-full border border-[var(--border-primary)] bg-[var(--bg-secondary)]">
+                        <button id="grid-view-btn" class="active rounded-full w-12 h-12 flex items-center justify-center">
+                            <i class="ph-bold ph-squares-four text-2xl"></i>
+                        </button>
+                         <button id="list-view-btn" class="rounded-full w-12 h-12 flex items-center justify-center">
+                            <i class="ph-bold ph-list text-2xl"></i>
+                        </button>
+                    </div>
+                </header>
+
+                <section>
+                    <div id="themeGrid" class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-10 transition-all duration-500">
+                        <!-- CÁC THẺ THEME SẼ ĐƯỢC TỰ ĐỘNG CHÈN VÀO ĐÂY -->
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- ===== BỘ CHUYỂN ĐỔI THEME ĐỘNG ===== -->
+    <div id="theme-switcher">
+        <div id="theme-menu" class="flex items-center gap-2">
+             <button class="theme-option" data-theme-set="neural-dark" title="Neural Dark"></button>
+             <button class="theme-option" data-theme-set="purple-mist" title="Purple Mist"></button>
+             <button class="theme-option" data-theme-set="forest-dew" title="Forest Dew"></button>
+             <button class="theme-option" data-theme-set="sunset-glow" title="Sunset Glow"></button>
+             <button class="theme-option" data-theme-set="cosmic-dark" title="Cosmic Dark"></button>
         </div>
-    </section>
-    <section id="projects" class="py-20">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-10 glow" data-animate="fadeInUp">Dự Án</h2>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="project-card p-6 rounded-lg" data-animate="fadeInUp" onclick="window.open('https://t.me/WeIrx_BOT, '_blank')">
-                    <img src="https://raw.githubusercontent.com/caheoblack/caheoblack.github.io/refs/heads/main/image.jpg" alt="Project 1" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <h3 class="text-xl font-semibold">TELEGRAM BOT SHOP</h3>
-                    <p class="text-[#AABBCC] mb-2">TRỌN GÓI CODE VÀ NHIỀU MÃ NGUỒN HỮU ÍCH DÀNH CHO DÂN BLACK MMO </p>
-                    <a href="https://t.me/WeIrx_BOT" class="text-[#BB00FF] hover:underline">Xem chi tiết</a>
+        <button id="theme-switcher-btn" class="flex items-center justify-center">
+             <i class="ph-bold ph-palette text-3xl"></i>
+        </button>
+    </div>
+
+    <!-- ===== MODAL ===== -->
+    <div id="modal-backdrop" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
+        <div id="modal-content" class="w-full max-w-5xl rounded-3xl shadow-2xl overflow-hidden">
+            <div class="p-6 sm:p-8 flex justify-between items-center border-b border-[var(--border-primary)]">
+                <h3 id="modal-title" class="text-3xl font-extrabold text-[var(--text-heading)]"></h3>
+                <button id="modal-close-btn" class="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all duration-300 hover:scale-125 hover:rotate-90">
+                    <i class="ph-bold ph-x text-2xl"></i>
+                </button>
+            </div>
+            <div class="p-6 sm:p-8 max-h-[80vh] overflow-y-auto">
+                <div class="flex flex-col lg:flex-row lg:gap-x-12">
+                    <div class="w-full lg:w-3/5 flex-shrink-0 mb-8 lg:mb-0">
+                        <div class="rounded-2xl overflow-hidden border border-[var(--border-primary)] shadow-lg shadow-black/10">
+                           <img id="modal-image" src="" alt="Theme Preview" class="w-full h-auto object-cover">
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-2/5">
+                        <h4 class="text-lg font-bold text-[var(--text-heading)] mb-3">Mô Tả Chi Tiết</h4>
+                        <p id="modal-description" class="text-[var(--text-primary)] mb-8 text-base leading-relaxed"></p>
+
+                        <h4 class="text-lg font-bold text-[var(--text-heading)] mb-4">Tính Năng Nổi Bật</h4>
+                        <ul id="modal-features" class="space-y-3 mt-4"></ul>
+
+                        <button class="btn-primary w-full mt-10 text-lg">Mua Ngay & Sở Hữu</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
-<section id="contact" class="py-20 text-[#DDEEFF]">
-        <div class="container mx-auto px-4 text-center" data-animate="fadeInUp">
-            <h2 class="text-4xl font-bold mb-10 glow">Liên Hệ</h2>
-            <div class="flex justify-center space-x-6">
-                <a href="https://github.com/caheoblack" target="_blank" class="social-link text-2xl">
-                    <i class="fab fa-github mr-2"></i>GitHub
-                </a>
-                <a href="https://t.me/quangtoannang" target="_blank" class="social-link text-2xl">
-                    <i class="fab fa-telegram mr-2"></i>Telegram
-                </a>
-                <a href="https://www.youtube.com/@C%C3%A1Heo-x2h" target="_blank" class="social-link text-2xl">
-                    <i class="fab fa-youtube mr-2"></i>YouTube
-                </a>
-            </div>
-        </div>
-    </section>
+    </div>
 
-    <footer class="bg-[#0F0F0F] text-[#DDEEFF] py-6 text-center">
-        <p>© 2025 Caheoblack. All rights reserved.</p>
-    </footer>
 
     <script>
-        // Smooth scrolling for nav links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+    document.addEventListener('DOMContentLoaded', function () {
+        'use strict';
+
+        // =====================================================================
+        // 1. DỮ LIỆU & TRẠNG THÁI
+        // =====================================================================
+        const themesData = [
+            { id: 1, title: "E-commerce Pro", category: "Shop", short_description: "Giao diện cửa hàng, tối ưu cho chuyển đổi.", long_description: "...", features: ["Tối ưu SEO", "Responsive 100%", "Tốc độ tải trang nhanh"], image_url: "https://i.imgur.com/vHZdcod.png" },
+            { id: 2, title: "Modern Blogster", category: "Blog", short_description: "Theme blog cá nhân, tập trung vào nội dung và tốc độ.", long_description: "...", features: ["Tối ưu cho đọc", "Chế độ Dark/Light", "Lazy Loading"], image_url: "https://i.imgur.com/tHFNXoT.png" },
+            { id: 3, title: "CreativeFolio", category: "Portfolio", short_description: "Showcase dự án của bạn chuyên nghiệp và ấn tượng.", long_description: "...", features: ["Lưới lọc Isotope", "Hiệu ứng Hover", "Mẫu liên hệ Ajax"], image_url: "https://i.imgur.com/Kpz5gRz.png" },
+            { id: 4, title: "Quantum SaaS", category: "Business", short_description: "Giao diện hiện đại cho các công ty công nghệ và SaaS.", long_description: "...", features: ["Bảng giá tùy biến", "Animation mượt mà", "Xây dựng trên TailwindCSS"], image_url: "https://i.imgur.com/kF2yt5v.png" },
+            { id: 5, title: "Artisan Guild", category: "Portfolio", short_description: "Giao diện portfolio tối giản, tôn vinh tác phẩm.", long_description: "...", features: ["Bố cục Masonry", "Chế độ toàn màn hình", "Font chữ cao cấp"], image_url: "https://i.imgur.com/0DmWzT7.png" },
+            { id: 6, title: "Gourmet Chef", category: "Blog", short_description: "Theme cho blog ẩm thực, công thức nấu ăn.", long_description: "...", features: ["Thẻ công thức chuyên nghiệp", "Hỗ trợ Video", "Đánh giá của người dùng"], image_url: "https://i.imgur.com/3ZwnV6E.png" },
+        ];
+        
+        const appState = { currentLayout: 'grid' };
+
+        // =====================================================================
+        // 2. LẤY CÁC THÀNH PHẦN DOM
+        // =====================================================================
+        const docHtml = document.documentElement;
+        const docBody = document.body;
+        const themeGrid = document.getElementById('themeGrid');
+        const gridViewBtn = document.getElementById('grid-view-btn');
+        const listViewBtn = document.getElementById('list-view-btn');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+        const themeSwitcherBtn = document.getElementById('theme-switcher-btn');
+        const themeMenu = document.getElementById('theme-menu');
+        
+        // =====================================================================
+        // 3. CÁC HÀM GIAO DIỆN & HIỂN THỊ
+        // =====================================================================
+        const renderThemes = () => {
+            if (!themeGrid) return;
+            let cardsHTML = '';
+            themesData.forEach(theme => {
+                const isList = appState.currentLayout === 'list';
+                const imageHTML = `<div class="card-image-wrapper ${isList ? 'w-[150px] h-[110px] flex-shrink-0' : 'h-64'} rounded-2xl overflow-hidden p-1 group"><img src="${theme.image_url}" alt="${theme.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 rounded-xl"></div>`;
+                const contentHTML = `<div class="card-content ${isList ? 'flex-grow p-0 pl-6' : 'p-6 pt-4'}"><div class="flex justify-between items-center mb-2"><h4 class="text-xl font-bold text-[var(--text-heading)] truncate pr-4">${theme.title}</h4><div class="category-pill" data-category="${theme.category}"><i class="ph-fill ph-tag text-sm"></i><span>${theme.category}</span></div></div><p class="card-description text-base text-[var(--text-secondary)] ${isList ? 'block' : 'hidden'} mt-3">${theme.short_description}</p></div>`;
+                cardsHTML += `<div class="theme-card" data-id="${theme.id}" data-category="${theme.category}">${imageHTML}${contentHTML}</div>`;
             });
+            themeGrid.innerHTML = cardsHTML;
+            setupScrollAnimations();
+        };
+
+        const setLayout = (layout) => {
+            if (layout === appState.currentLayout && themeGrid.innerHTML !== '') return;
+            appState.currentLayout = layout;
+            const isList = layout === 'list';
+            themeGrid.className = `transition-all duration-500 ${isList ? 'flex flex-col gap-6' : 'grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-10'}`;
+            gridViewBtn.classList.toggle('active', !isList);
+            listViewBtn.classList.toggle('active', isList);
+            renderThemes();
+        };
+        
+        // =====================================================================
+        // 4. LOGIC MODAL
+        // =====================================================================
+        const openModal = (theme) => {
+            modalBackdrop.classList.add('visible');
+            docHtml.style.overflow = 'hidden';
+            document.getElementById('modal-title').textContent = theme.title;
+            document.getElementById('modal-image').src = theme.image_url;
+            document.getElementById('modal-description').textContent = "Đây là phần mô tả dài và chi tiết cho giao diện. Nó được thiết kế với phong cách thanh lịch, tối ưu hóa trải nghiệm người dùng và tốc độ tải trang để mang lại hiệu quả cao nhất.";
+            document.getElementById('modal-features').innerHTML = theme.features.map(f =>
+                `<li class="flex items-center text-base text-[var(--text-primary)]"><i class="ph-duotone ph-check-circle text-2xl mr-3 text-[var(--accent-primary)]"><span class="ph-fill text-[var(--accent-secondary)]"></span></i><span>${f}</span></li>`
+            ).join('');
+        };
+        
+        const closeModal = () => {
+            modalBackdrop.classList.remove('visible');
+            docHtml.style.overflow = '';
+        };
+
+        // =====================================================================
+        // 5. LOGIC CHUYỂN ĐỔI THEME
+        // =====================================================================
+        const applyTheme = (themeName) => {
+            docHtml.setAttribute('data-theme', themeName);
+            localStorage.setItem('theme', themeName);
+            document.querySelectorAll('.theme-option').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.themeSet === themeName);
+            });
+            // Cập nhật lại màu sao cho phù hợp với theme mới
+            setTimeout(createStarrySky, 500);
+        };
+
+        // =====================================================================
+        // 6. HIỆU ỨNG & ANIMATION
+        // =====================================================================
+        // --- Hiệu ứng con trỏ chuột ---
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+            const target = e.target.closest('a, button, .theme-card, .theme-option');
+            cursorOutline.classList.toggle('hovered', !!target);
         });
 
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('[data-animate]');
+        // --- Hiệu ứng scroll-reveal cho thẻ ---
+        const setupScrollAnimations = () => {
             const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
+                entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
-                        const animation = entry.target.getAttribute('data-animate');
-                        entry.target.classList.add('animate__animated', `animate__${animation}`);
+                        entry.target.style.transitionDelay = `${index * 100}ms`;
+                        entry.target.classList.add('visible');
                         observer.unobserve(entry.target);
                     }
                 });
-            }, {
-                threshold: 0.2,
-                rootMargin: '0px 0px -50px 0px'
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.theme-card').forEach(el => observer.observe(el));
+        };
+
+        // --- Hiệu ứng nền trời sao ---
+        const createStarrySky = () => {
+            const canvas = document.getElementById('starry-sky');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const accentColor = getComputedStyle(docHtml).getPropertyValue('--accent-primary').trim();
+            const stars = [];
+            const numStars = 200;
+
+            for (let i = 0; i < numStars; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 1.5,
+                    alpha: Math.random(),
+                    dAlpha: (Math.random() * 0.02) - 0.01
+                });
+            }
+
+            function drawStars() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                stars.forEach(star => {
+                    star.alpha += star.dAlpha;
+                    if (star.alpha <= 0 || star.alpha >= 1) {
+                        star.dAlpha *= -1;
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `${accentColor}${Math.round(star.alpha * 100).toString(16).padStart(2, '0')}`;
+                    ctx.fill();
+                });
+                requestAnimationFrame(drawStars);
+            }
+            drawStars();
+            window.onresize = () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            };
+        };
+
+        // =====================================================================
+        // 7. THIẾT LẬP SỰ KIỆN
+        // =====================================================================
+        const setupEventListeners = () => {
+            gridViewBtn.addEventListener('click', () => setLayout('grid'));
+            listViewBtn.addEventListener('click', () => setLayout('list'));
+            modalCloseBtn.addEventListener('click', closeModal);
+            modalBackdrop.addEventListener('click', (e) => e.target === modalBackdrop && closeModal());
+            document.addEventListener('keydown', (e) => e.key === 'Escape' && closeModal());
+
+            themeGrid.addEventListener('click', (e) => {
+                const card = e.target.closest('.theme-card');
+                if (card) {
+                    const themeId = parseInt(card.dataset.id, 10);
+                    const themeData = themesData.find(t => t.id === themeId);
+                    if (themeData) {
+                        openModal(themeData);
+                    }
+                }
             });
 
-            elements.forEach(element => observer.observe(element));
+            themeSwitcherBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                themeMenu.classList.toggle('visible');
+            });
+            document.addEventListener('click', () => themeMenu.classList.remove('visible'));
+            themeMenu.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const target = e.target.closest('.theme-option');
+                if (target) applyTheme(target.dataset.themeSet);
+            });
         };
-        const avatar = document.getElementById('avatar');
-        const avatarContainer = avatar.parentElement;
-        avatarContainer.addEventListener('mousemove', (e) => {
-            const rect = avatarContainer.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = (y - centerY) / centerY * 10;
-            const rotateY = (centerX - x) / centerX * 10;
-            avatar.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
-        avatarContainer.addEventListener('mouseleave', () => {
-            avatar.style.transform = 'rotateX(0deg) rotateY(0deg)';
-        });
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.navbar ul');
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            hamburger.querySelector('i').classList.toggle('fa-bars');
-            hamburger.querySelector('i').classList.toggle('fa-times');
-        });
 
-        document.addEventListener('DOMContentLoaded', animateOnScroll);
+        // =====================================================================
+        // 8. KHỞI TẠO
+        // =====================================================================
+        const init = () => {
+            const savedTheme = localStorage.getItem('theme') || 'neural-dark';
+            applyTheme(savedTheme);
+            setLayout('grid'); // Sửa lỗi: Luôn render theme khi bắt đầu
+            setupEventListeners();
+            
+            // Hiệu ứng tải trang
+            docBody.classList.remove('initial-hidden');
+        };
+
+        init();
+    });
     </script>
 </body>
 </html>
