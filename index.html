@@ -531,13 +531,23 @@
             });
         };
 
-        // =====================================================================
+// =====================================================================
         // 8. KHỞI TẠO
         // =====================================================================
         const init = () => {
+            // Tải theme đã lưu hoặc dùng theme mặc định
             const savedTheme = localStorage.getItem('theme') || 'neural-dark';
             applyTheme(savedTheme);
-            setLayout('grid'); // Sửa lỗi: Luôn render theme khi bắt đầu
+
+            // --- PHẦN SỬA LỖI ---
+            // Luôn luôn hiển thị sản phẩm ngay khi tải trang
+            renderThemes(); 
+            // Sau đó, thiết lập đúng trạng thái cho layout 'grid' ban đầu
+            gridViewBtn.classList.add('active');
+            listViewBtn.classList.remove('active');
+            // --- KẾT THÚC PHẦN SỬA LỖI ---
+
+            // Thiết lập các sự kiện lắng nghe
             setupEventListeners();
             
             // Hiệu ứng tải trang
@@ -545,7 +555,6 @@
         };
 
         init();
-    });
     </script>
 </body>
 </html>
