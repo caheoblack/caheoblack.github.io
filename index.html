@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>ThemeStore Pro - Ultra Enhanced ✨</title>
+    <title>Black Shop MMO Pro - Ultra Enhanced ✨</title>
 
     <!-- ===== THƯ VIỆN & FONTS ===== -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800;900&family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- FONT AWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
@@ -20,6 +20,8 @@
            ===================================================================== */
         :root {
             --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-display: 'Orbitron', monospace;
+            --font-accent: 'Space Grotesk', sans-serif;
             --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
             --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
             --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -32,7 +34,109 @@
         [data-theme="cosmic-dark"] { --bg-primary: #04040a; --bg-secondary: #100f22; --bg-glass: rgba(12, 11, 26, 0.7); --text-primary: #f0f0f5; --text-secondary: #a0a0c0; --text-heading: #FFFFFF; --border-primary: rgba(67, 79, 138, 0.25); --accent-primary: #8b5cf6; --accent-secondary: #3b82f6; --shadow-color: rgba(139, 92, 246, 0.2); }
 
         /* =====================================================================
-           2. HIỆU ỨNG PARTICLES & BACKGROUND CHUYỂN ĐỘNG
+           2. FONT CHUYỂN ĐỘNG SIÊU ĐẲNG CẤP
+           ===================================================================== */
+        .text-animated {
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary), var(--text-heading), var(--accent-primary));
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: epicTextFlow 3s ease-in-out infinite, textGlow 2s ease-in-out infinite alternate;
+            position: relative;
+            font-family: var(--font-display);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: inline-block; /* Thêm để span hoạt động đúng */
+        }
+        
+        @keyframes epicTextFlow {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 50% 100%; }
+            75% { background-position: 100% 0%; }
+        }
+        
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 20px var(--shadow-color), 0 0 40px var(--shadow-color); }
+            100% { text-shadow: 0 0 40px var(--shadow-color), 0 0 80px var(--shadow-color); }
+        }
+        
+        .text-animated::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%; /* Thêm để ::before khớp kích thước */
+            height: 100%; /* Thêm để ::before khớp kích thước */
+            background: linear-gradient(45deg, transparent, var(--accent-primary), transparent);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmerText 2s infinite;
+            z-index: 1;
+        }
+        
+        @keyframes shimmerText {
+            0% { background-position: -200% 0; opacity: 0; }
+            50% { opacity: 1; }
+            100% { background-position: 200% 0; opacity: 0; }
+        }
+        
+        .text-bounce {
+            animation: textBounce 2s ease-in-out infinite;
+            font-family: var(--font-accent);
+            font-weight: 700;
+        }
+        
+        @keyframes textBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.05); }
+        }
+        
+        .text-wave {
+            display: inline-block;
+            font-family: var(--font-accent);
+            font-weight: 600;
+        }
+        
+        .text-wave span {
+            display: inline-block;
+            animation: wave 2s ease-in-out infinite;
+            animation-delay: calc(var(--i) * 0.1s);
+            color: var(--accent-primary);
+            text-shadow: 0 0 10px var(--shadow-color);
+        }
+        
+        @keyframes wave {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(5deg); }
+            50% { transform: translateY(-5px) rotate(-3deg); }
+            75% { transform: translateY(-10px) rotate(2deg); }
+        }
+        
+        .text-electric {
+            font-family: var(--font-display);
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            animation: electricPulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes electricPulse {
+            0%, 100% { 
+                text-shadow: 0 0 5px var(--accent-primary), 0 0 10px var(--accent-primary);
+                filter: brightness(1);
+            }
+            50% { 
+                text-shadow: 0 0 20px var(--accent-primary), 0 0 30px var(--accent-primary), 0 0 40px var(--accent-primary);
+                filter: brightness(1.5);
+            }
+        }
+
+        /* =====================================================================
+           3. HIỆU ỨNG PARTICLES & BACKGROUND CHUYỂN ĐỘNG MẠNH HƠN
            ===================================================================== */
         #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; }
         #starry-sky { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;}
@@ -50,21 +154,22 @@
         
         .floating-icon {
             position: absolute;
-            font-size: 1.5rem;
-            opacity: 0.1;
-            animation: floatAround 15s infinite linear;
+            font-size: 2rem;
+            opacity: 0.15;
+            animation: floatAround 12s infinite linear;
             color: var(--accent-primary);
+            text-shadow: 0 0 20px var(--shadow-color);
         }
         
         @keyframes floatAround {
-            0% { transform: translateY(100vh) translateX(-50px) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.3; }
+            0% { transform: translateY(100vh) translateX(-100px) rotate(0deg) scale(0.5); opacity: 0; }
+            10% { opacity: 0.4; }
             90% { opacity: 0.1; }
-            100% { transform: translateY(-100px) translateX(50px) rotate(360deg); opacity: 0; }
+            100% { transform: translateY(-100px) translateX(100px) rotate(720deg) scale(1.5); opacity: 0; }
         }
 
         /* =====================================================================
-           3. KIỂU CƠ BẢN & BỐ CỤC CHO DI ĐỘNG
+           4. KIỂU CƠ BẢN & BỐ CỤC CHO DI ĐỘNG
            ===================================================================== */
         html { 
             transition: all 0.8s var(--ease-in-out-cubic); 
@@ -72,30 +177,38 @@
         }
         body {
             font-family: var(--font-main);
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
             color: var(--text-primary);
             padding-bottom: 90px;
             position: relative;
             overflow-x: hidden;
-            animation: backgroundPulse 8s ease-in-out infinite alternate;
+            animation: backgroundPulse 6s ease-in-out infinite alternate;
         }
         
         @keyframes backgroundPulse {
-            0% { background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); }
-            100% { background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%); }
+            0% { background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%); }
+            33% { background: linear-gradient(225deg, var(--bg-secondary) 0%, var(--bg-primary) 50%, var(--bg-secondary) 100%); }
+            66% { background: linear-gradient(315deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%); }
+            100% { background: linear-gradient(45deg, var(--bg-secondary) 0%, var(--bg-primary) 50%, var(--bg-secondary) 100%); }
         }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); border-radius: 10px; }
         ::-webkit-scrollbar-thumb { 
             background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary)); 
             border-radius: 10px; 
             border: 2px solid var(--bg-primary);
-            box-shadow: 0 0 10px var(--shadow-color);
+            box-shadow: 0 0 15px var(--shadow-color);
+            animation: scrollGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes scrollGlow {
+            0% { box-shadow: 0 0 15px var(--shadow-color); }
+            100% { box-shadow: 0 0 25px var(--shadow-color), 0 0 35px var(--shadow-color); }
         }
 
         /* =====================================================================
-           4. HEADER SIÊU ĐẲNG CẤP
+           5. HEADER SIÊU ĐẲNG CẤP VỚI TEXT ANIMATED
            ===================================================================== */
         .header {
             animation: epicHeaderEntrance 2s var(--ease-bounce) 0.3s forwards;
@@ -119,29 +232,13 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
-            opacity: 0.1;
-            animation: shine 3s infinite;
+            opacity: 0.2;
+            animation: shine 2s infinite;
         }
         
         @keyframes shine {
             0% { left: -100%; }
             100% { left: 100%; }
-        }
-        
-        .header h2 {
-            color: var(--text-heading); 
-            text-shadow: 0 0 20px var(--shadow-color), 0 0 40px var(--shadow-color);
-            background: linear-gradient(45deg, var(--text-heading), var(--accent-primary), var(--accent-secondary));
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradientShift 3s ease-in-out infinite;
-            position: relative;
-        }
-        
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
         }
         
         .header h2::after {
@@ -150,12 +247,14 @@
             right: -40px;
             top: -10px;
             font-size: 2rem;
-            animation: sparkle 2s ease-in-out infinite;
+            animation: sparkle 1.5s ease-in-out infinite;
         }
         
         @keyframes sparkle {
             0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
-            50% { transform: scale(1.5) rotate(180deg); opacity: 0.7; }
+            25% { transform: scale(1.3) rotate(90deg); opacity: 0.8; }
+            50% { transform: scale(1.5) rotate(180deg); opacity: 0.6; }
+            75% { transform: scale(1.2) rotate(270deg); opacity: 0.9; }
         }
         
         .header p {
@@ -202,7 +301,7 @@
         }
 
         /* =====================================================================
-           5. THẺ THEME SIÊU ĐỈNH CAO
+           6. THẺ THEME SIÊU ĐỈNH CAO VỚI TEXT ANIMATED
            ===================================================================== */
         .theme-card {
             background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary)); 
@@ -226,7 +325,7 @@
             height: 200%;
             background: conic-gradient(from 0deg, var(--accent-primary), transparent, var(--accent-secondary), transparent, var(--accent-primary));
             opacity: 0;
-            animation: rotate 4s linear infinite;
+            animation: rotate 3s linear infinite;
             transition: opacity 0.5s;
             z-index: 1;
         }
@@ -236,7 +335,7 @@
         }
         
         .theme-card:hover::before {
-            opacity: 0.1;
+            opacity: 0.15;
         }
         
         .theme-card::after {
@@ -280,7 +379,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
             z-index: 1;
             transition: left 0.8s var(--ease-out-quint);
         }
@@ -315,6 +414,7 @@
             transition: all 0.5s var(--ease-bounce);
             position: relative;
             overflow: hidden;
+            font-family: var(--font-accent);
         }
         
         .category-pill::before {
@@ -329,7 +429,7 @@
             transition: opacity 0.3s;
             z-index: -1;
         }
-        
+        text-animated
         .theme-card:hover .category-pill {
             background-size: 100% 100%;
             color: var(--bg-primary);
@@ -342,7 +442,7 @@
         }
 
         /* =====================================================================
-           6. THANH ĐIỀU HƯỚNG DƯỚI SIÊU NGẦU
+           7. THANH ĐIỀU HƯỚNG DƯỚI SIÊU NGẦU
            ===================================================================== */
         .bottom-nav {
             position: fixed;
@@ -359,7 +459,7 @@
             padding-bottom: env(safe-area-inset-bottom);
             box-shadow: 0 -15px 50px rgba(0,0,0,0.4), 0 0 30px var(--shadow-color);
             transition: all 0.5s var(--ease-in-out-cubic);
-            animation: navGlow 4s ease-in-out infinite alternate;
+            animation: navGlow 3s ease-in-out infinite alternate;
         }
         
         @keyframes navGlow {
@@ -380,6 +480,7 @@
             padding: 8px;
             border-radius: 12px;
             overflow: hidden;
+            font-family: var(--font-accent);
         }
         
         .nav-item::before {
@@ -408,12 +509,12 @@
         }
         
         .nav-item.active i {
-            animation: iconBounce 2s ease-in-out infinite;
+            animation: iconBounce 1.5s ease-in-out infinite;
         }
         
         @keyframes iconBounce {
             0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-5px) rotate(10deg); }
+            50% { transform: translateY(-5px) rotate(15deg); }
         }
         
         .nav-item:active {
@@ -421,7 +522,7 @@
         }
 
         /* =====================================================================
-           7. MODAL THEME SWITCHER ĐẲNG CẤP
+           8. MODAL THEME SWITCHER ĐẲNG CẤP
            ===================================================================== */
         #theme-switcher-modal {
             position: fixed;
@@ -463,7 +564,7 @@
             background: conic-gradient(from 0deg, var(--accent-primary), var(--accent-secondary), var(--accent-primary));
             border-radius: 34px;
             z-index: -1;
-            animation: rotate 6s linear infinite;
+            animation: rotate 4s linear infinite;
         }
         
         #theme-switcher-modal.visible #theme-menu {
@@ -489,7 +590,7 @@
             border-radius: 50%;
             opacity: 0;
             transition: all 0.4s;
-            animation: rotate 3s linear infinite;
+            animation: rotate 2s linear infinite;
         }
         
         .theme-option:hover::before {
@@ -504,7 +605,7 @@
             border-color: var(--accent-primary); 
             box-shadow: 0 0 30px var(--shadow-color), inset 0 0 20px rgba(255,255,255,0.1); 
             transform: scale(1.2);
-            animation: activeThemePulse 2s ease-in-out infinite;
+            animation: activeThemePulse 1.5s ease-in-out infinite;
         }
         
         @keyframes activeThemePulse {
@@ -519,7 +620,7 @@
         .theme-option[data-theme-set="cosmic-dark"] { background: linear-gradient(135deg, #8b5cf6, #0C0B1A, #8b5cf6); }
 
         /* =====================================================================
-           8. MODAL CHI TIẾT THEME ĐỈNH CAO
+           9. MODAL CHI TIẾT THEME ĐỈNH CAO VỚI VIDEO & MULTIPLE IMAGES
            ===================================================================== */
         #modal-backdrop { 
             opacity: 0; 
@@ -544,7 +645,8 @@
             transform: translateY(80px) scale(0.8) rotateX(20deg);
             transition: all 0.8s var(--ease-bounce);
             width: 95%; 
-            max-width: 520px;
+            max-width: 900px;
+            max-height: 90vh;
             position: relative;
             overflow: hidden;
         }
@@ -557,7 +659,7 @@
             width: 100%;
             height: 4px;
             background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-primary));
-            animation: shimmer 2s infinite;
+            animation: shimmer 1.5s infinite;
         }
         
         @keyframes shimmer {
@@ -575,6 +677,160 @@
             background: linear-gradient(45deg, var(--text-heading), var(--accent-primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-family: var(--font-display);
+        }
+
+        /* =====================================================================
+           10. MEDIA GALLERY SIÊU ĐẲNG CẤP
+           ===================================================================== */
+        .media-gallery {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .media-gallery {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+        
+        .main-media {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--bg-primary);
+            aspect-ratio: 16/9;
+        }
+        
+        .main-media video,
+        .main-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s var(--ease-out-quint);
+        }
+        
+        .main-media:hover video,
+        .main-media:hover img {
+            transform: scale(1.05);
+        }
+        
+        .media-controls {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+        
+        .media-btn {
+            background: rgba(0,0,0,0.7);
+            border: 2px solid var(--accent-primary);
+            color: var(--accent-primary);
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-bounce);
+            backdrop-filter: blur(10px);
+        }
+        
+        .media-btn:hover {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--shadow-color);
+        }
+        
+        .media-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .media-thumbnails {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .media-thumbnails {
+                flex-direction: row;
+                max-height: none;
+                overflow-x: auto;
+                overflow-y: hidden;
+            }
+        }
+        
+        .thumbnail {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-bounce);
+            border: 2px solid transparent;
+            min-width: 100px;
+            aspect-ratio: 16/9;
+        }
+        
+        .thumbnail:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 15px var(--shadow-color);
+        }
+        
+        .thumbnail.active {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 20px var(--shadow-color);
+            transform: scale(1.1);
+        }
+        
+        .thumbnail img,
+        .thumbnail video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .thumbnail::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent, var(--accent-primary), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .thumbnail:hover::before {
+            opacity: 0.1;
+        }
+        
+        .thumbnail .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.7);
+            color: var(--accent-primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--accent-primary);
         }
         
         .btn-primary {
@@ -587,6 +843,9 @@
             transition: all 0.4s var(--ease-bounce); 
             position: relative;
             overflow: hidden;
+            font-family: var(--font-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
         
         .btn-primary::before {
@@ -611,7 +870,7 @@
         }
 
         /* =====================================================================
-           9. HIỆU ỨNG KHỞI TẠO & ANIMATIONS ĐẶC BIỆT
+           11. HIỆU ỨNG KHỞI TẠO & ANIMATIONS ĐẶC BIỆT
            ===================================================================== */
         .initial-hidden { opacity: 0; }
         
@@ -626,9 +885,31 @@
             -webkit-tap-highlight-color: transparent;
         }
         
-        .theme-card, .nav-item, .theme-option, .btn-primary {
+        .theme-card, .nav-item, .theme-option, .btn-primary, .thumbnail, .media-btn {
             user-select: none;
             -webkit-user-select: none;
+        }
+        
+        /* =====================================================================
+           12. RESPONSIVE ENHANCEMENTS
+           ===================================================================== */
+        @media (max-width: 640px) {
+            .text-animated {
+                font-size: 1.5rem;
+            }
+            
+            .media-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .media-thumbnails {
+                flex-direction: row;
+                gap: 0.5rem;
+            }
+            
+            .thumbnail {
+                min-width: 80px;
+            }
         }
     </style>
 </head>
@@ -642,8 +923,8 @@
         <div class="max-w-full mx-auto">
             <header class="header flex justify-between items-center mb-6">
                 <div>
-                    <h2 class="text-4xl font-extrabold tracking-tight">Epic Showcase</h2>
-                    <p class="text-[var(--text-secondary)] mt-1 text-lg">Giao diện siêu đẳng cấp ✨</p>
+                    <h2 class="text-4xl font-extrabold tracking-tight text-animated" data-text="Epic Showcase">Epic Showcase</h2>
+                    <p class="text-[var(--text-secondary)] mt-1 text-lg text-bounce">Giao diện siêu đẳng cấp ✨</p>
                 </div>
                 <button id="theme-switcher-btn-header">
                     <i class="fa-solid fa-palette text-3xl"></i>
@@ -662,26 +943,26 @@
     <nav class="bottom-nav">
         <a href="#" class="nav-item active">
             <i class="fa-solid fa-layer-group"></i>
-            <span>Tất Cả</span>
+            <span class="text-electric">Tất Cả</span>
         </a>
         <a href="#" class="nav-item">
             <i class="fa-solid fa-fire"></i>
-            <span>Phổ Biến</span>
+            <span class="text-electric">Phổ Biến</span>
         </a>
         <a href="#" class="nav-item">
             <i class="fa-solid fa-star"></i>
-            <span>Mới Nhất</span>
+            <span class="text-electric">Mới Nhất</span>
         </a>
         <a href="#" class="nav-item">
             <i class="fa-solid fa-headset"></i>
-            <span>Hỗ Trợ</span>
+            <span class="text-electric">Hỗ Trợ</span>
         </a>
     </nav>
     
     <!-- ===== MODAL CHỌN THEME ===== -->
     <div id="theme-switcher-modal">
         <div id="theme-menu">
-            <h3 class="text-2xl font-bold text-center mb-6 text-[var(--text-heading)]">🎨 Chọn Theme Siêu Đẳng Cấp</h3>
+            <h3 class="text-2xl font-bold text-center mb-6 text-animated" data-text="🎨 Chọn Theme Siêu Đẳng Cấp">🎨 Chọn Theme Siêu Đẳng Cấp</h3>
             <div class="grid grid-cols-3 gap-6 place-items-center">
                  <button class="theme-option" data-theme-set="neural-dark" title="Neural Dark ⚡"></button>
                  <button class="theme-option" data-theme-set="purple-mist" title="Purple Mist 🌙"></button>
@@ -693,7 +974,7 @@
         </div>
     </div>
 
-    <!-- ===== MODAL CHI TIẾT THEME ===== -->
+    <!-- ===== MODAL CHI TIẾT THEME VỚI VIDEO & MULTIPLE IMAGES ===== -->
     <div id="modal-backdrop" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
         <div id="modal-content" class="rounded-3xl shadow-2xl overflow-hidden">
             <div class="p-6 flex justify-between items-center border-b border-[var(--border-primary)]">
@@ -704,17 +985,79 @@
             </div>
             <div class="p-6 max-h-[75vh] overflow-y-auto">
                 <div class="flex flex-col gap-y-6">
-                    <div class="rounded-2xl overflow-hidden border border-[var(--border-primary)] shadow-lg shadow-black/10">
-                       <img id="modal-image" src="" alt="Theme Preview" class="w-full h-auto object-cover">
+                    <!-- MEDIA GALLERY -->
+                    <div class="media-gallery">
+                        <div class="main-media">
+                            <div id="main-media-container">
+                                <!-- Video hoặc hình ảnh chính sẽ hiển thị ở đây -->
+                            </div>
+                            <div class="media-controls">
+                                <button class="media-btn" id="play-pause-btn" title="Play/Pause">
+                                    <i class="fa-solid fa-play"></i>
+                                </button>
+                                <button class="media-btn" id="fullscreen-btn" title="Fullscreen">
+                                    <i class="fa-solid fa-expand"></i>
+                                </button>
+                                <button class="media-btn" id="volume-btn" title="Mute/Unmute">
+                                    <i class="fa-solid fa-volume-high"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="media-thumbnails" id="media-thumbnails">
+                            <!-- Thumbnails sẽ được tạo động ở đây -->
+                        </div>
                     </div>
+                    
                     <div>
-                        <h4 class="text-lg font-bold text-[var(--text-heading)] mb-2">🌟 Mô Tả Chi Tiết</h4>
+                        <h4 class="text-lg font-bold text-[var(--text-heading)] mb-2 text-wave">
+                            <span style="--i: 0">🌟</span>
+                            <span style="--i: 1"> </span>
+                            <span style="--i: 2">M</span>
+                            <span style="--i: 3">ô</span>
+                            <span style="--i: 4"> </span>
+                            <span style="--i: 5">T</span>
+                            <span style="--i: 6">ả</span>
+                            <span style="--i: 7"> </span>
+                            <span style="--i: 8">C</span>
+                            <span style="--i: 9">h</span>
+                            <span style="--i: 10">i</span>
+                            <span style="--i: 11"> </span>
+                            <span style="--i: 12">T</span>
+                            <span style="--i: 13">i</span>
+                            <span style="--i: 14">ế</span>
+                            <span style="--i: 15">t</span>
+                        </h4>
                         <p id="modal-description" class="text-[var(--text-primary)] mb-6 text-base leading-relaxed"></p>
 
-                        <h4 class="text-lg font-bold text-[var(--text-heading)] mb-3">🚀 Tính Năng Siêu Đỉnh</h4>
+                        <h4 class="text-lg font-bold text-[var(--text-heading)] mb-3 text-wave">
+                            <span style="--i: 0">🚀</span>
+                            <span style="--i: 1"> </span>
+                            <span style="--i: 2">T</span>
+                            <span style="--i: 3">í</span>
+                            <span style="--i: 4">n</span>
+                            <span style="--i: 5">h</span>
+                            <span style="--i: 6"> </span>
+                            <span style="--i: 7">N</span>
+                            <span style="--i: 8">ă</span>
+                            <span style="--i: 9">n</span>
+                            <span style="--i: 10">g</span>
+                            <span style="--i: 11"> </span>
+                            <span style="--i: 12">S</span>
+                            <span style="--i: 13">i</span>
+                            <span style="--i: 14">ê</span>
+                            <span style="--i: 15">u</span>
+                            <span style="--i: 16"> </span>
+                            <span style="--i: 17">Đ</span>
+                            <span style="--i: 18">ỉ</span>
+                            <span style="--i: 19">n</span>
+                            <span style="--i: 20">h</span>
+                        </h4>
                         <ul id="modal-features" class="space-y-3"></ul>
 
-                        <button class="btn-primary w-full mt-8 text-lg">💎 Mua Ngay & Sở Hữu Siêu Phẩm</button>
+                        <!-- ===== PHẦN ĐÃ SỬA LỖI ===== -->
+                        <button class="btn-primary w-full mt-8 text-lg">
+                            <span class="text-animated" data-text="💎 Mua Ngay & Sở Hữu Siêu Phẩm">💎 Mua Ngay & Sở Hữu Siêu Phẩm</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -726,7 +1069,7 @@
         'use strict';
 
         // =====================================================================
-        // 1. DỮ LIỆU & TRẠNG THÁI
+        // 1. DỮ LIỆU & TRẠNG THÁI VỚI VIDEO & MULTIPLE IMAGES
         // =====================================================================
         const themesData = [
             { 
@@ -736,7 +1079,15 @@
                 short_description: "Giao diện cửa hàng siêu đẳng cấp, tối ưu chuyển đổi 200%! 🚀", 
                 long_description: "Thiết kế e-commerce cực kỳ hiện đại với AI-powered recommendations, real-time analytics và conversion optimization. Tích hợp đầy đủ payment gateways và marketing tools tiên tiến nhất.", 
                 features: ["🔥 Tối ưu SEO cực mạnh", "📱 Responsive 4K Ready", "⚡ Tốc độ tải 0.5s", "🤖 AI Product Suggestions"], 
-                image_url: "https://i.imgur.com/vHZdcod.png" 
+                media: {
+                    video: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4",
+                    images: [
+                        "https://i.imgur.com/vHZdcod.png",
+                        "https://i.imgur.com/tHFNXoT.png",
+                        "https://i.imgur.com/Kpz5gRz.png",
+                        "https://i.imgur.com/kF2yt5v.png"
+                    ]
+                }
             },
             { 
                 id: 2, 
@@ -745,7 +1096,15 @@
                 short_description: "Theme blog cá nhân siêu đỉnh, engagement tăng 300%! 📈", 
                 long_description: "Giao diện blog tối giản và thanh lịch với advanced typography, reading analytics và social engagement tools. Được tối ưu cho content creators và influencers.", 
                 features: ["📖 Reading Experience A+", "🌓 Dark/Light Auto Switch", "🔄 Infinite Scroll Magic", "📊 Real-time Analytics"], 
-                image_url: "https://i.imgur.com/tHFNXoT.png" 
+                media: {
+                    video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                    images: [
+                        "https://i.imgur.com/tHFNXoT.png",
+                        "https://i.imgur.com/vHZdcod.png",
+                        "https://i.imgur.com/0DmWzT7.png",
+                        "https://i.imgur.com/3ZwnV6E.png"
+                    ]
+                }
             },
             { 
                 id: 3, 
@@ -754,7 +1113,15 @@
                 short_description: "Showcase dự án siêu chuyên nghiệp, wow factor 1000%! ✨", 
                 long_description: "Portfolio template với 3D effects, particle systems, và interactive animations. Hoàn hảo cho designers, photographers và creative professionals muốn gây ấn tượng mạnh.", 
                 features: ["🔍 3D Isotope Filtering", "✨ Particle Effects", "📧 Contact Form Ajax Pro", "🎬 Video Background Support"], 
-                image_url: "https://i.imgur.com/Kpz5gRz.png" 
+                media: {
+                    video: "https://sample-videos.com/zip/10/mp4/SampleVideo_640x360_1mb.mp4",
+                    images: [
+                        "https://i.imgur.com/Kpz5gRz.png",
+                        "https://i.imgur.com/0DmWzT7.png",
+                        "https://i.imgur.com/vHZdcod.png",
+                        "https://i.imgur.com/tHFNXoT.png"
+                    ]
+                }
             },
             { 
                 id: 4, 
@@ -763,7 +1130,15 @@
                 short_description: "Giao diện SaaS tương lai, conversion rate 500%! 🌟", 
                 long_description: "Template business cao cấp nhất với advanced pricing tables, customer testimonials carousel, và integrated CRM tools. Được thiết kế cho unicorn startups và enterprise companies.", 
                 features: ["💰 Dynamic Pricing Tables", "🎭 3D Micro-interactions", "🎯 A/B Testing Ready", "📈 Built-in Analytics"], 
-                image_url: "https://i.imgur.com/kF2yt5v.png" 
+                media: {
+                    video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+                    images: [
+                        "https://i.imgur.com/kF2yt5v.png",
+                        "https://i.imgur.com/vHZdcod.png",
+                        "https://i.imgur.com/Kpz5gRz.png",
+                        "https://i.imgur.com/3ZwnV6E.png"
+                    ]
+                }
             },
             { 
                 id: 5, 
@@ -772,7 +1147,15 @@
                 short_description: "Portfolio nghệ thuật tối giản, tôn vinh tác phẩm 100%! 🏆", 
                 long_description: "Thiết kế portfolio nghệ thuật với clean aesthetics, advanced image optimization và virtual gallery experience. Dành cho các nghệ sĩ muốn trưng bày tác phẩm một cách hoàn hảo nhất.", 
                 features: ["🧱 Smart Masonry Layout", "🖥️ Virtual Gallery Mode", "✒️ Premium Typography", "🎵 Ambient Sound Effects"], 
-                image_url: "https://i.imgur.com/0DmWzT7.png" 
+                media: {
+                    video: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4",
+                    images: [
+                        "https://i.imgur.com/0DmWzT7.png",
+                        "https://i.imgur.com/Kpz5gRz.png",
+                        "https://i.imgur.com/tHFNXoT.png",
+                        "https://i.imgur.com/kF2yt5v.png"
+                    ]
+                }
             },
             { 
                 id: 6, 
@@ -781,7 +1164,15 @@
                 short_description: "Theme ẩm thực siêu hấp dẫn, engagement tăng 400%! 😋", 
                 long_description: "Giao diện blog ẩm thực chuyên nghiệp với recipe calculator, nutrition tracker, và social sharing optimization. Hoàn hảo cho food bloggers và professional chefs.", 
                 features: ["📝 Recipe Calculator Pro", "🎥 4K Video Support", "⭐ Review System Advanced", "🔥 Trending Recipes AI"], 
-                image_url: "https://i.imgur.com/3ZwnV6E.png" 
+                media: {
+                    video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+                    images: [
+                        "https://i.imgur.com/3ZwnV6E.png",
+                        "https://i.imgur.com/0DmWzT7.png",
+                        "https://i.imgur.com/vHZdcod.png",
+                        "https://i.imgur.com/kF2yt5v.png"
+                    ]
+                }
             },
         ];
         
@@ -797,6 +1188,16 @@
         const themeSwitcherModal = document.getElementById('theme-switcher-modal');
         const themeMenu = document.getElementById('theme-menu');
         
+        // Media controls
+        const mainMediaContainer = document.getElementById('main-media-container');
+        const mediaThumbnails = document.getElementById('media-thumbnails');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        const volumeBtn = document.getElementById('volume-btn');
+        
+        let currentMedia = null;
+        let currentThemeMedia = null;
+
         // =====================================================================
         // 3. HIỆU ỨNG PARTICLES SIÊU ĐẲNG CẤP
         // =====================================================================
@@ -808,7 +1209,7 @@
             canvas.height = window.innerHeight;
             
             const particles = [];
-            const particleCount = 50;
+            const particleCount = 80;
             const accentColor = getComputedStyle(docHtml).getPropertyValue('--accent-primary').trim();
             
             class Particle {
@@ -820,17 +1221,19 @@
                 reset() {
                     this.x = Math.random() * canvas.width;
                     this.y = -10;
-                    this.speed = Math.random() * 2 + 0.5;
-                    this.size = Math.random() * 3 + 1;
-                    this.opacity = Math.random() * 0.5 + 0.3;
+                    this.speed = Math.random() * 3 + 0.5;
+                    this.size = Math.random() * 4 + 1;
+                    this.opacity = Math.random() * 0.6 + 0.3;
                     this.angle = 0;
-                    this.angleSpeed = (Math.random() - 0.5) * 0.02;
+                    this.angleSpeed = (Math.random() - 0.5) * 0.03;
+                    this.pulse = Math.random() * Math.PI * 2;
                 }
                 
                 update() {
                     this.y += this.speed;
-                    this.x += Math.sin(this.angle) * 0.5;
+                    this.x += Math.sin(this.angle) * 1;
                     this.angle += this.angleSpeed;
+                    this.pulse += 0.02;
                     
                     if (this.y > canvas.height + 10) {
                         this.reset();
@@ -838,13 +1241,14 @@
                 }
                 
                 draw() {
+                    const pulseFactor = Math.sin(this.pulse) * 0.3 + 0.7;
                     ctx.save();
-                    ctx.globalAlpha = this.opacity;
+                    ctx.globalAlpha = this.opacity * pulseFactor;
                     ctx.fillStyle = accentColor;
-                    ctx.shadowBlur = 10;
+                    ctx.shadowBlur = 15;
                     ctx.shadowColor = accentColor;
                     ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.arc(this.x, this.y, this.size * pulseFactor, 0, Math.PI * 2);
                     ctx.fill();
                     ctx.restore();
                 }
@@ -873,16 +1277,17 @@
             const container = document.getElementById('floating-icons');
             if (!container) return;
             
-            const icons = ['fa-rocket', 'fa-star', 'fa-heart', 'fa-gem', 'fa-crown', 'fa-magic', 'fa-bolt', 'fa-fire'];
+            const icons = ['fa-rocket', 'fa-star', 'fa-heart', 'fa-gem', 'fa-crown', 'fa-magic', 'fa-bolt', 'fa-fire', 'fa-diamond', 'fa-wand-magic-sparkles'];
             
             setInterval(() => {
-                if (container.children.length > 20) return;
+                if (container.children.length > 25) return;
                 
                 const icon = document.createElement('i');
                 icon.className = `fa-solid ${icons[Math.floor(Math.random() * icons.length)]} floating-icon`;
                 icon.style.left = Math.random() * 100 + '%';
-                icon.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                icon.style.animationDuration = (Math.random() * 8 + 8) + 's';
                 icon.style.animationDelay = Math.random() * 2 + 's';
+                icon.style.fontSize = (Math.random() * 1 + 1.5) + 'rem';
                 
                 container.appendChild(icon);
                 
@@ -890,27 +1295,204 @@
                     if (icon.parentNode) {
                         icon.parentNode.removeChild(icon);
                     }
-                }, 20000);
-            }, 3000);
+                }, 18000);
+            }, 2000);
         };
         
         // =====================================================================
-        // 5. RENDER THEMES VỚI HIỆU ỨNG ĐỈNH CAO
+        // 5. MEDIA GALLERY FUNCTIONS
+        // =====================================================================
+        const createMediaGallery = (media) => {
+            currentThemeMedia = media;
+            
+            // Create main media (video first if available)
+            if (media.video) {
+                showVideo(media.video);
+            } else if (media.images && media.images.length > 0) {
+                showImage(media.images[0]);
+            }
+            
+            // Create thumbnails
+            createThumbnails(media);
+        };
+        
+        const showVideo = (videoUrl) => {
+            mainMediaContainer.innerHTML = `
+                <video id="main-video" controls muted>
+                    <source src="${videoUrl}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            `;
+            currentMedia = document.getElementById('main-video');
+            updateMediaControls('video');
+        };
+        
+        const showImage = (imageUrl) => {
+            mainMediaContainer.innerHTML = `
+                <img id="main-image" src="${imageUrl}" alt="Theme Preview">
+            `;
+            currentMedia = document.getElementById('main-image');
+            updateMediaControls('image');
+        };
+        
+        const createThumbnails = (media) => {
+            let thumbnailsHTML = '';
+            
+            // Add video thumbnail if available
+            if (media.video) {
+                thumbnailsHTML += `
+                    <div class="thumbnail active" data-type="video" data-src="${media.video}">
+                        <video muted>
+                            <source src="${media.video}" type="video/mp4">
+                        </video>
+                        <div class="play-icon">
+                            <i class="fa-solid fa-play"></i>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Add image thumbnails
+            if (media.images) {
+                media.images.forEach((imageUrl, index) => {
+                    const isActive = !media.video && index === 0;
+                    thumbnailsHTML += `
+                        <div class="thumbnail ${isActive ? 'active' : ''}" data-type="image" data-src="${imageUrl}">
+                            <img src="${imageUrl}" alt="Preview ${index + 1}">
+                        </div>
+                    `;
+                });
+            }
+            
+            mediaThumbnails.innerHTML = thumbnailsHTML;
+            
+            // Add click events to thumbnails
+            mediaThumbnails.querySelectorAll('.thumbnail').forEach(thumb => {
+                thumb.addEventListener('click', () => {
+                    // Remove active class from all thumbnails
+                    mediaThumbnails.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked thumbnail
+                    thumb.classList.add('active');
+                    
+                    const type = thumb.dataset.type;
+                    const src = thumb.dataset.src;
+                    
+                    if (type === 'video') {
+                        showVideo(src);
+                    } else {
+                        showImage(src);
+                    }
+                    
+                    // Add confetti effect
+                    confetti({
+                        particleCount: 30,
+                        spread: 50,
+                        origin: { 
+                            x: thumb.getBoundingClientRect().left / window.innerWidth + 0.05,
+                            y: thumb.getBoundingClientRect().top / window.innerHeight + 0.1
+                        },
+                        colors: [getComputedStyle(docHtml).getPropertyValue('--accent-primary').trim()]
+                    });
+                });
+            });
+        };
+        
+        const updateMediaControls = (type) => {
+            if (type === 'video') {
+                playPauseBtn.style.display = 'flex';
+                volumeBtn.style.display = 'flex';
+            } else {
+                playPauseBtn.style.display = 'none';
+                volumeBtn.style.display = 'none';
+            }
+        };
+        
+        // =====================================================================
+        // 6. MEDIA CONTROLS EVENT LISTENERS
+        // =====================================================================
+        if (playPauseBtn) {
+            playPauseBtn.addEventListener('click', () => {
+                if (currentMedia && currentMedia.tagName === 'VIDEO') {
+                    if (currentMedia.paused) {
+                        currentMedia.play();
+                        playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                    } else {
+                        currentMedia.pause();
+                        playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+                    }
+                    
+                    // Mini confetti
+                    confetti({
+                        particleCount: 20,
+                        spread: 40,
+                        origin: { 
+                            x: playPauseBtn.getBoundingClientRect().left / window.innerWidth + 0.02,
+                            y: playPauseBtn.getBoundingClientRect().top / window.innerHeight + 0.02
+                        },
+                        colors: [getComputedStyle(docHtml).getPropertyValue('--accent-primary').trim()]
+                    });
+                }
+            });
+        }
+        
+        if (volumeBtn) {
+            volumeBtn.addEventListener('click', () => {
+                if (currentMedia && currentMedia.tagName === 'VIDEO') {
+                    currentMedia.muted = !currentMedia.muted;
+                    volumeBtn.innerHTML = currentMedia.muted ? 
+                        '<i class="fa-solid fa-volume-xmark"></i>' : 
+                        '<i class="fa-solid fa-volume-high"></i>';
+                }
+            });
+        }
+        
+        if (fullscreenBtn) {
+            fullscreenBtn.addEventListener('click', () => {
+                if (currentMedia) {
+                    if (currentMedia.requestFullscreen) {
+                        currentMedia.requestFullscreen();
+                    } else if (currentMedia.webkitRequestFullscreen) {
+                        currentMedia.webkitRequestFullscreen();
+                    } else if (currentMedia.msRequestFullscreen) {
+                        currentMedia.msRequestFullscreen();
+                    }
+                    
+                    // Explosion confetti
+                    confetti({
+                        particleCount: 100,
+                        spread: 90,
+                        origin: { y: 0.5 },
+                        colors: [getComputedStyle(docHtml).getPropertyValue('--accent-primary').trim()]
+                    });
+                }
+            });
+        }
+        
+        // =====================================================================
+        // 7. RENDER THEMES VỚI HIỆU ỨNG ĐỈNH CAO
         // =====================================================================
         const renderThemes = () => {
             if (!themeGrid) return;
             let cardsHTML = '';
             themesData.forEach((theme, index) => {
-                const imageHTML = `<div class="card-image-wrapper h-56 rounded-t-2xl overflow-hidden"><img src="${theme.image_url}" alt="${theme.title}" class="w-full h-full object-cover"></div>`;
-                const contentHTML = `<div class="p-5"><div class="flex justify-between items-start gap-4 mb-2"><h4 class="text-xl font-bold text-[var(--text-heading)]">${theme.title}</h4><div class="category-pill flex-shrink-0">${theme.category}</div></div><p class="text-base text-[var(--text-secondary)]">${theme.short_description}</p></div>`;
+                const imageHTML = `<div class="card-image-wrapper h-56 rounded-t-2xl overflow-hidden"><img src="${theme.media.images[0]}" alt="${theme.title}" class="w-full h-full object-cover"></div>`;
+                const titleWave = createWaveText(theme.title);
+                const contentHTML = `<div class="p-5"><div class="flex justify-between items-start gap-4 mb-2"><h4 class="text-xl font-bold text-[var(--text-heading)] text-electric">${titleWave}</h4><div class="category-pill flex-shrink-0">${theme.category}</div></div><p class="text-base text-[var(--text-secondary)]">${theme.short_description}</p></div>`;
                 cardsHTML += `<div class="theme-card" data-id="${theme.id}" style="transition-delay: ${index * 100}ms; animation-delay: ${index * 200}ms;">${imageHTML}${contentHTML}</div>`;
             });
             themeGrid.innerHTML = cardsHTML;
             setupScrollAnimations();
         };
         
+        const createWaveText = (text) => {
+            return text.split('').map((char, index) => {
+                if (char === ' ') return ' ';
+                return `<span style="--i: ${index}">${char}</span>`;
+            }).join('');
+        };
+        
         // =====================================================================
-        // 6. SCROLL ANIMATIONS SIÊU MƯỢT
+        // 8. SCROLL ANIMATIONS SIÊU MƯỢT
         // =====================================================================
         const setupScrollAnimations = () => {
             const observer = new IntersectionObserver((entries) => {
@@ -921,15 +1503,15 @@
                         setTimeout(() => {
                             const rect = entry.target.getBoundingClientRect();
                             confetti({
-                                particleCount: 30,
-                                spread: 60,
+                                particleCount: 40,
+                                spread: 70,
                                 origin: {
                                     x: (rect.left + rect.width/2) / window.innerWidth,
                                     y: (rect.top + rect.height/2) / window.innerHeight
                                 },
                                 colors: [getComputedStyle(docHtml).getPropertyValue('--accent-primary').trim()]
                             });
-                        }, 500);
+                        }, 600);
                         observer.unobserve(entry.target);
                     }
                 });
@@ -939,7 +1521,7 @@
         };
 
         // =====================================================================
-        // 7. STARRY SKY VỚI HIỆU ỨNG ĐỈNH CAO
+        // 9. STARRY SKY VỚI HIỆU ỨNG ĐỈNH CAO
         // =====================================================================
         let animationFrameId;
         const createEnhancedStarrySky = () => {
@@ -952,32 +1534,33 @@
             
             const accentColor = getComputedStyle(docHtml).getPropertyValue('--accent-primary').trim();
             const secondaryColor = getComputedStyle(docHtml).getPropertyValue('--accent-secondary').trim();
-            const numStars = 100;
+            const numStars = 120;
             let stars = [];
 
             class Star {
                 constructor() {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
-                    this.radius = Math.random() * 2 + 0.5;
-                    this.alpha = Math.random() * 0.8 + 0.2;
-                    this.twinkleSpeed = (Math.random() - 0.5) * 0.02;
+                    this.radius = Math.random() * 3 + 0.5;
+                    this.alpha = Math.random() * 0.9 + 0.1;
+                    this.twinkleSpeed = (Math.random() - 0.5) * 0.03;
                     this.color = Math.random() > 0.5 ? accentColor : secondaryColor;
                     this.pulsePhase = Math.random() * Math.PI * 2;
+                    this.pulseSpeed = Math.random() * 0.02 + 0.01;
                 }
                 
                 update() {
                     this.alpha += this.twinkleSpeed;
                     if (this.alpha <= 0.1 || this.alpha >= 1) this.twinkleSpeed *= -1;
-                    this.pulsePhase += 0.02;
+                    this.pulsePhase += this.pulseSpeed;
                 }
                 
                 draw() {
-                    const pulse = Math.sin(this.pulsePhase) * 0.3 + 0.7;
+                    const pulse = Math.sin(this.pulsePhase) * 0.4 + 0.6;
                     ctx.save();
                     ctx.globalAlpha = this.alpha * pulse;
                     ctx.fillStyle = this.color;
-                    ctx.shadowBlur = 15;
+                    ctx.shadowBlur = 20;
                     ctx.shadowColor = this.color;
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.radius * pulse, 0, 2 * Math.PI);
@@ -1002,32 +1585,39 @@
         };
         
         // =====================================================================
-        // 8. MODAL LOGIC VỚI HIỆU ỨNG ĐỈNH CAO
+        // 10. MODAL LOGIC VỚI HIỆU ỨNG ĐỈNH CAO
         // =====================================================================
         const openThemeDetailsModal = (theme) => {
             modalBackdrop.classList.add('visible');
             docBody.style.overflow = 'hidden';
             document.getElementById('modal-title').textContent = theme.title;
-            document.getElementById('modal-image').src = theme.image_url;
             document.getElementById('modal-description').textContent = theme.long_description;
             document.getElementById('modal-features').innerHTML = theme.features.map(f =>
                 `<li class="flex items-center text-base text-[var(--text-primary)]"><i class="fa-solid fa-circle-check text-lg mr-3 text-[var(--accent-primary)]"></i><span>${f}</span></li>`
             ).join('');
             
-            // Confetti khi mở modal
+            // Create media gallery
+            createMediaGallery(theme.media);
+            
+            // Super confetti khi mở modal
             setTimeout(() => {
                 confetti({
-                    particleCount: 100,
-                    spread: 70,
+                    particleCount: 150,
+                    spread: 80,
                     origin: { y: 0.6 },
                     colors: [getComputedStyle(docHtml).getPropertyValue('--accent-primary').trim()]
                 });
-            }, 300);
+            }, 400);
         };
         
         const closeThemeDetailsModal = () => {
             modalBackdrop.classList.remove('visible');
             docBody.style.overflow = '';
+            
+            // Stop any playing video
+            if (currentMedia && currentMedia.tagName === 'VIDEO') {
+                currentMedia.pause();
+            }
         };
 
         const toggleThemeSwitcherModal = (show) => {
@@ -1037,12 +1627,12 @@
                 // Confetti khi mở theme switcher
                 setTimeout(() => {
                     confetti({
-                        particleCount: 50,
-                        spread: 60,
+                        particleCount: 80,
+                        spread: 70,
                         origin: { y: 0.3 },
                         colors: [getComputedStyle(docHtml).getPropertyValue('--accent-primary').trim()]
                     });
-                }, 200);
+                }, 300);
             } else {
                 themeSwitcherModal.classList.remove('visible');
                 docBody.style.overflow = '';
@@ -1050,7 +1640,7 @@
         };
 
         // =====================================================================
-        // 9. THEME SWITCHING VỚI HIỆU ỨNG ĐỈNH CAO
+        // 11. THEME SWITCHING VỚI HIỆU ỨNG ĐỈNH CAO
         // =====================================================================
         const applyTheme = (themeName) => {
             docHtml.setAttribute('data-theme', themeName);
@@ -1059,10 +1649,10 @@
                 btn.classList.toggle('active', btn.dataset.themeSet === themeName);
             });
             
-            // Super confetti khi đổi theme
+            // Mega confetti khi đổi theme
             confetti({
-                particleCount: 200,
-                spread: 90,
+                particleCount: 300,
+                spread: 100,
                 origin: { y: 0.5 },
                 colors: [getComputedStyle(docHtml).getPropertyValue('--accent-primary').trim()]
             });
@@ -1070,13 +1660,13 @@
             setTimeout(() => {
                 createEnhancedStarrySky();
                 createEpicParticles();
-            }, 500);
+            }, 600);
             
             toggleThemeSwitcherModal(false);
         };
 
         // =====================================================================
-        // 10. EVENT LISTENERS
+        // 12. EVENT LISTENERS
         // =====================================================================
         
         // Mở Modal chi tiết theme với hiệu ứng
@@ -1124,8 +1714,8 @@
                 
                 // Mini confetti cho nav
                 confetti({
-                    particleCount: 20,
-                    spread: 40,
+                    particleCount: 25,
+                    spread: 50,
                     origin: { 
                         x: item.getBoundingClientRect().left / window.innerWidth + 0.05,
                         y: 0.9 
@@ -1136,11 +1726,13 @@
         });
 
         // =====================================================================
-        // 11. KHỞI TẠO SIÊU ĐẲNG CẤP
+        // 13. KHỞI TẠO SIÊU ĐẲNG CẤP
         // =====================================================================
         function init() {
-            // Fade in body
-            docBody.classList.remove('initial-hidden');
+            // Fade in body với delay để tạo dramatic effect
+            setTimeout(() => {
+                docBody.classList.remove('initial-hidden');
+            }, 100);
             
             // Load theme
             const savedTheme = localStorage.getItem('theme') || 'neural-dark';
@@ -1163,15 +1755,34 @@
                 createEpicParticles();
             });
             
-            // Welcome confetti
+            // Welcome mega confetti
             setTimeout(() => {
                 confetti({
-                    particleCount: 100,
-                    spread: 70,
+                    particleCount: 200,
+                    spread: 90,
                     origin: { y: 0.6 },
                     colors: [getComputedStyle(docHtml).getPropertyValue('--accent-primary').trim()]
                 });
-            }, 1000);
+            }, 1500);
+            
+            // Additional welcome effects
+            setTimeout(() => {
+                confetti({
+                    particleCount: 100,
+                    spread: 60,
+                    origin: { x: 0.2, y: 0.7 },
+                    colors: [getComputedStyle(docHtml).getPropertyValue('--accent-secondary').trim()]
+                });
+            }, 2000);
+            
+            setTimeout(() => {
+                confetti({
+                    particleCount: 100,
+                    spread: 60,
+                    origin: { x: 0.8, y: 0.7 },
+                    colors: [getComputedStyle(docHtml).getPropertyValue('--accent-primary').trim()]
+                });
+            }, 2500);
         }
         
         init();
