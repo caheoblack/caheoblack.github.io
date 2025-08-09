@@ -4,516 +4,382 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>ThemeStore Pro - Ultra Enhanced ✨</title>
-
-    <!-- ===== THƯ VIỆN & FONTS ===== -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <!-- FONT AWESOME -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-
     <style>
-        /* =====================================================================
-           1. DESIGN TOKENS & DYNAMIC THEME SETUP
-           ===================================================================== */
         :root {
             --font-main: 'Plus Jakarta Sans', sans-serif;
-            --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
-            --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
-            --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            --bg-primary: #191724; --bg-secondary: #201e2d; --bg-glass: rgba(32, 30, 45, 0.7); --text-primary: #e0def4; --text-secondary: #908caa; --text-heading: #ffffff; --border-primary: #2e2a3f; --accent-primary: #c3a6ff; --accent-secondary: #e0def4; --shadow-color: rgba(195, 166, 255, 0.15);
+            --ease-in-out: ease-in-out;
+            --bg-primary: #191724; --bg-secondary: #201e2d; --bg-glass: rgba(32, 30, 45, 0.7); 
+            --text-primary: #e0def4; --text-secondary: #908caa; --text-heading: #ffffff; 
+            --border-primary: #2e2a3f; --accent-primary: #c3a6ff; --accent-secondary: #e0def4; 
+            --shadow-color: rgba(195, 166, 255, 0.15);
         }
         [data-theme="neural-dark"] { --bg-primary: #0a0a0f; --bg-secondary: #111118; --bg-glass: rgba(17, 17, 24, 0.7); --text-primary: #cccccc; --text-secondary: #88889a; --text-heading: #ffffff; --border-primary: #252530; --accent-primary: #00f5ff; --accent-secondary: #74f9ff; --shadow-color: rgba(0, 245, 255, 0.2); }
         [data-theme="forest-dew"] { --bg-primary: #0f1a14; --bg-secondary: #14201a; --bg-glass: rgba(20, 32, 26, 0.7); --text-primary: #b8d8cb; --text-secondary: #79998a; --text-heading: #ffffff; --border-primary: #23382d; --accent-primary: #4deeb2; --accent-secondary: #90f5d1; --shadow-color: rgba(77, 238, 178, 0.15); }
         [data-theme="sunset-glow"] { --bg-primary: #21140f; --bg-secondary: #2b1a14; --bg-glass: rgba(43, 26, 20, 0.7); --text-primary: #f5d3c5; --text-secondary: #b89182; --text-heading: #ffffff; --border-primary: #4d2f25; --accent-primary: #ff8c69; --accent-secondary: #ffbba8; --shadow-color: rgba(255, 140, 105, 0.2); }
         [data-theme="cosmic-dark"] { --bg-primary: #04040a; --bg-secondary: #100f22; --bg-glass: rgba(12, 11, 26, 0.7); --text-primary: #f0f0f5; --text-secondary: #a0a0c0; --text-heading: #FFFFFF; --border-primary: rgba(67, 79, 138, 0.25); --accent-primary: #8b5cf6; --accent-secondary: #3b82f6; --shadow-color: rgba(139, 92, 246, 0.2); }
-
-        /* =====================================================================
-           2. HIỆU ỨNG PARTICLES & BACKGROUND CHUYỂN ĐỘNG
-           ===================================================================== */
         #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; }
-        #starry-sky { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;}
-        
         .floating-icons {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            overflow: hidden;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; overflow: hidden;
         }
-        
         .floating-icon {
-            position: absolute;
-            font-size: 1.5rem;
-            opacity: 0.1;
-            animation: floatAround 15s infinite linear;
-            color: var(--accent-primary);
+            position: absolute; font-size: 1.2rem; opacity: 0.15; animation: float 12s linear infinite; color: var(--accent-primary);
         }
-        
-        @keyframes floatAround {
-            0% { transform: translateY(100vh) translateX(-50px) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.3; }
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(-20px); opacity: 0; }
+            10% { opacity: 0.2; }
             90% { opacity: 0.1; }
-            100% { transform: translateY(-100px) translateX(50px) rotate(360deg); opacity: 0; }
+            100% { transform: translateY(-50px) translateX(20px); opacity: 0; }
         }
-
-        /* =====================================================================
-           3. KIỂU CƠ BẢN & BỐ CỤC CHO DI ĐỘNG
-           ===================================================================== */
-        html { 
-            transition: all 0.8s var(--ease-in-out-cubic); 
-            overflow-x: hidden;
-        }
+        html { transition: all 0.5s var(--ease-in-out); overflow-x: hidden; }
         body {
-            font-family: var(--font-main);
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-            color: var(--text-primary);
-            padding-bottom: 90px;
-            position: relative;
-            overflow-x: hidden;
-            animation: backgroundPulse 8s ease-in-out infinite alternate;
+            font-family: var(--font-main); background: var(--bg-primary); color: var(--text-primary);
+            padding-bottom: 80px; position: relative; overflow-x: hidden;
         }
-        
-        @keyframes backgroundPulse {
-            0% { background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); }
-            100% { background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%); }
-        }
-
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-primary); }
-        ::-webkit-scrollbar-thumb { 
-            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary)); 
-            border-radius: 10px; 
-            border: 2px solid var(--bg-primary);
-            box-shadow: 0 0 10px var(--shadow-color);
-        }
-
-        /* =====================================================================
-           4. HEADER SIÊU ĐẲNG CẤP
-           ===================================================================== */
-        .header {
-            animation: epicHeaderEntrance 2s var(--ease-bounce) 0.3s forwards;
-            opacity: 0;
-            padding: 1.5rem 1.5rem 0 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        @keyframes epicHeaderEntrance {
-            0% { opacity: 0; transform: translateY(-100px) scale(0.8) rotateX(45deg); }
-            50% { opacity: 0.8; transform: translateY(10px) scale(1.1) rotateX(-10deg); }
-            100% { opacity: 1; transform: translateY(0) scale(1) rotateX(0deg); }
-        }
-        
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
-            opacity: 0.1;
-            animation: shine 3s infinite;
-        }
-        
-        @keyframes shine {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-        
-        .header h2 {
-            color: var(--text-heading); 
-            text-shadow: 0 0 20px var(--shadow-color), 0 0 40px var(--shadow-color);
-            background: linear-gradient(45deg, var(--text-heading), var(--accent-primary), var(--accent-secondary));
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradientShift 3s ease-in-out infinite;
-            position: relative;
-        }
-        
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        .header h2::after {
-            content: '✨';
-            position: absolute;
-            right: -40px;
-            top: -10px;
-            font-size: 2rem;
-            animation: sparkle 2s ease-in-out infinite;
-        }
-        
-        @keyframes sparkle {
-            0%, 100% { transform: scale(1) rotate(0deg) translateY(0px); opacity: 1; text-shadow: 0 0 5px gold, 0 0 10px gold; }
-            10% { transform: scale(1.1) rotate(36deg) translateY(-3px); opacity: 0.9; text-shadow: 0 0 8px #ff9ff3, 0 0 15px #ff9ff3; }
-            25% { transform: scale(1.5) rotate(90deg) translateY(-8px); opacity: 0.8; text-shadow: 0 0 12px #54a0ff, 0 0 20px #54a0ff; }
-            50% { transform: scale(0.8) rotate(180deg) translateY(2px); opacity: 0.6; text-shadow: 0 0 15px #5f27cd, 0 0 25px #5f27cd; }
-            75% { transform: scale(1.3) rotate(270deg) translateY(-5px); opacity: 0.9; text-shadow: 0 0 10px #00d2d3, 0 0 18px #00d2d3; }
-            90% { transform: scale(1.1) rotate(324deg) translateY(-2px); opacity: 0.95; text-shadow: 0 0 7px #ff6b6b, 0 0 12px #ff6b6b; }
-        }
-        
-        .header p {
-            animation: fadeInUp 1s var(--ease-out-quint) 1s forwards;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        
-        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
-
-        #theme-switcher-btn-header { color: var(--text-secondary); transition: all 0.5s var(--ease-bounce); position: relative; overflow: hidden; }
-        #theme-switcher-btn-header::before { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; background: radial-gradient(circle, var(--accent-primary), transparent); transform: translate(-50%, -50%); transition: all 0.5s var(--ease-out-quint); border-radius: 50%; z-index: -1; }
-        #theme-switcher-btn-header:active { color: var(--accent-primary); transform: scale(1.2) rotate(360deg); text-shadow: 0 0 20px var(--shadow-color); }
-        #theme-switcher-btn-header:active::before { width: 60px; height: 60px; opacity: 0.3; }
-
-        /* =====================================================================
-           5. THẺ THEME SIÊU ĐỈNH CAO
-           ===================================================================== */
+        ::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 6px; }
+        .header { padding: 1rem; opacity: 0; animation: fadeIn 1s ease-in forwards; }
+        @keyframes fadeIn { to { opacity: 1; } }
+        .header h2 { color: var(--text-heading); font-size: 2rem; }
+        .header p { font-size: 1rem; color: var(--text-secondary); animation: fadeIn 1s ease-in 0.5s forwards; opacity: 0; }
+        #theme-switcher-btn-header { color: var(--text-secondary); transition: all 0.3s var(--ease-in-out); }
+        #theme-switcher-btn-header:hover { color: var(--accent-primary); transform: scale(1.1); }
         .theme-card {
-            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary)); 
-            border-radius: 24px; border: 2px solid var(--border-primary);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3), 0 0 20px var(--shadow-color); 
-            position: relative; overflow: hidden;
-            transition: all 0.6s var(--ease-bounce);
-            opacity: 0; transform: translateY(60px) scale(0.9) rotateX(15deg); cursor: pointer;
+            background: var(--bg-secondary); border-radius: 16px; border: 1px solid var(--border-primary);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: all 0.4s var(--ease-in-out);
+            opacity: 0; transform: translateY(30px); cursor: pointer;
         }
-        .theme-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(from 0deg, var(--accent-primary), transparent, var(--accent-secondary), transparent, var(--accent-primary)); opacity: 0; animation: rotate 4s linear infinite; transition: opacity 0.5s; z-index: 1; }
-        @keyframes rotate { 100% { transform: rotate(360deg); } }
-        .theme-card:hover::before { opacity: 0.1; }
-        .theme-card::after { content: ''; position: absolute; inset: 2px; background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary)); border-radius: 22px; z-index: 2; }
-        .theme-card > * { position: relative; z-index: 3; }
-        .theme-card.visible { opacity: 1; transform: translateY(0) scale(1) rotateX(0deg); }
-        .theme-card:hover { transform: translateY(-15px) scale(1.05) rotateY(5deg); box-shadow: 0 25px 60px rgba(0,0,0,0.4), 0 0 40px var(--shadow-color); }
-        .theme-card:active { transform: scale(0.95) rotateY(0deg); box-shadow: 0 10px 25px var(--shadow-color); }
-        .card-image-wrapper { position: relative; overflow: hidden; }
-        .card-image-wrapper::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); z-index: 1; transition: left 0.8s var(--ease-out-quint); }
-        .theme-card:hover .card-image-wrapper::before { left: 100%; }
-        .card-image-wrapper img { transition: all 0.8s var(--ease-out-quint); filter: brightness(0.9) saturate(1.1); }
-        .theme-card:hover .card-image-wrapper img { transform: scale(1.15) rotate(2deg); filter: brightness(1.1) saturate(1.3); }
-        .category-pill { display: inline-flex; align-items: center; gap: 8px; font-size: 0.75rem; font-weight: 700; padding: 8px 16px; border-radius: 999px; border: 2px solid var(--accent-primary); color: var(--accent-primary); background: linear-gradient(135deg, transparent, var(--accent-primary)); background-size: 0% 100%; background-repeat: no-repeat; transition: all 0.5s var(--ease-bounce); position: relative; overflow: hidden; }
-        .category-pill::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--accent-primary); opacity: 0; transition: opacity 0.3s; z-index: -1; }
-        .theme-card:hover .category-pill { background-size: 100% 100%; color: var(--bg-primary); transform: scale(1.1); box-shadow: 0 0 20px var(--shadow-color); }
-        .theme-card:hover .category-pill::before { opacity: 0.2; }
-
-        /* =====================================================================
-           6. THANH ĐIỀU HƯỚNG DƯỚI SIÊU NGẦU
-           ===================================================================== */
-        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 75px; background: linear-gradient(135deg, var(--bg-glass), rgba(0,0,0,0.3)); backdrop-filter: blur(25px) saturate(1.5); -webkit-backdrop-filter: blur(25px) saturate(1.5); border-top: 2px solid var(--border-primary); display: flex; justify-content: space-around; align-items: center; z-index: 1000; padding-bottom: env(safe-area-inset-bottom); box-shadow: 0 -15px 50px rgba(0,0,0,0.4), 0 0 30px var(--shadow-color); transition: all 0.5s var(--ease-in-out-cubic); animation: navGlow 4s ease-in-out infinite alternate; }
-        @keyframes navGlow { 0% { box-shadow: 0 -15px 50px rgba(0,0,0,0.4), 0 0 30px var(--shadow-color); } 100% { box-shadow: 0 -15px 50px rgba(0,0,0,0.4), 0 0 50px var(--shadow-color); } }
-        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-secondary); font-weight: 600; font-size: 0.7rem; transition: all 0.5s var(--ease-bounce); position: relative; padding: 8px; border-radius: 12px; overflow: hidden; }
-        .nav-item::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, var(--accent-primary), transparent); opacity: 0; transition: all 0.4s var(--ease-out-quint); z-index: -1; }
-        .nav-item i { font-size: 1.4rem; transition: all 0.4s var(--ease-bounce); }
-        .nav-item.active { color: var(--accent-primary); transform: translateY(-10px) scale(1.1); text-shadow: 0 0 15px var(--shadow-color); }
-        .nav-item.active::before { opacity: 0.2; }
-        .nav-item.active i { animation: iconBounce 2s ease-in-out infinite; }
-        @keyframes iconBounce { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-5px) rotate(10deg); } }
-        .nav-item:active { transform: translateY(-8px) scale(0.95); }
-
-        /* =====================================================================
-           7. MODAL THEME SWITCHER ĐẲNG CẤP
-           ===================================================================== */
-        #theme-switcher-modal { position: fixed; inset: 0; z-index: 2000; background: radial-gradient(circle at center, rgba(0,0,0,0.8), rgba(0,0,0,0.6)); backdrop-filter: blur(15px) saturate(1.2); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: all 0.6s var(--ease-in-out-cubic); }
+        .theme-card.visible { opacity: 1; transform: translateY(0); }
+        .theme-card:hover { transform: translateY(-10px); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
+        .card-image-wrapper { overflow: hidden; border-radius: 16px 16px 0 0; }
+        .card-image-wrapper img, .card-image-wrapper video { width: 100%; height: 200px; object-fit: cover; transition: all 0.4s var(--ease-in-out); loading: lazy; }
+        .theme-card:hover .card-image-wrapper img, .theme-card:hover .card-image-wrapper video { transform: scale(1.1); }
+        .category-pill {
+            display: inline-flex; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--accent-primary);
+            color: var(--accent-primary); font-size: 0.75rem; font-weight: 600; transition: all 0.3s var(--ease-in-out);
+        }
+        .theme-card:hover .category-pill { background: var(--accent-primary); color: var(--bg-primary); }
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; right: 0; height: 70px; background: var(--bg-glass);
+            backdrop-filter: blur(10px); border-top: 1px solid var(--border-primary); display: flex;
+            justify-content: space-around; align-items: center; z-index: 1000; padding-bottom: env(safe-area-inset-bottom);
+            box-shadow: 0 -8px 20px rgba(0,0,0,0.2);
+        }
+        .nav-item {
+            display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-secondary);
+            font-size: 0.7rem; font-weight: 600; transition: all 0.3s var(--ease-in-out); padding: 8px;
+        }
+        .nav-item i { font-size: 1.2rem; }
+        .nav-item.active { color: var(--accent-primary); transform: translateY(-5px); }
+        .nav-item:hover { transform: translateY(-5px); }
+        #theme-switcher-modal {
+            position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px);
+            display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none;
+            transition: all 0.4s var(--ease-in-out);
+        }
         #theme-switcher-modal.visible { opacity: 1; pointer-events: auto; }
-        #theme-menu { background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary)); border: 3px solid var(--border-primary); border-radius: 32px; padding: 2.5rem; width: 90%; max-width: 400px; box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 50px var(--shadow-color); transform: scale(0.7) translateY(50px) rotateX(15deg); transition: all 0.6s var(--ease-bounce); position: relative; overflow: hidden; }
-        #theme-menu::before { content: ''; position: absolute; inset: -2px; background: conic-gradient(from 0deg, var(--accent-primary), var(--accent-secondary), var(--accent-primary)); border-radius: 34px; z-index: -1; animation: rotate 6s linear infinite; }
-        #theme-switcher-modal.visible #theme-menu { transform: scale(1) translateY(0) rotateX(0deg); }
-        .theme-option { width: 64px; height: 64px; border-radius: 50%; border: 4px solid transparent; transition: all 0.5s var(--ease-bounce); cursor: pointer; position: relative; overflow: hidden; }
-        .theme-option::before { content: ''; position: absolute; inset: -10px; background: conic-gradient(from 0deg, transparent, var(--accent-primary), transparent); border-radius: 50%; opacity: 0; transition: all 0.4s; animation: rotate 3s linear infinite; }
-        .theme-option:hover::before { opacity: 0.6; }
-        .theme-option:active { transform: scale(0.85); }
-        .theme-option.active { border-color: var(--accent-primary); box-shadow: 0 0 30px var(--shadow-color), inset 0 0 20px rgba(255,255,255,0.1); transform: scale(1.2); animation: activeThemePulse 2s ease-in-out infinite; }
-        @keyframes activeThemePulse { 0%, 100% { transform: scale(1.2); } 50% { transform: scale(1.3); } }
-        .theme-option[data-theme-set="neural-dark"] { background: linear-gradient(135deg, #00f5ff, #111118, #00f5ff); }
-        .theme-option[data-theme-set="purple-mist"] { background: linear-gradient(135deg, #c3a6ff, #191724, #c3a6ff); }
-        .theme-option[data-theme-set="forest-dew"] { background: linear-gradient(135deg, #4deeb2, #0f1a14, #4deeb2); }
-        .theme-option[data-theme-set="sunset-glow"] { background: linear-gradient(135deg, #ff8c69, #21140f, #ff8c69); }
-        .theme-option[data-theme-set="cosmic-dark"] { background: linear-gradient(135deg, #8b5cf6, #0C0B1A, #8b5cf6); }
-
-        /* =====================================================================
-           8. MODAL CHI TIẾT THEME ĐỈNH CAO (CẬP NHẬT)
-           ===================================================================== */
-        #modal-backdrop { opacity: 0; pointer-events: none; transition: all 0.6s var(--ease-in-out-cubic); backdrop-filter: blur(0px); background: radial-gradient(circle at center, rgba(0,0,0,0.9), rgba(0,0,0,0.7)); }
-        #modal-backdrop.visible { opacity: 1; pointer-events: auto; backdrop-filter: blur(20px) saturate(1.3); }
-        #modal-content { background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary)); border: 3px solid; border-image: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary)) 1; box-shadow: 0 0 100px var(--shadow-color), 0 40px 80px rgba(0,0,0,0.5); opacity: 0; transform: translateY(80px) scale(0.8) rotateX(20deg); transition: all 0.8s var(--ease-bounce); width: 95%; max-width: 520px; position: relative; overflow: hidden; }
-        #modal-content::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 4px; background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-primary)); animation: shimmer 2s infinite; }
-        @keyframes shimmer { 0% { left: -100%; } 100% { left: 100%; } }
-        #modal-backdrop.visible #modal-content { opacity: 1; transform: translateY(0) scale(1) rotateX(0deg); }
-        #modal-title { text-shadow: 0 0 20px var(--shadow-color); background: linear-gradient(45deg, var(--text-heading), var(--accent-primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        /* === CSS MỚI CHO GALLERY TRONG MODAL === */
+        #theme-menu {
+            background: var(--bg-secondary); border: 2px solid var(--border-primary); border-radius: 24px;
+            padding: 2rem; width: 90%; max-width: 360px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: scale(0.9); transition: all 0.4s var(--ease-in-out);
+        }
+        #theme-switcher-modal.visible #theme-menu { transform: scale(1); }
+        .theme-option {
+            width: 48px; height: 48px; border-radius: 50%; border: 2px solid transparent;
+            transition: all 0.3s var(--ease-in-out); cursor: pointer;
+        }
+        .theme-option:hover { transform: scale(1.1); }
+        .theme-option.active { border-color: var(--accent-primary); transform: scale(1.15); }
+        .theme-option[data-theme-set="neural-dark"] { background: linear-gradient(135deg, #00f5ff, #111118); }
+        .theme-option[data-theme-set="purple-mist"] { background: linear-gradient(135deg, #c3a6ff, #191724); }
+        .theme-option[data-theme-set="forest-dew"] { background: linear-gradient(135deg, #4deeb2, #0f1a14); }
+        .theme-option[data-theme-set="sunset-glow"] { background: linear-gradient(135deg, #ff8c69, #21140f); }
+        .theme-option[data-theme-set="cosmic-dark"] { background: linear-gradient(135deg, #8b5cf6, #0C0B1A); }
+        #modal-backdrop {
+            opacity: 0; pointer-events: none; transition: all 0.4s var(--ease-in-out);
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(10px);
+        }
+        #modal-backdrop.visible { opacity: 1; pointer-events: auto; }
+        #modal-content {
+            background: var(--bg-secondary); border: 2px solid var(--border-primary); border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); opacity: 0; transform: translateY(50px);
+            transition: all 0.4s var(--ease-in-out); width: 90%; max-width: 480px;
+        }
+        #modal-backdrop.visible #modal-content { opacity: 1; transform: translateY(0); }
         #modal-media-display {
-            position: relative;
-            background-color: var(--bg-primary);
-            border-radius: 1rem;
-            overflow: hidden;
-            min-height: 250px; /* Đảm bảo có chiều cao tối thiểu */
-            transition: all 0.5s var(--ease-in-out-cubic);
+            position: relative; background: var(--bg-primary); border-radius: 12px; overflow: hidden;
+            min-height: 200px;
         }
         #modal-media-display img, #modal-media-display video {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            position: absolute; /* Thêm vào để animation hoạt động */
-            top: 0; left: 0;
-            opacity: 0;
-            transition: opacity 0.4s var(--ease-in-out-cubic);
+            width: 100%; height: auto; object-fit: cover; opacity: 0; transition: opacity 0.3s var(--ease-in-out);
+            loading: lazy;
         }
-        #modal-media-display .media-active {
-            opacity: 1;
-            position: relative; /* Ghi đè position absolute */
-        }
+        #modal-media-display .media-active { opacity: 1; }
         #modal-media-thumbnails {
-            display: flex;
-            gap: 0.75rem;
-            padding: 0.5rem;
-            overflow-x: auto;
+            display: flex; gap: 0.5rem; padding: 0.5rem; overflow-x: auto;
         }
         .thumbnail-item {
-            width: 70px;
-            height: 50px;
-            border-radius: 8px;
-            border: 2px solid var(--border-primary);
-            cursor: pointer;
-            transition: all 0.3s var(--ease-bounce);
-            flex-shrink: 0;
-            position: relative;
-            overflow: hidden;
-            filter: grayscale(50%);
+            width: 60px; height: 40px; border-radius: 6px; border: 1px solid var(--border-primary);
+            cursor: pointer; transition: all 0.3s var(--ease-in-out); flex-shrink: 0;
         }
-        .thumbnail-item img { width: 100%; height: 100%; object-fit: cover; }
+        .thumbnail-item img { width: 100%; height: 100%; object-fit: cover; loading: lazy; }
         .thumbnail-item .play-icon {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.2rem;
-            color: white;
-            text-shadow: 0 0 5px black;
-            opacity: 0.8;
-            pointer-events: none; /* Quan trọng */
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: 1rem; color: white; text-shadow: 0 0 3px black; opacity: 0.7; pointer-events: none;
         }
-        .thumbnail-item:hover { transform: scale(1.1); filter: grayscale(0%); }
-        .thumbnail-item.active {
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 15px var(--shadow-color);
-            transform: scale(1.05);
-            filter: grayscale(0%);
+        .thumbnail-item:hover { transform: scale(1.05); }
+        .thumbnail-item.active { border-color: var(--accent-primary); }
+        .btn-primary {
+            background: var(--accent-primary); color: black; font-weight: bold; padding: 12px 24px;
+            border-radius: 16px; box-shadow: 0 5px 15px var(--shadow-color); transition: all 0.3s var(--ease-in-out);
         }
-        /* === KẾT THÚC CSS MỚI === */
-
-        .btn-primary { background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); color: black; font-weight: bold; padding: 18px 28px; border-radius: 20px; box-shadow: 0 10px 30px var(--shadow-color); transition: all 0.4s var(--ease-bounce); position: relative; overflow: hidden; }
-        .btn-primary::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.6s; }
-        .btn-primary:hover::before { left: 100%; }
-        .btn-primary:active { transform: translateY(3px) scale(0.97); box-shadow: 0 5px 15px var(--shadow-color); filter: brightness(1.2); }
-
-        /* =====================================================================
-           9. HIỆU ỨNG KHỞI TẠO & ANIMATIONS ĐẶC BIỆT
-           ===================================================================== */
-        .initial-hidden { opacity: 0; }
-        @keyframes epicEntrance { 0% { opacity: 0; transform: translateY(50px) scale(0.8) rotateX(30deg); } 60% { opacity: 0.8; transform: translateY(-10px) scale(1.1) rotateX(-5deg); } 100% { opacity: 1; transform: translateY(0) scale(1) rotateX(0deg); } }
-        * { -webkit-tap-highlight-color: transparent; }
+        .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.1); }
         .theme-card, .nav-item, .theme-option, .btn-primary { user-select: none; -webkit-user-select: none; }
-        .sparkle-subtitle { display: inline-block; animation: sparkle-bounce-glow 2s ease-in-out infinite; }
-        @keyframes sparkle-bounce-glow {
-            0%, 100% { transform: scale(1) rotate(0deg) translateY(0px); opacity: 1; text-shadow: 0 0 5px gold, 0 0 10px gold; }
-            10% { transform: scale(1.1) rotate(36deg) translateY(-3px); opacity: 0.9; text-shadow: 0 0 8px #ff9ff3, 0 0 15px #ff9ff3; }
-            25% { transform: scale(1.5) rotate(90deg) translateY(-8px); opacity: 0.8; text-shadow: 0 0 12px #54a0ff, 0 0 20px #54a0ff; }
-            50% { transform: scale(0.8) rotate(180deg) translateY(2px); opacity: 0.6; text-shadow: 0 0 15px #5f27cd, 0 0 25px #5f27cd; }
-            75% { transform: scale(1.3) rotate(270deg) translateY(-5px); opacity: 0.9; text-shadow: 0 0 10px #00d2d3, 0 0 18px #00d2d3; }
-            90% { transform: scale(1.1) rotate(324deg) translateY(-2px); opacity: 0.95; text-shadow: 0 0 7px #ff6b6b, 0 0 12px #ff6b6b; }
-        }
     </style>
 </head>
 <body class="initial-hidden">
     <canvas id="particles-canvas"></canvas>
-    <canvas id="starry-sky"></canvas>
     <div class="floating-icons" id="floating-icons"></div>
-
-    <!-- ===== NỘI DUNG CHÍNH ===== -->
     <main class="flex-1 transition-colors duration-500">
         <div class="max-w-full mx-auto">
             <header class="header flex justify-between items-center mb-6">
                 <div>
-                    <h2 class="text-4xl font-extrabold tracking-tight">Epic Showcase</h2>
-                    <p class="text-[var(--text-secondary)] mt-1 text-lg">Web Shop siêu đẳng cấp <span class="sparkle-subtitle">✨</span></p>
+                    <h2 class="text-3xl font-bold">Epic Showcase</h2>
+                    <p class="mt-1 text-base">Web Shop siêu đẳng cấp ✨</p>
                 </div>
                 <button id="theme-switcher-btn-header">
-                    <i class="fa-solid fa-palette text-3xl"></i>
+                    <i class="fa-solid fa-palette text-2xl"></i>
                 </button>
             </header>
-
             <section class="px-4">
-                <div id="themeGrid" class="flex flex-col gap-8">
-                    <!-- CÁC THẺ THEME SẼ ĐƯỢC TỰ ĐỘNG CHÈN VÀO ĐÂY -->
-                </div>
+                <div id="themeGrid" class="flex flex-col gap-6"></div>
             </section>
         </div>
     </main>
-
-    <!-- ===== THANH ĐIỀU HƯỚNG DƯỚI CÙNG ===== -->
     <nav class="bottom-nav">
-        <a href="#" class="nav-item active">
-            <i class="fa-solid fa-layer-group"></i>
-            <span>Tất Cả</span>
-        </a>
-        <a href="#" class="nav-item">
-            <i class="fa-solid fa-fire"></i>
-            <span>Phổ Biến</span>
-        </a>
-        <a href="#" class="nav-item">
-            <i class="fa-solid fa-star"></i>
-            <span>Mới Nhất</span>
-        </a>
-        <a href="#" class="nav-item">
-            <i class="fa-solid fa-headset"></i>
-            <span>Hỗ Trợ</span>
-        </a>
+        <a href="#" class="nav-item active"><i class="fa-solid fa-layer-group"></i><span>Tất Cả</span></a>
+        <a href="#" class="nav-item"><i class="fa-solid fa-fire"></i><span>Phổ Biến</span></a>
+        <a href="#" class="nav-item"><i class="fa-solid fa-star"></i><span>Mới Nhất</span></a>
+        <a href="#" class="nav-item"><i class="fa-solid fa-headset"></i><span>Hỗ Trợ</span></a>
     </nav>
-    
-    <!-- ===== MODAL CHỌN THEME ===== -->
     <div id="theme-switcher-modal">
         <div id="theme-menu">
-            <h3 class="text-2xl font-bold text-center mb-6 text-[var(--text-heading)]">🎨 Chọn Theme Siêu Đẳng Cấp</h3>
-            <div class="grid grid-cols-3 gap-6 place-items-center">
-                 <button class="theme-option" data-theme-set="neural-dark" title="Neural Dark ⚡"></button>
-                 <button class="theme-option" data-theme-set="purple-mist" title="Purple Mist 🌙"></button>
-                 <button class="theme-option" data-theme-set="forest-dew" title="Forest Dew 🌿"></button>
-                 <button class="theme-option" data-theme-set="sunset-glow" title="Sunset Glow 🌅"></button>
-                 <button class="theme-option" data-theme-set="cosmic-dark" title="Cosmic Dark 🌌"></button>
-                 <div></div>
+            <h3 class="text-xl font-bold text-center mb-4 text-[var(--text-heading)]">🎨 Chọn Theme</h3>
+            <div class="grid grid-cols-3 gap-4 place-items-center">
+                <button class="theme-option" data-theme-set="neural-dark" title="Neural Dark"></button>
+                <button class="theme-option" data-theme-set="purple-mist" title="Purple Mist"></button>
+                <button class="theme-option" data-theme-set="forest-dew" title="Forest Dew"></button>
+                <button class="theme-option" data-theme-set="sunset-glow" title="Sunset Glow"></button>
+                <button class="theme-option" data-theme-set="cosmic-dark" title="Cosmic Dark"></button>
+                <div></div>
             </div>
         </div>
     </div>
-
-    <!-- ===== MODAL CHI TIẾT THEME (CẤU TRÚC MỚI) ===== -->
-    <div id="modal-backdrop" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
-        <div id="modal-content" class="rounded-3xl shadow-2xl overflow-hidden">
-            <div class="p-6 flex justify-between items-center border-b border-[var(--border-primary)]">
-                <h3 id="modal-title" class="text-2xl font-extrabold text-[var(--text-heading)]"></h3>
-                <button id="modal-close-btn" class="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all duration-300">
-                    <i class="fa-solid fa-xmark text-2xl"></i>
+    <div id="modal-backdrop" class="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div id="modal-content" class="rounded-2xl overflow-hidden">
+            <div class="p-5 flex justify-between items-center border-b border-[var(--border-primary)]">
+                <h3 id="modal-title" class="text-xl font-bold"></h3>
+                <button id="modal-close-btn" class="text-[var(--text-secondary)] hover:text-[var(--text-primary)]">
+                    <i class="fa-solid fa-xmark text-xl"></i>
                 </button>
             </div>
-            <div class="p-6 max-h-[75vh] overflow-y-auto">
-                <div class="flex flex-col gap-y-6">
-                    <!-- KHU VỰC GALLERY MỚI -->
-                    <div class="flex flex-col gap-y-3">
-                        <div id="modal-media-display" class="rounded-2xl overflow-hidden border border-[var(--border-primary)] shadow-lg shadow-black/10">
-                           <!-- Nội dung media sẽ được chèn vào đây bằng JS -->
-                        </div>
-                        <div id="modal-media-thumbnails">
-                           <!-- Thumbnails sẽ được chèn vào đây bằng JS -->
-                        </div>
+            <div class="p-5 max-h-[70vh] overflow-y-auto">
+                <div class="flex flex-col gap-y-4">
+                    <div class="flex flex-col gap-y-2">
+                        <div id="modal-media-display" class="rounded-xl overflow-hidden border border-[var(--border-primary)]"></div>
+                        <div id="modal-media-thumbnails"></div>
                     </div>
-                    <!-- KẾT THÚC KHU VỰC GALLERY -->
-                    
                     <div>
-                        <h4 class="text-lg font-bold text-[var(--text-heading)] mb-2">🌟 Mô Tả Chi Tiết</h4>
-                        <p id="modal-description" class="text-[var(--text-primary)] mb-6 text-base leading-relaxed"></p>
-
-                        <h4 class="text-lg font-bold text-[var(--text-heading)] mb-3">🚀 Tính Năng Siêu Đỉnh</h4>
-                        <ul id="modal-features" class="space-y-3"></ul>
-
-                        <button class="btn-primary w-full mt-8 text-lg">💎 Mua Ngay & Sở Hữu Siêu Phẩm</button>
+                        <h4 class="text-base font-bold text-[var(--text-heading)] mb-2">🌟 Mô Tả</h4>
+                        <p id="modal-description" class="text-[var(--text-primary)] mb-4 text-sm"></p>
+                        <h4 class="text-base font-bold text-[var(--text-heading)] mb-2">🚀 Tính Năng</h4>
+                        <ul id="modal-features" class="space-y-2"></ul>
+                        <h4 class="text-base font-bold text-[var(--text-heading)] mb-2">💰 Giá</h4>
+                        <p id="modal-price" class="text-[var(--text-primary)] mb-4 text-sm"></p>
+                        <h4 class="text-base font-bold text-[var(--text-heading)] mb-2">🔗 Link Tải</h4>
+                        <p id="modal-product-url" class="text-[var(--text-primary)] mb-4 text-sm"></p>
+                        <button class="btn-primary w-full mt-6 text-base">💎 Mua Ngay</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         'use strict';
-
-        // =====================================================================
-        // 1. DỮ LIỆU & TRẠNG THÁI (CẬP NHẬT)
-        // =====================================================================
         const themesData = [
-            { 
-                id: 1, 
-                title: "WEB PHISING TẠO PHISING AUTO 🚀", 
-                category: "🚀 Business", 
-                short_description: "Giao diện phising siêu đẳng cấp với đa dạng các mẫu mã phising nhiều mẫu content hot đặc biệt để rải link scan via, tối ưu chuyển đổi 200%! 🚀", 
-                long_description: "Được xây dựng với sự tinh tế đỉnh cao, nền tảng phising thương mại điện tử này tái định nghĩa nghệ thuật lừa đảo số với giao diện hiện đại, mượt mà được thiết kế để thu hút và chuyển đổi", 
-                features: ["🔥 Tối ưu auto tạo web phising", "📱Giao diện Web Responsive 4K Ready", "⚡ Tốc độ tải 0.5s", "🤖 AI Product Suggestions"], 
-                // THAY ĐỔI TỪ image_url SANG media
-                media: [
-                    { type: 'image', src: 'https://i.imgur.com/vHZdcod.png' },
-                    { type: 'image', src: 'https://i.imgur.com/kF2yt5v.png' },
-                    { type: 'video', src: 'https://cdn.pixabay.com/video/2024/05/27/211905_tiny.mp4' }
-                ]
+            {
+                id: 'tele_bot_welcome_01',
+                title: 'MÃ NGUỒN BOT CHƠI GAME KIẾM TIỀN',
+                category: '🚀 Telegram',
+                short_description: 'Bot Telegram chơi game kiếm tiền, hỗ trợ thanh toán tự động.',
+                long_description: 'Nhận code bot Telegram theo yêu cầu. Có thể chỉnh sửa mã nguồn theo yêu cầu, hỗ trợ nạp tiền thanh toán tự động trong 1 giây khi có người dùng nạp tiền.',
+                features: ['🔥 Tùy chỉnh mã nguồn', '💸 Thanh toán tự động 1 giây', '🎮 Hỗ trợ game kiếm tiền'],
+                price: '50,000 VND',
+                product_url: 'LINK TẢI: https://www.mediafire.com/file/a44okenwzb7z9n1/soucer_botgame.zip/file\nSETUP INBOX TELE ADMIN @quangtoannang',
+                media: [{ type: 'image', src: '/telegram/TAIXIU.jpg' }]
             },
-            { 
-                id: 2, 
-                title: "Modern Blogster Pro ✍️", 
-                category: "📝 Blog", 
-                short_description: "Theme blog cá nhân siêu đỉnh, engagement tăng 300%! 📈", 
-                long_description: "Giao diện blog tối giản và thanh lịch với advanced typography, reading analytics và social engagement tools. Được tối ưu cho content creators và influencers.", 
-                features: ["📖 Reading Experience A+", "🌓 Dark/Light Auto Switch", "🔄 Infinite Scroll Magic", "📊 Real-time Analytics"], 
-                media: [
-                    { type: 'image', src: 'https://i.imgur.com/tHFNXoT.png' },
-                    { type: 'video', src: 'https://cdn.pixabay.com/video/2023/04/10/157584-81483321_tiny.mp4' }
-                ] 
+            {
+                id: 'tele_bot_manager_02',
+                title: 'MÃ NGUỒN BOT CÁ CƯỢC TÀI XỈU NỔ HỦ',
+                category: '🚀 Telegram',
+                short_description: 'Bot cá cược tài xỉu, nổ hũ, tối ưu kinh doanh.',
+                long_description: 'Nhận code bot Telegram theo yêu cầu. Có thể chỉnh sửa mã nguồn theo yêu cầu, hỗ trợ nạp tiền thanh toán tự động trong 1 giây khi có người chơi nạp tiền.',
+                features: ['🎰 Cá cược tài xỉu, nổ hũ', '💸 Thanh toán tự động', '🔧 Tùy chỉnh mã nguồn'],
+                price: '100,000 VND',
+                product_url: 'Gói source code bao gồm hướng dẫn cài đặt chi tiết.',
+                media: [{ type: 'image', src: '/telegram/TX.jpg' }]
             },
-            { 
-                id: 3, 
-                title: "CreativeFolio Epic 🎨", 
-                category: "🎭 Portfolio", 
-                short_description: "Showcase dự án siêu chuyên nghiệp, wow factor 1000%! ✨", 
-                long_description: "Portfolio template với 3D effects, particle systems, và interactive animations. Hoàn hảo cho designers, photographers và creative professionals muốn gây ấn tượng mạnh.", 
-                features: ["🔍 3D Isotope Filtering", "✨ Particle Effects", "📧 Contact Form Ajax Pro", "🎬 Video Background Support"], 
-                media: [
-                    { type: 'image', src: 'https://i.imgur.com/Kpz5gRz.png' },
-                    { type: 'image', src: 'https://i.imgur.com/0DmWzT7.png' }
-                ] 
+            {
+                id: 'tele_bot_manager_03',
+                title: 'Bot Bán Dịch Vụ',
+                category: '🚀 Telegram',
+                short_description: 'Bot dịch vụ siêu VIP với đầy đủ chức năng.',
+                long_description: 'Nhận code bot Telegram với đầy đủ chức năng như demo, hỗ trợ dịch vụ bán hàng chuyên nghiệp.',
+                features: ['🛒 Bán dịch vụ VIP', '📱 Giao diện demo đầy đủ', '🔧 Tùy chỉnh theo yêu cầu'],
+                price: '150,000 VND',
+                product_url: 'IB ĐỂ ADMIN CHỤP LỊCH SỬ MUA HÀNG ĐỂ ĐƯỢC ADMIN ĐƯA SOUCER.',
+                media: [{ type: 'image', src: '/telegram/dv.jpg' }]
             },
-             { 
-                id: 4, 
-                title: "Quantum SaaS Ultimate 💼", 
-                category: "🚀 Business", 
-                short_description: "Giao diện SaaS tương lai, conversion rate 500%! 🌟", 
-                long_description: "Template business cao cấp nhất với advanced pricing tables, customer testimonials carousel, và integrated CRM tools. Được thiết kế cho unicorn startups và enterprise companies.", 
-                features: ["💰 Dynamic Pricing Tables", "🎭 3D Micro-interactions", "🎯 A/B Testing Ready", "📈 Built-in Analytics"], 
-                media: [
-                    { type: 'image', src: 'https://i.imgur.com/kF2yt5v.png' }
-                ]
+            {
+                id: 'tele_bot_manager_04',
+                title: 'BOT TUYỂN CÔNG VIỆC TỰ ĐỘNG',
+                category: '🚀 Telegram',
+                short_description: 'Bot tuyển công việc tự động, hiệu quả cao.',
+                long_description: 'Nhận code bot Telegram chuyên hỗ trợ tuyển dụng công việc tự động theo yêu cầu.',
+                features: ['🤝 Tuyển dụng tự động', '🔧 Tùy chỉnh mã nguồn', '📱 Giao diện thân thiện'],
+                price: '150,000 VND',
+                product_url: 'Gói source code bao gồm hướng dẫn cài đặt chi tiết.',
+                media: [{ type: 'image', src: '/telegram/ga.jpg' }]
             },
-            { 
-                id: 5, 
-                title: "Artisan Guild Masterpiece 🖼️", 
-                category: "🎨 Portfolio", 
-                short_description: "Portfolio nghệ thuật tối giản, tôn vinh tác phẩm 100%! 🏆", 
-                long_description: "Thiết kế portfolio nghệ thuật với clean aesthetics, advanced image optimization và virtual gallery experience. Dành cho các nghệ sĩ muốn trưng bày tác phẩm một cách hoàn hảo nhất.", 
-                features: ["🧱 Smart Masonry Layout", "🖥️ Virtual Gallery Mode", "✒️ Premium Typography", "🎵 Ambient Sound Effects"], 
-                media: [
-                    { type: 'image', src: 'https://i.imgur.com/0DmWzT7.png' }
-                ]
+            {
+                id: 'web_shop_simple_01',
+                title: 'WEB PHISING REAL TIME SIÊU XỊN',
+                category: '🌐 Website',
+                short_description: 'Web phising lấy tài khoản, vượt 2FA, gửi real-time qua Telegram.',
+                long_description: 'Chức năng lấy tài khoản, mật khẩu đăng nhập Facebook kèm lệnh real-time gửi về Telegram. Hỗ trợ vượt 2FA bằng cách hiển thị yêu cầu nhập mã 2FA cho nạn nhân, giúp đăng nhập thành công tài khoản Facebook nạn nhân. (Giá 1 triệu chưa bao gồm miền, server)',
+                features: ['🔐 Lấy tài khoản, mật khẩu', '⚡ Real-time qua Telegram', '🔑 Vượt 2FA', '📱 Giao diện tinh vi'],
+                price: '2,000,000 VND',
+                product_url: 'VUI LÒNG LIÊN HỆ ADMIN @quangtoannang để nhận soucer và setup web',
+                media: [{ type: 'video', src: '/website/phisng_realtime.MP4' }]
             },
-            { 
-                id: 6, 
-                title: "Gourmet Chef Deluxe 👨‍🍳", 
-                category: "🍽️ Food", 
-                short_description: "Theme ẩm thực siêu hấp dẫn, engagement tăng 400%! 😋", 
-                long_description: "Giao diện blog ẩm thực chuyên nghiệp với recipe calculator, nutrition tracker, và social sharing optimization. Hoàn hảo cho food bloggers và professional chefs.", 
-                features: ["📝 Recipe Calculator Pro", "🎥 4K Video Support", "⭐ Review System Advanced", "🔥 Trending Recipes AI"], 
-                media: [
-                    { type: 'image', src: 'https://i.imgur.com/3ZwnV6E.png' },
-                    { type: 'video', src: 'https://cdn.pixabay.com/video/2019/09/20/28492-364275463_tiny.mp4' }
-                ]
+            {
+                id: 'web_landing_page_02',
+                title: 'WEB PHISING LẤY CI NGOẠI SIÊU XỊN',
+                category: '🌐 Website',
+                short_description: 'Web phising lấy tài khoản, thẻ, địa chỉ, gửi qua Telegram.',
+                long_description: 'Chức năng lấy tài khoản, mật khẩu, thẻ, và địa chỉ, gửi về Telegram. Hỗ trợ tích hợp cổng 2D, 3D. Liên hệ admin để biết thêm chi tiết và nhận code phising theo yêu cầu. (Giá 1 triệu chưa bao gồm miền, server)',
+                features: ['💳 Lấy thông tin thẻ', '📍 Lấy địa chỉ', '⚡ Gửi real-time qua Telegram', '🔧 Tùy chỉnh theo yêu cầu'],
+                price: '2,000,000 VND',
+                product_url: 'VUI LÒNG LIÊN HỆ ADMIN @quangtoannang để nhận soucer và setup web',
+                media: [{ type: 'video', src: '/website/phising2.MP4' }]
             },
+            {
+                id: 'web_shop_simple_03',
+                title: 'SOUCER WEB TẠO WEB PHISING BÁN KEY',
+                category: '🌐 Website',
+                short_description: 'Web phising tạo nhanh, hỗ trợ bán key kiếm tiền.',
+                long_description: 'Hỗ trợ tạo web phising nhanh chóng, có thể cho thuê hoặc bán key để kiếm tiền. Có thể tùy chỉnh thêm chức năng theo yêu cầu.',
+                features: ['🛠️ Tạo web phising nhanh', '💸 Bán key kiếm tiền', '🔧 Tùy chỉnh chức năng'],
+                price: '2,000,000 VND',
+                product_url: 'VUI LÒNG LIÊN HỆ ADMIN @quangtoannang để nhận soucer và setup web',
+                media: [{ type: 'image', src: '/website/soucer4.png' }]
+            },
+            {
+                id: 'web_shop_simple_04',
+                title: 'WEB SÒNG TÀI XỈU 86 BET CLUB',
+                category: '🌐 Website',
+                short_description: 'Web tài xỉu với giao diện đẹp, tùy chỉnh kết quả.',
+                long_description: 'Mã nguồn Node.js, giao diện thân thiện, có thể chỉnh sửa kết quả phiên, tích hợp API casino. Đã fix toàn bộ lỗi, hoạt động trên mọi miền. Hỗ trợ setup với phí 500k.',
+                features: ['🎮 Đa dạng game', '🔧 Tùy chỉnh kết quả', '📱 Giao diện thân thiện', '🔌 Tích hợp API casino'],
+                price: 'Miễn phí (Setup: 500,000 VND)',
+                product_url: 'https://drive.google.com/file/d/1aA4HZDfRBkoPkKet7jV8CdR42aK1e_nY/view SETUP LIÊN HỆ ADMIN @quangtoannang',
+                media: [{ type: 'image', src: '/website/79bet.png' }]
+            },
+            {
+                id: 'web_shop_simple_05',
+                title: 'WEB SÀN BO ẢO TỶ LỆ 1:1',
+                category: '🌐 Website',
+                short_description: 'Web sàn BO ảo với giao diện đẹp, tùy chỉnh kết quả.',
+                long_description: 'Mã nguồn đã fix toàn bộ lỗi, giao diện thân thiện, hỗ trợ chỉnh sửa kết quả phiên, tích hợp chức năng đại lý, hoa hồng. Hỗ trợ setup với phí 500k.',
+                features: ['📈 Tỷ lệ 1:1', '🔧 Tùy chỉnh kết quả', '🤝 Hỗ trợ đại lý', '📱 Giao diện thân thiện'],
+                price: '2,000,000 VND (Setup: 500,000 VND)',
+                product_url: 'SETUP LIÊN HỆ ADMIN @quangtoannang',
+                media: [{ type: 'image', src: '/website/boo.jpg' }]
+            },
+            {
+                id: 'web_shop_simple_06',
+                title: 'WEB SÒNG TÀI XỈU FANVIN',
+                category: '🌐 Website',
+                short_description: 'Web tài xỉu Fanvin với giao diện đẹp, tích hợp API casino.',
+                long_description: 'Mã nguồn Java, giao diện thân thiện, có thể chỉnh sửa kết quả phiên, tích hợp API casino. Đã fix toàn bộ lỗi, hoạt động trên mọi miền. Hỗ trợ setup với phí 500k.',
+                features: ['🎮 Đa dạng game', '🔧 Tùy chỉnh kết quả', '📱 Giao diện thân thiện', '🔌 Tích hợp API casino'],
+                price: 'Miễn phí (Setup: 500,000 VND)',
+                product_url: 'https://www.mediafire.com/file/0vs772njpf7afte/fan.zip/file SETUP LIÊN HỆ ADMIN @quangtoannang',
+                media: [{ type: 'image', src: '/website/fanvin.png' }]
+            },
+            {
+                id: 'web_shop_simple_07',
+                title: 'WEB SÒNG XỔ SỐ LOTTERY79',
+                category: '🌐 Website',
+                short_description: 'Web xổ số Lottery79 với giao diện đẹp, nhiều chức năng.',
+                long_description: 'Mã nguồn JS, giao diện thân thiện, có thể chỉnh sửa kết quả phiên, tích hợp API casino. Đã fix toàn bộ lỗi, hoạt động trên mọi miền. Hỗ trợ setup với phí 500k.',
+                features: ['🎰 Xổ số đa dạng', '🔧 Tùy chỉnh kết quả', '📱 Giao diện thân thiện', '🔌 Tích hợp API casino'],
+                price: 'Miễn phí (Setup: 500,000 VND)',
+                product_url: 'https://drive.google.com/file/d/1QQCIwLzfInb9NHEhklFQR5y0bakuUch0/view SETUP LIÊN HỆ ADMIN @quangtoannang',
+                media: [{ type: 'image', src: '/website/lotery.png' }]
+            },
+            {
+                id: 'web_shop_simple_08',
+                title: 'WEB REALTIME TUYỂN MẪU ẢNH',
+                category: '🌐 Website',
+                short_description: 'Web phising tuyển mẫu ảnh, tối ưu scam via nữ.',
+                long_description: 'Mã nguồn PHP, giao diện thân thiện, thu hút, hỗ trợ thay đổi HTML qua Telegram để lấy thông tin WhatsApp, đăng nhập tài khoản Facebook nạn nhân. Tốc độ phản hồi real-time vượt trội.',
+                features: ['📱 Giao diện thu hút', '⚡ Real-time qua Telegram', '🔧 Thay đổi HTML nhanh', '🔐 Lấy thông tin WhatsApp'],
+                price: '3,000,000 VND',
+                product_url: 'LIÊN HỆ ADMIN @quangtoannang để nhận mã nguồn và setup',
+                media: [{ type: 'video', src: '/website/mauanh.mp4' }]
+            },
+            {
+                id: 'web_shop_simple_09',
+                title: 'WEB REALTIME WHATS APP',
+                category: '🌐 Website',
+                short_description: 'Web phising WhatsApp, tối ưu scam via nữ.',
+                long_description: 'Mã nguồn PHP, giao diện thân thiện, thu hút, hỗ trợ thay đổi HTML qua Telegram để lấy thông tin WhatsApp, đăng nhập tài khoản Facebook nạn nhân. Tốc độ phản hồi real-time vượt trội.',
+                features: ['📱 Giao diện thu hút', '⚡ Real-time qua Telegram', '🔧 Thay đổi HTML nhanh', '🔐 Lấy thông tin WhatsApp'],
+                price: '500,000 VND',
+                product_url: 'https://drive.google.com/file/d/1QQCIwLzfInb9NHEhklFQR5y0bakuUch0/view SETUP LIÊN HỆ ADMIN @quangtoannang',
+                media: [{ type: 'video', src: '/website/mauanh.mp4' }]
+            },
+            {
+                id: 'tool_deepfake_01',
+                title: 'TOOL DEEPFAKE SETUP',
+                category: '🛠️ Tool',
+                short_description: 'Công cụ deepfake tạo video/ảnh ghép mặt, dễ sử dụng.',
+                long_description: 'Công cụ deepfake chất lượng cao, hỗ trợ tạo video/ảnh ghép mặt, dùng live cam fake mặt gọi Zalo. Tool miễn phí, phí setup 100,000 VND.',
+                features: ['🎥 Tạo video deepfake', '📸 Ghép ảnh mặt', '📱 Hỗ trợ live cam Zalo'],
+                price: '100,000 VND (Setup)',
+                product_url: 'Tool FREE. Inbox @quangtoannang để được hướng dẫn và yêu cầu Setup (có phí).',
+                media: [{ type: 'image', src: '/tools/deepfakee.png' }]
+            },
+            {
+                id: 'tool_proxy_checker_02',
+                title: 'TOOL CHECK PROXY',
+                category: '🛠️ Tool',
+                short_description: 'Tool check proxy tốc độ cao, đa định dạng.',
+                long_description: 'Công cụ kiểm tra proxy tốc độ cao, hỗ trợ nhiều định dạng proxy, giúp tối ưu hóa công việc mạng.',
+                features: ['⚡ Check proxy nhanh', '📋 Hỗ trợ nhiều định dạng', '🔧 Dễ sử dụng'],
+                price: '50,000 VND',
+                product_url: 'Liên hệ @quangtoannang để nhận link tải sau khi thanh toán.',
+                media: [{ type: 'image', src: '/tools/proxy_checker.png' }]
+            }
         ];
-        
-        // =====================================================================
-        // 2. LẤY CÁC THÀNH PHẦN DOM
-        // =====================================================================
         const docHtml = document.documentElement;
         const docBody = document.body;
         const themeGrid = document.getElementById('themeGrid');
@@ -524,232 +390,156 @@
         const themeMenu = document.getElementById('theme-menu');
         const modalMediaDisplay = document.getElementById('modal-media-display');
         const modalMediaThumbnails = document.getElementById('modal-media-thumbnails');
-        
-        // =====================================================================
-        // 3. HIỆU ỨNG PARTICLES SIÊU ĐẲNG CẤP
-        // =====================================================================
-        const createEpicParticles = () => {
+        const createParticles = () => {
             const canvas = document.getElementById('particles-canvas');
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            
             const particles = [];
-            const particleCount = 50;
+            const particleCount = 20;
             const accentColor = getComputedStyle(docHtml).getPropertyValue('--accent-primary').trim();
-            
             class Particle {
-                constructor() { this.reset(); this.y = Math.random() * canvas.height; }
-                reset() { this.x = Math.random() * canvas.width; this.y = -10; this.speed = Math.random() * 2 + 0.5; this.size = Math.random() * 3 + 1; this.opacity = Math.random() * 0.5 + 0.3; this.angle = 0; this.angleSpeed = (Math.random() - 0.5) * 0.02; }
-                update() { this.y += this.speed; this.x += Math.sin(this.angle) * 0.5; this.angle += this.angleSpeed; if (this.y > canvas.height + 10) { this.reset(); } }
-                draw() { ctx.save(); ctx.globalAlpha = this.opacity; ctx.fillStyle = accentColor; ctx.shadowBlur = 10; ctx.shadowColor = accentColor; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); ctx.restore(); }
+                constructor() { this.reset(); }
+                reset() { this.x = Math.random() * canvas.width; this.y = -10; this.speed = Math.random() * 1 + 0.5; this.size = Math.random() * 2 + 1; this.opacity = 0.3; }
+                update() { this.y += this.speed; if (this.y > canvas.height + 10) this.reset(); }
+                draw() { ctx.globalAlpha = this.opacity; ctx.fillStyle = accentColor; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
             }
-            
-            for (let i = 0; i < particleCount; i++) { particles.push(new Particle()); }
-            function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(particle => { particle.update(); particle.draw(); }); requestAnimationFrame(animate); }
-            animate();
+            for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+            let lastTime = 0;
+            function animate(time) {
+                if (time - lastTime < 1000 / 30) {
+                    requestAnimationFrame(animate);
+                    return;
+                }
+                lastTime = time;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => { p.update(); p.draw(); });
+                requestAnimationFrame(animate);
+            }
+            animate(0);
         };
-        
-        // =====================================================================
-        // 4. ICONS BAY LƯỢN SIÊU ẤN TƯỢNG
-        // =====================================================================
         const createFloatingIcons = () => {
             const container = document.getElementById('floating-icons');
             if (!container) return;
-            const icons = ['fa-rocket', 'fa-star', 'fa-heart', 'fa-gem', 'fa-crown', 'fa-magic', 'fa-bolt', 'fa-fire'];
-            setInterval(() => {
-                if (container.children.length > 20) return;
+            const icons = ['fa-rocket', 'fa-star', 'fa-heart'];
+            let iconCount = 0;
+            const addIcon = () => {
+                if (iconCount >= 10) return;
                 const icon = document.createElement('i');
                 icon.className = `fa-solid ${icons[Math.floor(Math.random() * icons.length)]} floating-icon`;
                 icon.style.left = Math.random() * 100 + '%';
-                icon.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                icon.style.animationDelay = Math.random() * 2 + 's';
+                icon.style.animationDuration = (Math.random() * 8 + 8) + 's';
                 container.appendChild(icon);
-                setTimeout(() => { if (icon.parentNode) { icon.parentNode.removeChild(icon); } }, 20000);
-            }, 3000);
+                iconCount++;
+                setTimeout(() => { if (icon.parentNode) { icon.parentNode.removeChild(icon); iconCount--; } }, 12000);
+            };
+            addIcon();
+            setInterval(addIcon, 5000);
         };
-        
-        // =====================================================================
-        // 5. RENDER THEMES VỚI HIỆU ỨNG ĐỈNH CAO
-        // =====================================================================
         const renderThemes = () => {
             if (!themeGrid) return;
-            let cardsHTML = '';
-            themesData.forEach((theme, index) => {
-                // Lấy ảnh đầu tiên trong mảng media làm ảnh đại diện
-                const representativeImage = theme.media.find(m => m.type === 'image')?.src || theme.media[0].src;
-                const imageHTML = `<div class="card-image-wrapper h-56 rounded-t-2xl overflow-hidden"><img src="${representativeImage}" alt="${theme.title}" class="w-full h-full object-cover"></div>`;
-                const contentHTML = `<div class="p-5"><div class="flex justify-between items-start gap-4 mb-2"><h4 class="text-xl font-bold text-[var(--text-heading)]">${theme.title}</h4><div class="category-pill flex-shrink-0">${theme.category}</div></div><p class="text-base text-[var(--text-secondary)]">${theme.short_description}</p></div>`;
-                cardsHTML += `<div class="theme-card" data-id="${theme.id}" style="transition-delay: ${index * 100}ms; animation-delay: ${index * 200}ms;">${imageHTML}${contentHTML}</div>`;
-            });
-            themeGrid.innerHTML = cardsHTML;
+            themeGrid.innerHTML = themesData.map((theme, index) => {
+                const mediaItem = theme.media[0];
+                return `
+                    <div class="theme-card" data-id="${theme.id}" style="animation-delay: ${index * 100}ms;">
+                        <div class="card-image-wrapper">
+                            ${mediaItem.type === 'image' ? `<img src="${mediaItem.src}" alt="${theme.title}" loading="lazy">` : `<video src="${mediaItem.src}" muted loop playsinline loading="lazy"></video>`}
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start gap-3 mb-2">
+                                <h4 class="text-lg font-bold text-[var(--text-heading)]">${theme.title}</h4>
+                                <div class="category-pill">${theme.category}</div>
+                            </div>
+                            <p class="text-sm text-[var(--text-secondary)]">${theme.short_description}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
             setupScrollAnimations();
         };
-        
-        // =====================================================================
-        // 6. SCROLL ANIMATIONS SIÊU MƯỢT
-        // =====================================================================
         const setupScrollAnimations = () => {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        setTimeout(() => {
-                            const rect = entry.target.getBoundingClientRect();
-                            confetti({ particleCount: 30, spread: 60, origin: { x: (rect.left + rect.width/2) / window.innerWidth, y: (rect.top + rect.height/2) / window.innerHeight }, colors: [getComputedStyle(docHtml).getPropertyValue('--accent-primary').trim()] });
-                        }, 500);
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+            }, { threshold: 0.2 });
             document.querySelectorAll('.theme-card').forEach(el => observer.observe(el));
         };
-
-        // =====================================================================
-        // 7. STARRY SKY VỚI HIỆU ỨNG ĐỈNH CAO
-        // =====================================================================
-        let animationFrameId;
-        const createEnhancedStarrySky = () => {
-            if (animationFrameId) cancelAnimationFrame(animationFrameId);
-            const canvas = document.getElementById('starry-sky');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            const accentColor = getComputedStyle(docHtml).getPropertyValue('--accent-primary').trim();
-            const secondaryColor = getComputedStyle(docHtml).getPropertyValue('--accent-secondary').trim();
-            const numStars = 100; let stars = [];
-            class Star {
-                constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.radius = Math.random() * 2 + 0.5; this.alpha = Math.random() * 0.8 + 0.2; this.twinkleSpeed = (Math.random() - 0.5) * 0.02; this.color = Math.random() > 0.5 ? accentColor : secondaryColor; this.pulsePhase = Math.random() * Math.PI * 2; }
-                update() { this.alpha += this.twinkleSpeed; if (this.alpha <= 0.1 || this.alpha >= 1) this.twinkleSpeed *= -1; this.pulsePhase += 0.02; }
-                draw() { const pulse = Math.sin(this.pulsePhase) * 0.3 + 0.7; ctx.save(); ctx.globalAlpha = this.alpha * pulse; ctx.fillStyle = this.color; ctx.shadowBlur = 15; ctx.shadowColor = this.color; ctx.beginPath(); ctx.arc(this.x, this.y, this.radius * pulse, 0, 2 * Math.PI); ctx.fill(); ctx.restore(); }
-            }
-            for (let i = 0; i < numStars; i++) { stars.push(new Star()); }
-            function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); stars.forEach(star => { star.update(); star.draw(); }); animationFrameId = requestAnimationFrame(animate); }
-            animate();
-        };
-        
-        // =====================================================================
-        // 8. MODAL LOGIC (ĐÃ CẬP NHẬT HOÀN TOÀN)
-        // =====================================================================
-
-        // HÀM MỚI: Hiển thị một media cụ thể (ảnh hoặc video)
         const displayMedia = (media, index) => {
-            modalMediaDisplay.innerHTML = ''; // Xóa nội dung cũ
+            modalMediaDisplay.innerHTML = '';
             let mediaElement;
-
             if (media.type === 'image') {
                 mediaElement = document.createElement('img');
                 mediaElement.src = media.src;
-                mediaElement.alt = "Theme preview image";
+                mediaElement.alt = 'Theme preview';
+                mediaElement.loading = 'lazy';
             } else if (media.type === 'video') {
                 mediaElement = document.createElement('video');
                 mediaElement.src = media.src;
                 mediaElement.controls = true;
-                mediaElement.autoplay = true;
-                mediaElement.muted = true; // Cần thiết để tự động phát trên nhiều trình duyệt
+                mediaElement.muted = true;
                 mediaElement.loop = true;
+                mediaElement.loading = 'lazy';
             }
-            
             if (mediaElement) {
-                mediaElement.className = 'media-active'; // Thêm class để hiện
+                mediaElement.className = 'media-active';
                 modalMediaDisplay.appendChild(mediaElement);
+                if (media.type === 'video') mediaElement.play().catch(() => {});
             }
-
-            // Cập nhật trạng thái active cho thumbnail
             document.querySelectorAll('.thumbnail-item').forEach((thumb, i) => {
                 thumb.classList.toggle('active', i === index);
             });
         };
-
         const openThemeDetailsModal = (theme) => {
             modalBackdrop.classList.add('visible');
             docBody.style.overflow = 'hidden';
             document.getElementById('modal-title').textContent = theme.title;
             document.getElementById('modal-description').textContent = theme.long_description;
             document.getElementById('modal-features').innerHTML = theme.features.map(f =>
-                `<li class="flex items-center text-base text-[var(--text-primary)]"><i class="fa-solid fa-circle-check text-lg mr-3 text-[var(--accent-primary)]"></i><span>${f}</span></li>`
+                `<li class="flex items-center text-sm text-[var(--text-primary)]"><i class="fa-solid fa-circle-check text-base mr-2 text-[var(--accent-primary)]"></i><span>${f}</span></li>`
             ).join('');
-
-            // TẠO GALLERY
-            modalMediaThumbnails.innerHTML = ''; // Xóa thumbnails cũ
-            theme.media.forEach((mediaItem, index) => {
-                const thumb = document.createElement('div');
-                thumb.className = 'thumbnail-item';
-                
-                const thumbImg = document.createElement('img');
-                // Nếu là video, tìm một ảnh đại diện hoặc dùng ảnh đầu tiên
-                thumbImg.src = mediaItem.type === 'image' ? mediaItem.src : theme.media.find(m => m.type === 'image')?.src || mediaItem.src;
-                
-                thumb.appendChild(thumbImg);
-
-                // Thêm icon play cho video
-                if (mediaItem.type === 'video') {
-                    const playIcon = document.createElement('i');
-                    playIcon.className = 'fa-solid fa-play play-icon';
-                    thumb.appendChild(playIcon);
-                }
-                
-                thumb.addEventListener('click', () => displayMedia(mediaItem, index));
-                modalMediaThumbnails.appendChild(thumb);
+            document.getElementById('modal-price').textContent = theme.price;
+            document.getElementById('modal-product-url').textContent = theme.product_url;
+            modalMediaThumbnails.innerHTML = theme.media.map((media, index) => `
+                <div class="thumbnail-item">
+                    <img src="${media.type === 'image' ? media.src : (theme.media.find(m => m.type === 'image')?.src || media.src)}" loading="lazy">
+                    ${media.type === 'video' ? '<i class="fa-solid fa-play play-icon"></i>' : ''}
+                </div>
+            `).join('');
+            if (theme.media.length > 0) displayMedia(theme.media[0], 0);
+            modalMediaThumbnails.querySelectorAll('.thumbnail-item').forEach((thumb, index) => {
+                thumb.addEventListener('click', () => displayMedia(theme.media[index], index));
             });
-
-            // Hiển thị media đầu tiên khi mở modal
-            if (theme.media.length > 0) {
-                displayMedia(theme.media[0], 0);
-            }
-            
-            // Confetti khi mở modal
-            setTimeout(() => {
-                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: [getComputedStyle(docHtml).getPropertyValue('--accent-primary').trim()] });
-            }, 300);
         };
-        
         const closeThemeDetailsModal = () => {
             modalBackdrop.classList.remove('visible');
             docBody.style.overflow = '';
-            // Dừng tất cả video đang phát trong modal
             const videoElement = modalMediaDisplay.querySelector('video');
             if (videoElement) {
                 videoElement.pause();
-                videoElement.src = ""; // Ngăn video tiếp tục tải
+                videoElement.src = '';
             }
         };
-
         const toggleThemeSwitcherModal = (show) => {
-            if (show) {
-                themeSwitcherModal.classList.add('visible');
-                docBody.style.overflow = 'hidden';
-                setTimeout(() => { confetti({ particleCount: 50, spread: 60, origin: { y: 0.3 }, colors: [getComputedStyle(docHtml).getPropertyValue('--accent-primary').trim()] }); }, 200);
-            } else {
-                themeSwitcherModal.classList.remove('visible');
-                docBody.style.overflow = '';
-            }
+            themeSwitcherModal.classList.toggle('visible', show);
+            docBody.style.overflow = show ? 'hidden' : '';
         };
-
-        // =====================================================================
-        // 9. THEME SWITCHING VỚI HIỆU ỨNG ĐỈNH CAO
-        // =====================================================================
         const applyTheme = (themeName) => {
             docHtml.setAttribute('data-theme', themeName);
             localStorage.setItem('theme', themeName);
             document.querySelectorAll('.theme-option').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.themeSet === themeName);
             });
-            confetti({ particleCount: 200, spread: 90, origin: { y: 0.5 }, colors: [getComputedStyle(docHtml).getPropertyValue('--accent-primary').trim()] });
-            setTimeout(() => { createEnhancedStarrySky(); createEpicParticles(); }, 500);
-            toggleThemeSwitcherModal(false);
+            createParticles();
         };
-
-        // =====================================================================
-        // 10. EVENT LISTENERS
-        // =====================================================================
         if (themeGrid) themeGrid.addEventListener('click', (e) => {
             const card = e.target.closest('.theme-card');
             if (card) {
-                card.style.transform = 'scale(0.95)';
-                setTimeout(() => { card.style.transform = ''; }, 150);
-                const themeId = parseInt(card.dataset.id, 10);
+                const themeId = card.dataset.id;
                 const selectedTheme = themesData.find(t => t.id === themeId);
                 openThemeDetailsModal(selectedTheme);
             }
@@ -764,33 +554,24 @@
         });
         if (themeMenu) themeMenu.addEventListener('click', (e) => {
             const button = e.target.closest('.theme-option');
-            if (button) { applyTheme(button.dataset.themeSet); }
+            if (button) applyTheme(button.dataset.themeSet);
         });
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', (e) => {
                 e.preventDefault();
                 document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
                 item.classList.add('active');
-                confetti({ particleCount: 20, spread: 40, origin: { x: item.getBoundingClientRect().left / window.innerWidth + 0.05, y: 0.9 }, colors: [getComputedStyle(docHtml).getPropertyValue('--accent-primary').trim()] });
             });
         });
-
-        // =====================================================================
-        // 11. KHỞI TẠO SIÊU ĐẲNG CẤP
-        // =====================================================================
         function init() {
             docBody.classList.remove('initial-hidden');
             const savedTheme = localStorage.getItem('theme') || 'neural-dark';
             applyTheme(savedTheme);
-            toggleThemeSwitcherModal(false);
             renderThemes();
-            createEnhancedStarrySky();
-            createEpicParticles();
+            createParticles();
             createFloatingIcons();
-            window.addEventListener('resize', () => { createEnhancedStarrySky(); createEpicParticles(); });
-            setTimeout(() => { confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: [getComputedStyle(docHtml).getPropertyValue('--accent-primary').trim()] }); }, 1000);
+            window.addEventListener('resize', createParticles);
         }
-        
         init();
     });
     </script>
