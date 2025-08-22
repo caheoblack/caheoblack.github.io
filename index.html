@@ -1,579 +1,1155 @@
 <!DOCTYPE html>
-<html lang="vi" data-theme="neural-dark">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>ThemeStore Pro - Ultra Enhanced ✨</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C07 VIETNAM - AN NINH MẠNG</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root {
-            --font-main: 'Plus Jakarta Sans', sans-serif;
-            --ease-in-out: ease-in-out;
-            --bg-primary: #191724; --bg-secondary: #201e2d; --bg-glass: rgba(32, 30, 45, 0.7); 
-            --text-primary: #e0def4; --text-secondary: #908caa; --text-heading: #ffffff; 
-            --border-primary: #2e2a3f; --accent-primary: #c3a6ff; --accent-secondary: #e0def4; 
-            --shadow-color: rgba(195, 166, 255, 0.15);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        [data-theme="neural-dark"] { --bg-primary: #0a0a0f; --bg-secondary: #111118; --bg-glass: rgba(17, 17, 24, 0.7); --text-primary: #cccccc; --text-secondary: #88889a; --text-heading: #ffffff; --border-primary: #252530; --accent-primary: #00f5ff; --accent-secondary: #74f9ff; --shadow-color: rgba(0, 245, 255, 0.2); }
-        [data-theme="forest-dew"] { --bg-primary: #0f1a14; --bg-secondary: #14201a; --bg-glass: rgba(20, 32, 26, 0.7); --text-primary: #b8d8cb; --text-secondary: #79998a; --text-heading: #ffffff; --border-primary: #23382d; --accent-primary: #4deeb2; --accent-secondary: #90f5d1; --shadow-color: rgba(77, 238, 178, 0.15); }
-        [data-theme="sunset-glow"] { --bg-primary: #21140f; --bg-secondary: #2b1a14; --bg-glass: rgba(43, 26, 20, 0.7); --text-primary: #f5d3c5; --text-secondary: #b89182; --text-heading: #ffffff; --border-primary: #4d2f25; --accent-primary: #ff8c69; --accent-secondary: #ffbba8; --shadow-color: rgba(255, 140, 105, 0.2); }
-        [data-theme="cosmic-dark"] { --bg-primary: #04040a; --bg-secondary: #100f22; --bg-glass: rgba(12, 11, 26, 0.7); --text-primary: #f0f0f5; --text-secondary: #a0a0c0; --text-heading: #FFFFFF; --border-primary: rgba(67, 79, 138, 0.25); --accent-primary: #8b5cf6; --accent-secondary: #3b82f6; --shadow-color: rgba(139, 92, 246, 0.2); }
-        #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; }
-        .floating-icons {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; overflow: hidden;
-        }
-        .floating-icon {
-            position: absolute; font-size: 1.2rem; opacity: 0.15; animation: float 12s linear infinite; color: var(--accent-primary);
-        }
-        @keyframes float {
-            0% { transform: translateY(100vh) translateX(-20px); opacity: 0; }
-            10% { opacity: 0.2; }
-            90% { opacity: 0.1; }
-            100% { transform: translateY(-50px) translateX(20px); opacity: 0; }
-        }
-        html { transition: all 0.5s var(--ease-in-out); overflow-x: hidden; }
+
         body {
-            font-family: var(--font-main); background: var(--bg-primary); color: var(--text-primary);
-            padding-bottom: 80px; position: relative; overflow-x: hidden;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a0f0a 0%, #2d1810 50%, #1f1209 100%);
+            color: white;
+            overflow-x: hidden;
         }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg-primary); }
-        ::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 6px; }
-        .header { padding: 1rem; opacity: 0; animation: fadeIn 1s ease-in forwards; }
-        @keyframes fadeIn { to { opacity: 1; } }
-        .header h2 { color: var(--text-heading); font-size: 2rem; }
-        .header p { font-size: 1rem; color: var(--text-secondary); animation: fadeIn 1s ease-in 0.5s forwards; opacity: 0; }
-        #theme-switcher-btn-header { color: var(--text-secondary); transition: all 0.3s var(--ease-in-out); }
-        #theme-switcher-btn-header:hover { color: var(--accent-primary); transform: scale(1.1); }
-        .theme-card {
-            background: var(--bg-secondary); border-radius: 16px; border: 1px solid var(--border-primary);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: all 0.4s var(--ease-in-out);
-            opacity: 0; transform: translateY(30px); cursor: pointer;
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(220, 20, 60, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(34, 139, 34, 0.15) 0%, transparent 50%);
+            animation: gradientShift 8s ease-in-out infinite alternate;
         }
-        .theme-card.visible { opacity: 1; transform: translateY(0); }
-        .theme-card:hover { transform: translateY(-10px); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
-        .card-image-wrapper { overflow: hidden; border-radius: 16px 16px 0 0; }
-        .card-image-wrapper img, .card-image-wrapper video { width: 100%; height: 200px; object-fit: cover; transition: all 0.4s var(--ease-in-out); loading: lazy; }
-        .theme-card:hover .card-image-wrapper img, .theme-card:hover .card-image-wrapper video { transform: scale(1.1); }
-        .category-pill {
-            display: inline-flex; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--accent-primary);
-            color: var(--accent-primary); font-size: 0.75rem; font-weight: 600; transition: all 0.3s var(--ease-in-out);
+
+        @keyframes gradientShift {
+            0% { opacity: 0.5; transform: scale(1) rotate(0deg); }
+            100% { opacity: 0.8; transform: scale(1.1) rotate(5deg); }
         }
-        .theme-card:hover .category-pill { background: var(--accent-primary); color: var(--bg-primary); }
-        .bottom-nav {
-            position: fixed; bottom: 0; left: 0; right: 0; height: 70px; background: var(--bg-glass);
-            backdrop-filter: blur(10px); border-top: 1px solid var(--border-primary); display: flex;
-            justify-content: space-around; align-items: center; z-index: 1000; padding-bottom: env(safe-area-inset-bottom);
-            box-shadow: 0 -8px 20px rgba(0,0,0,0.2);
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 15, 10, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
         }
-        .nav-item {
-            display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-secondary);
-            font-size: 0.7rem; font-weight: 600; transition: all 0.3s var(--ease-in-out); padding: 8px;
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
         }
-        .nav-item i { font-size: 1.2rem; }
-        .nav-item.active { color: var(--accent-primary); transform: translateY(-5px); }
-        .nav-item:hover { transform: translateY(-5px); }
-        #theme-switcher-modal {
-            position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px);
-            display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none;
-            transition: all 0.4s var(--ease-in-out);
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
-        #theme-switcher-modal.visible { opacity: 1; pointer-events: auto; }
-        #theme-menu {
-            background: var(--bg-secondary); border: 2px solid var(--border-primary); border-radius: 24px;
-            padding: 2rem; width: 90%; max-width: 360px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transform: scale(0.9); transition: all 0.4s var(--ease-in-out);
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #FFD700, #DC143C);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            animation: pulse 2s infinite;
+            border: 2px solid #228B22;
         }
-        #theme-switcher-modal.visible #theme-menu { transform: scale(1); }
-        .theme-option {
-            width: 48px; height: 48px; border-radius: 50%; border: 2px solid transparent;
-            transition: all 0.3s var(--ease-in-out); cursor: pointer;
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(220, 20, 60, 0.7); }
         }
-        .theme-option:hover { transform: scale(1.1); }
-        .theme-option.active { border-color: var(--accent-primary); transform: scale(1.15); }
-        .theme-option[data-theme-set="neural-dark"] { background: linear-gradient(135deg, #00f5ff, #111118); }
-        .theme-option[data-theme-set="purple-mist"] { background: linear-gradient(135deg, #c3a6ff, #191724); }
-        .theme-option[data-theme-set="forest-dew"] { background: linear-gradient(135deg, #4deeb2, #0f1a14); }
-        .theme-option[data-theme-set="sunset-glow"] { background: linear-gradient(135deg, #ff8c69, #21140f); }
-        .theme-option[data-theme-set="cosmic-dark"] { background: linear-gradient(135deg, #8b5cf6, #0C0B1A); }
-        #modal-backdrop {
-            opacity: 0; pointer-events: none; transition: all 0.4s var(--ease-in-out);
-            background: rgba(0,0,0,0.7); backdrop-filter: blur(10px);
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #FFD700, #DC143C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        #modal-backdrop.visible { opacity: 1; pointer-events: auto; }
-        #modal-content {
-            background: var(--bg-secondary); border: 2px solid var(--border-primary); border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3); opacity: 0; transform: translateY(50px);
-            transition: all 0.4s var(--ease-in-out); width: 90%; max-width: 480px;
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
         }
-        #modal-backdrop.visible #modal-content { opacity: 1; transform: translateY(0); }
-        #modal-media-display {
-            position: relative; background: var(--bg-primary); border-radius: 12px; overflow: hidden;
-            min-height: 200px;
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
         }
-        #modal-media-display img, #modal-media-display video {
-            width: 100%; height: auto; object-fit: cover; opacity: 0; transition: opacity 0.3s var(--ease-in-out);
-            loading: lazy;
+
+        .nav-links a:hover {
+            color: #FFD700;
+            transform: translateY(-2px);
         }
-        #modal-media-display .media-active { opacity: 1; }
-        #modal-media-thumbnails {
-            display: flex; gap: 0.5rem; padding: 0.5rem; overflow-x: auto;
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #FFD700, #DC143C);
+            transition: width 0.3s ease;
         }
-        .thumbnail-item {
-            width: 60px; height: 40px; border-radius: 6px; border: 1px solid var(--border-primary);
-            cursor: pointer; transition: all 0.3s var(--ease-in-out); flex-shrink: 0;
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
-        .thumbnail-item img { width: 100%; height: 100%; object-fit: cover; loading: lazy; }
-        .thumbnail-item .play-icon {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-size: 1rem; color: white; text-shadow: 0 0 3px black; opacity: 0.7; pointer-events: none;
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        .thumbnail-item:hover { transform: scale(1.05); }
-        .thumbnail-item.active { border-color: var(--accent-primary); }
-        .btn-primary {
-            background: var(--accent-primary); color: black; font-weight: bold; padding: 12px 24px;
-            border-radius: 16px; box-shadow: 0 5px 15px var(--shadow-color); transition: all 0.3s var(--ease-in-out);
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+            animation: fadeInUp 1.5s ease-out;
+            position: relative;
         }
-        .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.1); }
-        .theme-card, .nav-item, .theme-option, .btn-primary { user-select: none; -webkit-user-select: none; }
+
+        /* Logo Container - Fixed */
+        .logo-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            z-index: 3;
+        }
+
+        .cybersecurity-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.2), rgba(220, 20, 60, 0.2));
+            border: 3px solid #228B22;
+            backdrop-filter: blur(20px);
+            transition: all 0.5s ease;
+            animation: logoFloat 4s ease-in-out infinite;
+        }
+
+        .cybersecurity-logo:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Logo content - chỉ hiển thị icon placeholder */
+        .logo-placeholder {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #FFD700, #DC143C);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Style cho logo thật khi có */
+        .actual-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 3;
+            display: none; /* Ẩn đi vì chưa có file logo */
+        }
+
+        /* Hào quang phát sáng xung quanh logo */
+        .logo-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, rgba(220, 20, 60, 0.3) 30%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: glowPulse 3s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        .logo-glow::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.6) 0%, transparent 60%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: glowPulse 2s ease-in-out infinite reverse;
+        }
+
+        .logo-glow::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(34, 139, 34, 0.3) 0%, transparent 50%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: glowPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-10px) rotate(2deg);
+            }
+            50% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            75% {
+                transform: translateY(-5px) rotate(-1deg);
+            }
+        }
+
+        /* Tia sáng xoay quanh logo */
+        .logo-rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            animation: rotateRays 20s linear infinite;
+        }
+
+        .ray {
+            position: absolute;
+            width: 2px;
+            height: 60px;
+            background: linear-gradient(to bottom, rgba(255, 215, 0, 0.8), transparent);
+            border-radius: 1px;
+            transform-origin: 1px 150px;
+        }
+
+        .ray:nth-child(1) { transform: rotate(0deg); }
+        .ray:nth-child(2) { transform: rotate(30deg); }
+        .ray:nth-child(3) { transform: rotate(60deg); }
+        .ray:nth-child(4) { transform: rotate(90deg); }
+        .ray:nth-child(5) { transform: rotate(120deg); }
+        .ray:nth-child(6) { transform: rotate(150deg); }
+        .ray:nth-child(7) { transform: rotate(180deg); }
+        .ray:nth-child(8) { transform: rotate(210deg); }
+        .ray:nth-child(9) { transform: rotate(240deg); }
+        .ray:nth-child(10) { transform: rotate(270deg); }
+        .ray:nth-child(11) { transform: rotate(300deg); }
+        .ray:nth-child(12) { transform: rotate(330deg); }
+
+        @keyframes rotateRays {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #FFD700, #ffffff, #DC143C);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textShine 3s ease-in-out infinite;
+        }
+
+        @keyframes textShine {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #FFD700, #DC143C);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #228B22;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #FFD700, #DC143C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+            border-color: rgba(255, 215, 0, 0.5);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(220, 20, 60, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #FFD700, #DC143C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 50px 0;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            margin: 50px 0;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #FFD700, #DC143C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 100px 0;
+            background: radial-gradient(circle at center, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+            position: relative;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .contact-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 4rem;
+            line-height: 1.6;
+        }
+
+        .telegram-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 4rem 3rem;
+            margin: 3rem auto;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .telegram-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(255, 215, 0, 0.6);
+            box-shadow: 0 30px 80px rgba(255, 215, 0, 0.2);
+        }
+
+        .telegram-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(220, 20, 60, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .telegram-card:hover::before {
+            opacity: 1;
+        }
+
+        .telegram-icon-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .telegram-icon {
+            font-size: 4rem;
+            background: linear-gradient(45deg, #FFD700, #DC143C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 2;
+            animation: telegramPulse 2s infinite;
+        }
+
+        @keyframes telegramPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        .icon-pulse {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.3), transparent);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulsing 2s infinite;
+        }
+
+        @keyframes pulsing {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.4; }
+            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+        }
+
+        .telegram-title {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #FFD700, #DC143C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 2;
+        }
+
+        .telegram-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+
+        .telegram-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(45deg, #FFD700, #DC143C);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #228B22;
+            z-index: 2;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .telegram-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.5);
+            border-color: #32CD32;
+        }
+
+        .button-shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .telegram-button:hover .button-shine {
+            left: 100%;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 215, 0, 0.5);
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .contact-item i {
+            background: linear-gradient(45deg, #FFD700, #DC143C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(26, 15, 10, 0.95);
+            padding: 50px 0 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #FFD700, #DC143C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #FFD700, #DC143C);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid #228B22;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .telegram-card {
+                padding: 3rem 2rem;
+                margin: 2rem auto;
+            }
+            
+            .telegram-title {
+                font-size: 1.8rem;
+            }
+            
+            .telegram-icon {
+                font-size: 3rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+            
+            .contact-item {
+                justify-content: center;
+                min-width: 200px;
+            }
+            
+            /* Logo responsive */
+            .cybersecurity-logo {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .logo-placeholder {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+            }
+            
+            .logo-glow {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .logo-glow::before {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .logo-glow::after {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .logo-rays {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .ray {
+                height: 40px;
+                transform-origin: 1px 100px;
+            }
+        }
+
+        /* Floating particles animation */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 215, 0, 0.6);
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.3; }
+        }
+
+        /* Class để hiện logo khi có file */
+        .has-logo .logo-placeholder {
+            display: none;
+        }
+
+        .has-logo .actual-logo {
+            display: block;
+        }
     </style>
 </head>
-<body class="initial-hidden">
-    <canvas id="particles-canvas"></canvas>
-    <div class="floating-icons" id="floating-icons"></div>
-    <main class="flex-1 transition-colors duration-500">
-        <div class="max-w-full mx-auto">
-            <header class="header flex justify-between items-center mb-6">
-                <div>
-                    <h2 class="text-3xl font-bold">Epic Showcase</h2>
-                    <p class="mt-1 text-base">Web Shop siêu đẳng cấp ✨</p>
+<body>
+    <div class="bg-animation"></div>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-shield-alt"></i>
                 </div>
-                <button id="theme-switcher-btn-header">
-                    <i class="fa-solid fa-palette text-2xl"></i>
-                </button>
-            </header>
-            <section class="px-4">
-                <div id="themeGrid" class="flex flex-col gap-6"></div>
-            </section>
+                <div class="logo-text">C07 TRINH SÁT ĐẶC NHIỆM MẠNG VIETNAM</div>
+            </div>
+            <div class="nav-links">
+                <a href="#home">Trang Chủ</a>
+                <a href="#services">Dịch Vụ</a>
+                <a href="#about">Giới Thiệu</a>
+                <a href="#contact">Liên Hệ</a>
+            </div>
         </div>
-    </main>
-    <nav class="bottom-nav">
-        <a href="#" class="nav-item active"><i class="fa-solid fa-layer-group"></i><span>Tất Cả</span></a>
-        <a href="#" class="nav-item"><i class="fa-solid fa-fire"></i><span>Phổ Biến</span></a>
-        <a href="#" class="nav-item"><i class="fa-solid fa-star"></i><span>Mới Nhất</span></a>
-        <a href="#" class="nav-item"><i class="fa-solid fa-headset"></i><span>Hỗ Trợ</span></a>
     </nav>
-    <div id="theme-switcher-modal">
-        <div id="theme-menu">
-            <h3 class="text-xl font-bold text-center mb-4 text-[var(--text-heading)]">🎨 Chọn Theme</h3>
-            <div class="grid grid-cols-3 gap-4 place-items-center">
-                <button class="theme-option" data-theme-set="neural-dark" title="Neural Dark"></button>
-                <button class="theme-option" data-theme-set="purple-mist" title="Purple Mist"></button>
-                <button class="theme-option" data-theme-set="forest-dew" title="Forest Dew"></button>
-                <button class="theme-option" data-theme-set="sunset-glow" title="Sunset Glow"></button>
-                <button class="theme-option" data-theme-set="cosmic-dark" title="Cosmic Dark"></button>
-                <div></div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <!-- Logo Container với hào quang - Fixed -->
+            <div class="logo-container">
+                <div class="logo-glow"></div>
+                <div class="logo-rays">
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                </div>
+                <div class="cybersecurity-logo">
+                    <div class="logo-placeholder">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <img src="aa.png" alt="C05 Logo" class="actual-logo">
+                </div>
+            </div>
+            
+            <h1>AN NINH MẠNG C07</h1>
+            <p>Đơn vị đặc nhiệm mạng chuyên nghiệp hàng đầu về lĩnh vực dịch vụ black mmo hỗ trợ tận tình giải đáp mọi thắc mắc chuyên sâu về black mmo, đầy đủ các công cụ BLACK trong công cuộc đổi mới của mạng xã hội </p>
+            <a href="#services" class="cta-button">
+                <i class="fas fa-rocket"></i> Khám Phá Dịch Vụ
+            </a>
+        </div>
+        
+        <div class="particle" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="top: 60%; left: 20%; animation-delay: 1s;"></div>
+        <div class="particle" style="top: 40%; left: 80%; animation-delay: 2s;"></div>
+        <div class="particle" style="top: 80%; left: 70%; animation-delay: 3s;"></div>
+        <div class="particle" style="top: 30%; left: 60%; animation-delay: 4s;"></div>
+    </section>
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <span class="stat-number">99.9%</span>
+                <div class="stat-label">Độ Tin Cậy</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">24/7</span>
+                <div class="stat-label">Giám Sát</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">1000+</span>
+                <div class="stat-label">Khách Hàng</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">5+</span>
+                <div class="stat-label">Năm Kinh Nghiệm</div>
             </div>
         </div>
-    </div>
-    <div id="modal-backdrop" class="fixed inset-0 z-50 flex items-center justify-center p-4">
-        <div id="modal-content" class="rounded-2xl overflow-hidden">
-            <div class="p-5 flex justify-between items-center border-b border-[var(--border-primary)]">
-                <h3 id="modal-title" class="text-xl font-bold"></h3>
-                <button id="modal-close-btn" class="text-[var(--text-secondary)] hover:text-[var(--text-primary)]">
-                    <i class="fa-solid fa-xmark text-xl"></i>
-                </button>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h2 class="section-title">DỊCH VỤ CHUYÊN NGHIỆP</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-shield-virus"></i>
+                </div>
+                <h3>ĐA DẠNG PHẦN MỀM HỆ THỐNG</h3>
+                <p>Triển khai các giải pháp phục vu cho nhu cầu công việc cho cộng đồng black mmo với những phần mềm và website ưu việt hỗ trợ trực tiếp tới chất lượng sản phẩm đầu ra và dòng tiền chất lượng nhất.</p>
             </div>
-            <div class="p-5 max-h-[70vh] overflow-y-auto">
-                <div class="flex flex-col gap-y-4">
-                    <div class="flex flex-col gap-y-2">
-                        <div id="modal-media-display" class="rounded-xl overflow-hidden border border-[var(--border-primary)]"></div>
-                        <div id="modal-media-thumbnails"></div>
-                    </div>
-                    <div>
-                        <h4 class="text-base font-bold text-[var(--text-heading)] mb-2">🌟 Mô Tả</h4>
-                        <p id="modal-description" class="text-[var(--text-primary)] mb-4 text-sm"></p>
-                        <h4 class="text-base font-bold text-[var(--text-heading)] mb-2">🚀 Tính Năng</h4>
-                        <ul id="modal-features" class="space-y-2"></ul>
-                        <h4 class="text-base font-bold text-[var(--text-heading)] mb-2">💰 Giá</h4>
-                        <p id="modal-price" class="text-[var(--text-primary)] mb-4 text-sm"></p>
-                        <h4 class="text-base font-bold text-[var(--text-heading)] mb-2">🔗 Link Tải</h4>
-                        <p id="modal-product-url" class="text-[var(--text-primary)] mb-4 text-sm"></p>
-                        <button class="btn-primary w-full mt-6 text-base">💎 Mua Ngay</button>
-                    </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-user-secret"></i>
+                </div>
+                <h3>Điều Tra Số</h3>
+                <p>Cung cấp dịch vụ điều tra và phân tích tội phạm mạng với đội ngũ chuyên gia giàu kinh nghiệm.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <h3>Giám Sát Mạng</h3>
+                <p>Hệ thống giám sát 24/7 để phát hiện và ứng phó kịp thời với các mối đe dọa từ an ninh mạng C05 của nhà nước.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Đào Tạo An Ninh</h3>
+                <p>Chương trình đào tạo hỗ trợ chuyên sâu về các công cụ black cho cá nhân và tổ chức.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-bug"></i>
+                </div>
+                <h3>Kiểm Thử Bảo Mật</h3>
+                <p>Thực hiện kiểm thử thâm nhập và đánh giá lỗ hổng bảo mật cho hệ thống của bạn.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-phone-volume"></i>
+                </div>
+                <h3>Ứng Phó Sự Cố</h3>
+                <p>Dịch vụ ứng phó khẩn cấp và phục hồi hệ thống sau các sự cố phần mềm website do bên dịch vụ C07 cung cấp nhanh chống</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <h2 class="section-title">LIÊN HỆ CHÚNG TÔI</h2>
+            <p class="contact-subtitle">Kết nối trực tiếp với đội ngũ chuyên gia an ninh mạng C07</p>
+            
+            <div class="telegram-card">
+                <div class="telegram-icon-wrapper">
+                    <i class="fab fa-telegram-plane telegram-icon"></i>
+                    <div class="icon-pulse"></div>
+                </div>
+                <h3 class="telegram-title">Liên Hệ Telegram</h3>
+                <p class="telegram-description">
+                    Hỗ trợ 24/7 • Tư vấn chuyên nghiệp • Phản hồi nhanh chóng
+                </p>
+                <a href="https://t.me/quangtoannang" target="_blank" class="telegram-button">
+                    <i class="fab fa-telegram-plane"></i>
+                    <span>@quangtoannang</span>
+                    <div class="button-shine"></div>
+                </a>
+            </div>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Hỗ trợ 24/7</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Bảo mật tuyệt đối</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-bolt"></i>
+                    <span>Phản hồi tức thì</span>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">C07 VIETNAM</div>
+            <p class="footer-text">
+                Đơn vị hàng đầu về an ninh mạng tại Việt Nam<br>
+                Bảo vệ dữ liệu - Đảm bảo an toàn - Xây dựng tương lai
+            </p>
+            
+            <div class="copyright">
+                © 2025 C07 Vietnam Cybersecurity. Tất cả quyền được bảo lưu.
+            </div>
+        </div>
+    </footer>
+
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        'use strict';
-        const themesData = [
-            {
-                id: 'tele_bot_welcome_01',
-                title: 'MÃ NGUỒN BOT CHƠI GAME KIẾM TIỀN',
-                category: '🚀 Telegram',
-                short_description: 'Bot Telegram chơi game kiếm tiền, hỗ trợ thanh toán tự động.',
-                long_description: 'Nhận code bot Telegram theo yêu cầu. Có thể chỉnh sửa mã nguồn theo yêu cầu, hỗ trợ nạp tiền thanh toán tự động trong 1 giây khi có người dùng nạp tiền.',
-                features: ['🔥 Tùy chỉnh mã nguồn', '💸 Thanh toán tự động 1 giây', '🎮 Hỗ trợ game kiếm tiền'],
-                price: '50,000 VND',
-                product_url: 'LINK TẢI: https://www.mediafire.com/file/a44okenwzb7z9n1/soucer_botgame.zip/file\nSETUP INBOX TELE ADMIN @quangtoannang',
-                media: [{ type: 'image', src: '/telegram/TAIXIU.jpg' }]
-            },
-            {
-                id: 'tele_bot_manager_02',
-                title: 'MÃ NGUỒN BOT CÁ CƯỢC TÀI XỈU NỔ HỦ',
-                category: '🚀 Telegram',
-                short_description: 'Bot cá cược tài xỉu, nổ hũ, tối ưu kinh doanh.',
-                long_description: 'Nhận code bot Telegram theo yêu cầu. Có thể chỉnh sửa mã nguồn theo yêu cầu, hỗ trợ nạp tiền thanh toán tự động trong 1 giây khi có người chơi nạp tiền.',
-                features: ['🎰 Cá cược tài xỉu, nổ hũ', '💸 Thanh toán tự động', '🔧 Tùy chỉnh mã nguồn'],
-                price: '100,000 VND',
-                product_url: 'Gói source code bao gồm hướng dẫn cài đặt chi tiết.',
-                media: [{ type: 'image', src: '/telegram/TX.jpg' }]
-            },
-            {
-                id: 'tele_bot_manager_03',
-                title: 'Bot Bán Dịch Vụ',
-                category: '🚀 Telegram',
-                short_description: 'Bot dịch vụ siêu VIP với đầy đủ chức năng.',
-                long_description: 'Nhận code bot Telegram với đầy đủ chức năng như demo, hỗ trợ dịch vụ bán hàng chuyên nghiệp.',
-                features: ['🛒 Bán dịch vụ VIP', '📱 Giao diện demo đầy đủ', '🔧 Tùy chỉnh theo yêu cầu'],
-                price: '150,000 VND',
-                product_url: 'IB ĐỂ ADMIN CHỤP LỊCH SỬ MUA HÀNG ĐỂ ĐƯỢC ADMIN ĐƯA SOUCER.',
-                media: [{ type: 'image', src: '/telegram/dv.jpg' }]
-            },
-            {
-                id: 'tele_bot_manager_04',
-                title: 'BOT TUYỂN CÔNG VIỆC TỰ ĐỘNG',
-                category: '🚀 Telegram',
-                short_description: 'Bot tuyển công việc tự động, hiệu quả cao.',
-                long_description: 'Nhận code bot Telegram chuyên hỗ trợ tuyển dụng công việc tự động theo yêu cầu.',
-                features: ['🤝 Tuyển dụng tự động', '🔧 Tùy chỉnh mã nguồn', '📱 Giao diện thân thiện'],
-                price: '150,000 VND',
-                product_url: 'Gói source code bao gồm hướng dẫn cài đặt chi tiết.',
-                media: [{ type: 'image', src: '/telegram/ga.jpg' }]
-            },
-            {
-                id: 'web_shop_simple_01',
-                title: 'WEB PHISING REAL TIME SIÊU XỊN',
-                category: '🌐 Website',
-                short_description: 'Web phising lấy tài khoản, vượt 2FA, gửi real-time qua Telegram.',
-                long_description: 'Chức năng lấy tài khoản, mật khẩu đăng nhập Facebook kèm lệnh real-time gửi về Telegram. Hỗ trợ vượt 2FA bằng cách hiển thị yêu cầu nhập mã 2FA cho nạn nhân, giúp đăng nhập thành công tài khoản Facebook nạn nhân. (Giá 1 triệu chưa bao gồm miền, server)',
-                features: ['🔐 Lấy tài khoản, mật khẩu', '⚡ Real-time qua Telegram', '🔑 Vượt 2FA', '📱 Giao diện tinh vi'],
-                price: '2,000,000 VND',
-                product_url: 'VUI LÒNG LIÊN HỆ ADMIN @quangtoannang để nhận soucer và setup web',
-                media: [{ type: 'video', src: '/website/phisng_realtime.MP4' }]
-            },
-            {
-                id: 'web_landing_page_02',
-                title: 'WEB PHISING LẤY CI NGOẠI SIÊU XỊN',
-                category: '🌐 Website',
-                short_description: 'Web phising lấy tài khoản, thẻ, địa chỉ, gửi qua Telegram.',
-                long_description: 'Chức năng lấy tài khoản, mật khẩu, thẻ, và địa chỉ, gửi về Telegram. Hỗ trợ tích hợp cổng 2D, 3D. Liên hệ admin để biết thêm chi tiết và nhận code phising theo yêu cầu. (Giá 1 triệu chưa bao gồm miền, server)',
-                features: ['💳 Lấy thông tin thẻ', '📍 Lấy địa chỉ', '⚡ Gửi real-time qua Telegram', '🔧 Tùy chỉnh theo yêu cầu'],
-                price: '2,000,000 VND',
-                product_url: 'VUI LÒNG LIÊN HỆ ADMIN @quangtoannang để nhận soucer và setup web',
-                media: [{ type: 'video', src: '/website/phising2.MP4' }]
-            },
-            {
-                id: 'web_shop_simple_03',
-                title: 'SOUCER WEB TẠO WEB PHISING BÁN KEY',
-                category: '🌐 Website',
-                short_description: 'Web phising tạo nhanh, hỗ trợ bán key kiếm tiền.',
-                long_description: 'Hỗ trợ tạo web phising nhanh chóng, có thể cho thuê hoặc bán key để kiếm tiền. Có thể tùy chỉnh thêm chức năng theo yêu cầu.',
-                features: ['🛠️ Tạo web phising nhanh', '💸 Bán key kiếm tiền', '🔧 Tùy chỉnh chức năng'],
-                price: '2,000,000 VND',
-                product_url: 'VUI LÒNG LIÊN HỆ ADMIN @quangtoannang để nhận soucer và setup web',
-                media: [{ type: 'image', src: '/website/soucer4.png' }]
-            },
-            {
-                id: 'web_shop_simple_04',
-                title: 'WEB SÒNG TÀI XỈU 86 BET CLUB',
-                category: '🌐 Website',
-                short_description: 'Web tài xỉu với giao diện đẹp, tùy chỉnh kết quả.',
-                long_description: 'Mã nguồn Node.js, giao diện thân thiện, có thể chỉnh sửa kết quả phiên, tích hợp API casino. Đã fix toàn bộ lỗi, hoạt động trên mọi miền. Hỗ trợ setup với phí 500k.',
-                features: ['🎮 Đa dạng game', '🔧 Tùy chỉnh kết quả', '📱 Giao diện thân thiện', '🔌 Tích hợp API casino'],
-                price: 'Miễn phí (Setup: 500,000 VND)',
-                product_url: 'https://drive.google.com/file/d/1aA4HZDfRBkoPkKet7jV8CdR42aK1e_nY/view SETUP LIÊN HỆ ADMIN @quangtoannang',
-                media: [{ type: 'image', src: '/website/79bet.png' }]
-            },
-            {
-                id: 'web_shop_simple_05',
-                title: 'WEB SÀN BO ẢO TỶ LỆ 1:1',
-                category: '🌐 Website',
-                short_description: 'Web sàn BO ảo với giao diện đẹp, tùy chỉnh kết quả.',
-                long_description: 'Mã nguồn đã fix toàn bộ lỗi, giao diện thân thiện, hỗ trợ chỉnh sửa kết quả phiên, tích hợp chức năng đại lý, hoa hồng. Hỗ trợ setup với phí 500k.',
-                features: ['📈 Tỷ lệ 1:1', '🔧 Tùy chỉnh kết quả', '🤝 Hỗ trợ đại lý', '📱 Giao diện thân thiện'],
-                price: '2,000,000 VND (Setup: 500,000 VND)',
-                product_url: 'SETUP LIÊN HỆ ADMIN @quangtoannang',
-                media: [{ type: 'image', src: '/website/boo.jpg' }]
-            },
-            {
-                id: 'web_shop_simple_06',
-                title: 'WEB SÒNG TÀI XỈU FANVIN',
-                category: '🌐 Website',
-                short_description: 'Web tài xỉu Fanvin với giao diện đẹp, tích hợp API casino.',
-                long_description: 'Mã nguồn Java, giao diện thân thiện, có thể chỉnh sửa kết quả phiên, tích hợp API casino. Đã fix toàn bộ lỗi, hoạt động trên mọi miền. Hỗ trợ setup với phí 500k.',
-                features: ['🎮 Đa dạng game', '🔧 Tùy chỉnh kết quả', '📱 Giao diện thân thiện', '🔌 Tích hợp API casino'],
-                price: 'Miễn phí (Setup: 500,000 VND)',
-                product_url: 'https://www.mediafire.com/file/0vs772njpf7afte/fan.zip/file SETUP LIÊN HỆ ADMIN @quangtoannang',
-                media: [{ type: 'image', src: '/website/fanvin.png' }]
-            },
-            {
-                id: 'web_shop_simple_07',
-                title: 'WEB SÒNG XỔ SỐ LOTTERY79',
-                category: '🌐 Website',
-                short_description: 'Web xổ số Lottery79 với giao diện đẹp, nhiều chức năng.',
-                long_description: 'Mã nguồn JS, giao diện thân thiện, có thể chỉnh sửa kết quả phiên, tích hợp API casino. Đã fix toàn bộ lỗi, hoạt động trên mọi miền. Hỗ trợ setup với phí 500k.',
-                features: ['🎰 Xổ số đa dạng', '🔧 Tùy chỉnh kết quả', '📱 Giao diện thân thiện', '🔌 Tích hợp API casino'],
-                price: 'Miễn phí (Setup: 500,000 VND)',
-                product_url: 'https://drive.google.com/file/d/1QQCIwLzfInb9NHEhklFQR5y0bakuUch0/view SETUP LIÊN HỆ ADMIN @quangtoannang',
-                media: [{ type: 'image', src: '/website/lotery.png' }]
-            },
-            {
-                id: 'web_shop_simple_08',
-                title: 'WEB REALTIME TUYỂN MẪU ẢNH',
-                category: '🌐 Website',
-                short_description: 'Web phising tuyển mẫu ảnh, tối ưu scam via nữ.',
-                long_description: 'Mã nguồn PHP, giao diện thân thiện, thu hút, hỗ trợ thay đổi HTML qua Telegram để lấy thông tin WhatsApp, đăng nhập tài khoản Facebook nạn nhân. Tốc độ phản hồi real-time vượt trội.',
-                features: ['📱 Giao diện thu hút', '⚡ Real-time qua Telegram', '🔧 Thay đổi HTML nhanh', '🔐 Lấy thông tin WhatsApp'],
-                price: '3,000,000 VND',
-                product_url: 'LIÊN HỆ ADMIN @quangtoannang để nhận mã nguồn và setup',
-                media: [{ type: 'video', src: '/website/mauanh.mp4' }]
-            },
-            {
-                id: 'web_shop_simple_09',
-                title: 'WEB REALTIME WHATS APP',
-                category: '🌐 Website',
-                short_description: 'Web phising WhatsApp, tối ưu scam via nữ.',
-                long_description: 'Mã nguồn PHP, giao diện thân thiện, thu hút, hỗ trợ thay đổi HTML qua Telegram để lấy thông tin WhatsApp, đăng nhập tài khoản Facebook nạn nhân. Tốc độ phản hồi real-time vượt trội.',
-                features: ['📱 Giao diện thu hút', '⚡ Real-time qua Telegram', '🔧 Thay đổi HTML nhanh', '🔐 Lấy thông tin WhatsApp'],
-                price: '500,000 VND',
-                product_url: 'https://drive.google.com/file/d/1QQCIwLzfInb9NHEhklFQR5y0bakuUch0/view SETUP LIÊN HỆ ADMIN @quangtoannang',
-                media: [{ type: 'video', src: '/website/mauanh.mp4' }]
-            },
-            {
-                id: 'tool_deepfake_01',
-                title: 'TOOL DEEPFAKE SETUP',
-                category: '🛠️ Tool',
-                short_description: 'Công cụ deepfake tạo video/ảnh ghép mặt, dễ sử dụng.',
-                long_description: 'Công cụ deepfake chất lượng cao, hỗ trợ tạo video/ảnh ghép mặt, dùng live cam fake mặt gọi Zalo. Tool miễn phí, phí setup 100,000 VND.',
-                features: ['🎥 Tạo video deepfake', '📸 Ghép ảnh mặt', '📱 Hỗ trợ live cam Zalo'],
-                price: '100,000 VND (Setup)',
-                product_url: 'Tool FREE. Inbox @quangtoannang để được hướng dẫn và yêu cầu Setup (có phí).',
-                media: [{ type: 'image', src: '/tools/deepfakee.png' }]
-            },
-            {
-                id: 'tool_proxy_checker_02',
-                title: 'TOOL CHECK PROXY',
-                category: '🛠️ Tool',
-                short_description: 'Tool check proxy tốc độ cao, đa định dạng.',
-                long_description: 'Công cụ kiểm tra proxy tốc độ cao, hỗ trợ nhiều định dạng proxy, giúp tối ưu hóa công việc mạng.',
-                features: ['⚡ Check proxy nhanh', '📋 Hỗ trợ nhiều định dạng', '🔧 Dễ sử dụng'],
-                price: '50,000 VND',
-                product_url: 'Liên hệ @quangtoannang để nhận link tải sau khi thanh toán.',
-                media: [{ type: 'image', src: '/tools/proxy_checker.png' }]
-            }
-        ];
-        const docHtml = document.documentElement;
-        const docBody = document.body;
-        const themeGrid = document.getElementById('themeGrid');
-        const modalBackdrop = document.getElementById('modal-backdrop');
-        const modalCloseBtn = document.getElementById('modal-close-btn');
-        const themeSwitcherBtnHeader = document.getElementById('theme-switcher-btn-header');
-        const themeSwitcherModal = document.getElementById('theme-switcher-modal');
-        const themeMenu = document.getElementById('theme-menu');
-        const modalMediaDisplay = document.getElementById('modal-media-display');
-        const modalMediaThumbnails = document.getElementById('modal-media-thumbnails');
-        const createParticles = () => {
-            const canvas = document.getElementById('particles-canvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            const particles = [];
-            const particleCount = 20;
-            const accentColor = getComputedStyle(docHtml).getPropertyValue('--accent-primary').trim();
-            class Particle {
-                constructor() { this.reset(); }
-                reset() { this.x = Math.random() * canvas.width; this.y = -10; this.speed = Math.random() * 1 + 0.5; this.size = Math.random() * 2 + 1; this.opacity = 0.3; }
-                update() { this.y += this.speed; if (this.y > canvas.height + 10) this.reset(); }
-                draw() { ctx.globalAlpha = this.opacity; ctx.fillStyle = accentColor; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
-            }
-            for (let i = 0; i < particleCount; i++) particles.push(new Particle());
-            let lastTime = 0;
-            function animate(time) {
-                if (time - lastTime < 1000 / 30) {
-                    requestAnimationFrame(animate);
-                    return;
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
-                lastTime = time;
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                particles.forEach(p => { p.update(); p.draw(); });
-                requestAnimationFrame(animate);
+            });
+        });
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(26, 15, 10, 0.98)';
+            } else {
+                nav.style.background = 'rgba(26, 15, 10, 0.95)';
             }
-            animate(0);
-        };
-        const createFloatingIcons = () => {
-            const container = document.getElementById('floating-icons');
-            if (!container) return;
-            const icons = ['fa-rocket', 'fa-star', 'fa-heart'];
-            let iconCount = 0;
-            const addIcon = () => {
-                if (iconCount >= 10) return;
-                const icon = document.createElement('i');
-                icon.className = `fa-solid ${icons[Math.floor(Math.random() * icons.length)]} floating-icon`;
-                icon.style.left = Math.random() * 100 + '%';
-                icon.style.animationDuration = (Math.random() * 8 + 8) + 's';
-                container.appendChild(icon);
-                iconCount++;
-                setTimeout(() => { if (icon.parentNode) { icon.parentNode.removeChild(icon); iconCount--; } }, 12000);
-            };
-            addIcon();
-            setInterval(addIcon, 5000);
-        };
-        const renderThemes = () => {
-            if (!themeGrid) return;
-            themeGrid.innerHTML = themesData.map((theme, index) => {
-                const mediaItem = theme.media[0];
-                return `
-                    <div class="theme-card" data-id="${theme.id}" style="animation-delay: ${index * 100}ms;">
-                        <div class="card-image-wrapper">
-                            ${mediaItem.type === 'image' ? `<img src="${mediaItem.src}" alt="${theme.title}" loading="lazy">` : `<video src="${mediaItem.src}" muted loop playsinline loading="lazy"></video>`}
-                        </div>
-                        <div class="p-4">
-                            <div class="flex justify-between items-start gap-3 mb-2">
-                                <h4 class="text-lg font-bold text-[var(--text-heading)]">${theme.title}</h4>
-                                <div class="category-pill">${theme.category}</div>
-                            </div>
-                            <p class="text-sm text-[var(--text-secondary)]">${theme.short_description}</p>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-            setupScrollAnimations();
-        };
-        const setupScrollAnimations = () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
+        });
+
+        // Animate stats numbers
+        function animateStats() {
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const target = stat.textContent;
+                const isPercentage = target.includes('%');
+                const isTime = target.includes('/');
+                const isPlus = target.includes('+');
+                
+                let finalValue;
+                if (isPercentage) {
+                    finalValue = parseFloat(target);
+                } else if (isTime) {
+                    return; // Skip animation for time format
+                } else if (isPlus) {
+                    finalValue = parseInt(target);
+                } else {
+                    finalValue = parseInt(target);
+                }
+
+                if (!isNaN(finalValue)) {
+                    let current = 0;
+                    const increment = finalValue / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= finalValue) {
+                            current = finalValue;
+                            clearInterval(timer);
+                        }
+                        
+                        if (isPercentage) {
+                            stat.textContent = current.toFixed(1) + '%';
+                        } else if (isPlus) {
+                            stat.textContent = Math.floor(current) + '+';
+                        } else {
+                            stat.textContent = Math.floor(current);
+                        }
+                    }, 50);
+                }
+            });
+        }
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.classList.contains('stats')) {
+                        animateStats();
                         observer.unobserve(entry.target);
                     }
-                });
-            }, { threshold: 0.2 });
-            document.querySelectorAll('.theme-card').forEach(el => observer.observe(el));
-        };
-        const displayMedia = (media, index) => {
-            modalMediaDisplay.innerHTML = '';
-            let mediaElement;
-            if (media.type === 'image') {
-                mediaElement = document.createElement('img');
-                mediaElement.src = media.src;
-                mediaElement.alt = 'Theme preview';
-                mediaElement.loading = 'lazy';
-            } else if (media.type === 'video') {
-                mediaElement = document.createElement('video');
-                mediaElement.src = media.src;
-                mediaElement.controls = true;
-                mediaElement.muted = true;
-                mediaElement.loop = true;
-                mediaElement.loading = 'lazy';
-            }
-            if (mediaElement) {
-                mediaElement.className = 'media-active';
-                modalMediaDisplay.appendChild(mediaElement);
-                if (media.type === 'video') mediaElement.play().catch(() => {});
-            }
-            document.querySelectorAll('.thumbnail-item').forEach((thumb, i) => {
-                thumb.classList.toggle('active', i === index);
-            });
-        };
-        const openThemeDetailsModal = (theme) => {
-            modalBackdrop.classList.add('visible');
-            docBody.style.overflow = 'hidden';
-            document.getElementById('modal-title').textContent = theme.title;
-            document.getElementById('modal-description').textContent = theme.long_description;
-            document.getElementById('modal-features').innerHTML = theme.features.map(f =>
-                `<li class="flex items-center text-sm text-[var(--text-primary)]"><i class="fa-solid fa-circle-check text-base mr-2 text-[var(--accent-primary)]"></i><span>${f}</span></li>`
-            ).join('');
-            document.getElementById('modal-price').textContent = theme.price;
-            document.getElementById('modal-product-url').textContent = theme.product_url;
-            modalMediaThumbnails.innerHTML = theme.media.map((media, index) => `
-                <div class="thumbnail-item">
-                    <img src="${media.type === 'image' ? media.src : (theme.media.find(m => m.type === 'image')?.src || media.src)}" loading="lazy">
-                    ${media.type === 'video' ? '<i class="fa-solid fa-play play-icon"></i>' : ''}
-                </div>
-            `).join('');
-            if (theme.media.length > 0) displayMedia(theme.media[0], 0);
-            modalMediaThumbnails.querySelectorAll('.thumbnail-item').forEach((thumb, index) => {
-                thumb.addEventListener('click', () => displayMedia(theme.media[index], index));
-            });
-        };
-        const closeThemeDetailsModal = () => {
-            modalBackdrop.classList.remove('visible');
-            docBody.style.overflow = '';
-            const videoElement = modalMediaDisplay.querySelector('video');
-            if (videoElement) {
-                videoElement.pause();
-                videoElement.src = '';
-            }
-        };
-        const toggleThemeSwitcherModal = (show) => {
-            themeSwitcherModal.classList.toggle('visible', show);
-            docBody.style.overflow = show ? 'hidden' : '';
-        };
-        const applyTheme = (themeName) => {
-            docHtml.setAttribute('data-theme', themeName);
-            localStorage.setItem('theme', themeName);
-            document.querySelectorAll('.theme-option').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.themeSet === themeName);
-            });
-            createParticles();
-        };
-        if (themeGrid) themeGrid.addEventListener('click', (e) => {
-            const card = e.target.closest('.theme-card');
-            if (card) {
-                const themeId = card.dataset.id;
-                const selectedTheme = themesData.find(t => t.id === themeId);
-                openThemeDetailsModal(selectedTheme);
-            }
-        });
-        if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeThemeDetailsModal);
-        if (modalBackdrop) modalBackdrop.addEventListener('click', (e) => {
-            if (e.target === modalBackdrop) closeThemeDetailsModal();
-        });
-        if (themeSwitcherBtnHeader) themeSwitcherBtnHeader.addEventListener('click', () => toggleThemeSwitcherModal(true));
-        if (themeSwitcherModal) themeSwitcherModal.addEventListener('click', (e) => {
-            if (e.target === themeSwitcherModal) toggleThemeSwitcherModal(false);
-        });
-        if (themeMenu) themeMenu.addEventListener('click', (e) => {
-            const button = e.target.closest('.theme-option');
-            if (button) applyTheme(button.dataset.themeSet);
-        });
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', (e) => {
-                e.preventDefault();
-                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-                item.classList.add('active');
+                }
             });
         });
-        function init() {
-            docBody.classList.remove('initial-hidden');
-            const savedTheme = localStorage.getItem('theme') || 'neural-dark';
-            applyTheme(savedTheme);
-            renderThemes();
-            createParticles();
-            createFloatingIcons();
-            window.addEventListener('resize', createParticles);
+
+        observer.observe(document.querySelector('.stats'));
+
+        // Add dynamic particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            document.querySelector('.hero').appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 6000);
         }
-        init();
-    });
+
+        // Create particles periodically
+        setInterval(createParticle, 2000);
+
+        // Function to enable actual logo when available
+        function enableActualLogo() {
+            const logoContainer = document.querySelector('.cybersecurity-logo');
+            logoContainer.classList.add('has-logo');
+        }
+
+        // Uncomment next line and call this function when you have the actual logo file
+        enableActualLogo();
     </script>
 </body>
 </html>
