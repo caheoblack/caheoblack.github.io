@@ -137,11 +137,19 @@
             height: 60px;
             background: linear-gradient(45deg, #FFD700, #DC143C);
             border-radius: 50%;
-            display: flex;
+            display: none; /* Ẩn placeholder để hiện ảnh thật */
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
             color: white;
+        }
+
+        .actual-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block; /* Hiển thị ảnh thật */
         }
 
         .logo-glow {
@@ -554,6 +562,7 @@
             <div class="logo-container">
                 <div class="logo-glow gpu-accelerated"></div>
                 <div class="cybersecurity-logo touchable">
+                    <img src="aa.png" alt="C07 Logo" class="actual-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="logo-placeholder">
                         <i class="fas fa-shield-alt"></i>
                     </div>
@@ -889,7 +898,24 @@
             });
         }
 
-        console.log('C07 Vietnam Mobile App Initialized');
+        // Function để test logo loading
+        function checkLogoLoad() {
+            const logo = document.querySelector('.actual-logo');
+            const placeholder = document.querySelector('.logo-placeholder');
+            
+            if (logo.complete && logo.naturalWidth > 0) {
+                console.log('Logo loaded successfully');
+                logo.style.display = 'block';
+                placeholder.style.display = 'none';
+            } else {
+                console.log('Logo failed to load, showing placeholder');
+                logo.style.display = 'none';
+                placeholder.style.display = 'flex';
+            }
+        }
+
+        // Check logo when page loads
+        window.addEventListener('load', checkLogoLoad);
     </script>
 </body>
 </html>
