@@ -119,59 +119,215 @@
         }
 
         .cybersecurity-logo {
-            width: 80px;
-            height: 80px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             background: rgba(255, 215, 0, 0.1);
-            border: 2px solid #228B22;
-            backdrop-filter: blur(10px);
+            border: 3px solid #FFD700;
+            backdrop-filter: blur(15px);
             animation: mobileLogoFloat 3s ease-in-out infinite;
+            box-shadow: 
+                0 0 20px rgba(255, 215, 0, 0.6),
+                0 0 40px rgba(255, 215, 0, 0.4),
+                0 0 60px rgba(255, 215, 0, 0.2),
+                inset 0 0 20px rgba(255, 215, 0, 0.1);
         }
 
         .logo-placeholder {
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             background: linear-gradient(45deg, #FFD700, #DC143C);
             border-radius: 50%;
             display: none; /* Ẩn placeholder để hiện ảnh thật */
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 2rem;
             color: white;
         }
 
         .actual-logo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            width: 110px;
+            height: 110px;
+            object-fit: contain;
             border-radius: 50%;
             display: block; /* Hiển thị ảnh thật */
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
         }
 
         .logo-glow {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(
+                circle,
+                rgba(255, 215, 0, 0.6) 0%,
+                rgba(255, 215, 0, 0.4) 20%,
+                rgba(220, 20, 60, 0.3) 40%,
+                rgba(34, 139, 34, 0.2) 60%,
+                transparent 80%
+            );
             border-radius: 50%;
             transform: translate(-50%, -50%);
             animation: mobileGlow 2s ease-in-out infinite;
         }
 
+        .logo-glow::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(
+                circle,
+                rgba(255, 215, 0, 0.8) 0%,
+                rgba(255, 215, 0, 0.4) 30%,
+                transparent 60%
+            );
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: mobileGlow 1.5s ease-in-out infinite reverse;
+        }
+
+        .logo-glow::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 240px;
+            height: 240px;
+            background: radial-gradient(
+                circle,
+                rgba(34, 139, 34, 0.4) 0%,
+                rgba(220, 20, 60, 0.2) 30%,
+                transparent 50%
+            );
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: mobileGlow 2.5s ease-in-out infinite;
+        }
+
+        /* Tia sáng xoay quanh logo */
+        .logo-rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            animation: rotateRays 15s linear infinite;
+        }
+
+        .ray {
+            position: absolute;
+            width: 3px;
+            height: 50px;
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 215, 0, 0.9) 0%,
+                rgba(255, 215, 0, 0.6) 30%,
+                transparent 100%
+            );
+            border-radius: 2px;
+            transform-origin: 1.5px 150px;
+            filter: blur(0.5px);
+        }
+
+        .ray:nth-child(1) { transform: rotate(0deg); }
+        .ray:nth-child(2) { transform: rotate(30deg); }
+        .ray:nth-child(3) { transform: rotate(60deg); }
+        .ray:nth-child(4) { transform: rotate(90deg); }
+        .ray:nth-child(5) { transform: rotate(120deg); }
+        .ray:nth-child(6) { transform: rotate(150deg); }
+        .ray:nth-child(7) { transform: rotate(180deg); }
+        .ray:nth-child(8) { transform: rotate(210deg); }
+        .ray:nth-child(9) { transform: rotate(240deg); }
+        .ray:nth-child(10) { transform: rotate(270deg); }
+        .ray:nth-child(11) { transform: rotate(300deg); }
+        .ray:nth-child(12) { transform: rotate(330deg); }
+
+        @keyframes rotateRays {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Hiệu ứng nhấp nháy ánh sáng */
+        .light-pulse {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(
+                circle,
+                rgba(255, 255, 255, 0.3) 0%,
+                rgba(255, 215, 0, 0.2) 30%,
+                transparent 70%
+            );
+            transform: translate(-50%, -50%);
+            animation: lightPulse 3s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes lightPulse {
+            0%, 100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+
         @keyframes mobileLogoFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg);
+                box-shadow: 
+                    0 0 20px rgba(255, 215, 0, 0.6),
+                    0 0 40px rgba(255, 215, 0, 0.4),
+                    0 0 60px rgba(255, 215, 0, 0.2);
+            }
+            25% { 
+                transform: translateY(-8px) rotate(1deg);
+                box-shadow: 
+                    0 0 25px rgba(255, 215, 0, 0.8),
+                    0 0 50px rgba(255, 215, 0, 0.6),
+                    0 0 80px rgba(255, 215, 0, 0.3);
+            }
+            50% { 
+                transform: translateY(0px) rotate(0deg);
+                box-shadow: 
+                    0 0 30px rgba(220, 20, 60, 0.6),
+                    0 0 60px rgba(220, 20, 60, 0.4),
+                    0 0 90px rgba(220, 20, 60, 0.2);
+            }
+            75% { 
+                transform: translateY(-5px) rotate(-1deg);
+                box-shadow: 
+                    0 0 25px rgba(34, 139, 34, 0.6),
+                    0 0 50px rgba(34, 139, 34, 0.4),
+                    0 0 75px rgba(34, 139, 34, 0.2);
+            }
         }
 
         @keyframes mobileGlow {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
-            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.6; }
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1); 
+                opacity: 0.4; 
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.15); 
+                opacity: 0.8; 
+            }
         }
 
         @keyframes fadeInUp {
@@ -561,7 +717,22 @@
         <div class="hero-content">
             <div class="logo-container">
                 <div class="logo-glow gpu-accelerated"></div>
+                <div class="logo-rays gpu-accelerated">
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                    <div class="ray"></div>
+                </div>
                 <div class="cybersecurity-logo touchable">
+                    <div class="light-pulse"></div>
                     <img src="aa.png" alt="C07 Logo" class="actual-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="logo-placeholder">
                         <i class="fas fa-shield-alt"></i>
